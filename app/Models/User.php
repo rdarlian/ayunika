@@ -25,6 +25,7 @@ class User extends Authenticatable
         'period',
         'period_date',
         'theme',
+        'invitation_word'
     ];
 
     public function undangan()
@@ -64,6 +65,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(CoverImage::class);
     }
+    public function song()
+    {
+        return $this->hasOne(UserSong::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

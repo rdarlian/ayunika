@@ -86,6 +86,7 @@ class FileUploadController extends Controller
      */
     public function dropzoneFileUpload(Request $request)
     {
+
         // Define the list of allowed fields and their corresponding model classes
         $uid = Auth::id();
         $slug = DB::table('undangans')->where("user_id", Auth::id())->value("slug");
@@ -124,6 +125,7 @@ class FileUploadController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+
 
         if ($request->hasFile("songs")) {
             $file = $request->file("songs");
@@ -197,7 +199,7 @@ class FileUploadController extends Controller
                     $file->getRealPath(),
                     $file->getClientOriginalName()
                 );
-                dd($result);
+
 
                 $modelClass = $this->getModelClass($fieldName);
 
@@ -221,6 +223,7 @@ class FileUploadController extends Controller
                     ->take(20)
                     ->get();
 
+
                 return response()->json([
                     // "success" => true,
                     "result" => $result,
@@ -238,8 +241,6 @@ class FileUploadController extends Controller
      */
     public function fileDestroy(Request $request)
     {
-        dd($request);
-
         $filename = $request->get("filename");
         $name = $request->get("name");
         $fieldName = $request->get("fieldName");

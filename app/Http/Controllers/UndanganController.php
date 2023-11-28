@@ -3,14 +3,22 @@
 namespace App\Http\Controllers;
 
 use DateTime;
+use Carbon\Carbon;
 use App\Models\Song;
 use App\Models\Story;
+use App\Models\Theme;
 use App\Models\Images;
+use App\Models\Ucapan;
 use App\Models\Undangan;
+use App\Models\User;
+use App\Models\UserSong;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\DB;
+use function Laravel\Prompts\error;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UndanganController extends Controller
 {
@@ -62,14 +70,13 @@ class UndanganController extends Controller
 
     public function formatDay($dateStr, $locale)
     {
-        $date = new DateTime($dateStr);
-        setlocale(LC_TIME, $locale);
-        $formattedDay = strftime("%A", strtotime($date->format("d F Y")));
+        $date = Carbon::parse($dateStr);
+        $formattedDay = $date->translatedFormat("l");
         return $formattedDay;
     }
-
     public function createOrUpdateUndangan($request, $uid, $slug, $link, $lat, $lng)
     {
+
         $undanganData = [
             "quote" => $request->quote,
             "quote_source" => $request->quote_source,
@@ -105,6 +112,7 @@ class UndanganController extends Controller
             "akad_lng" => $request->akad_lng,
             "resepsi_lat" => $request->resepsi_lat,
             "resepsi_lng" => $request->resepsi_lng,
+            "songs" => $request->songs,
             "link" => $link,
 
             "slug" => $slug,
@@ -118,25 +126,107 @@ class UndanganController extends Controller
     }
     public function createOrUpdateStory($request, $uid, $slug)
     {
-        $storyData = ["user_id" => $uid, "slug" => $slug];
+
+        $title_story = $request->title_stories;
+        $tgl_story = $request->tgl_stories;
+        $description_story = $request->description_stories;
+        $all = Story::where('user_id', $uid)->get();
+        if ($title_story != null)
+            foreach ($title_story as $index => $title) {
+                $details = new Story();
+                // $details->customer_id = session('customer_id');
+                $details->title_story = $title_story[$index];
+                $details->tgl_story = $tgl_story[$index];
+                $details->description_story = $description_story[$index];
+                $details->user_id = $uid;
+                $details->slug = $slug;
 
 
-        $storyData = $request->validate([
-            'title_story' => 'nullable|max:255',
-            'tgl_story' => 'nullable',
-            'slug' => 'required',
-            'description_story' => 'nullable',
-            'image_story' => 'image|file|max:5048',
+                $validateData = [
+                    'title_story' => $details->title_story,
+                    'tgl_story' => $details->tgl_story,
+                    'slug' =>  $details->slug = $slug,
+                    'description_story' =>   $details->description_story,
+                ];
+
+                // if (($all[$index]->title_story == $details->title_story)) {
+                //     $details["title_story"] = $all[$index]->title_story;
+                // }
+                Story::where('id', $all[$index]->id)
+                    ->update($validateData);
+            }
+        if ($request->title_story != '') {
+            $storyData = $request->validate([
+                'title_story' => 'nullable|max:255',
+                'tgl_story' => 'nullable',
+                'slug' => '',
+                'description_story' => 'nullable',
+                'image_story' => 'image|file',
+            ]);
+            if ($request->file('image_story')) {
+                if ($request->oldImage) {
+                    Storage::disk('public')->delete($request->oldImage);
+                }
+                $storyData['image_story'] = $request->file('image_story')->store('undangan-images', 'public');
+            }
+            $storyData["user_id"] = $uid;
+            $storyData["slug"] = $slug;
+            $story = Story::updateOrCreate(
+                $storyData
+            );
+        }
+
+
+
+        // if ($request->file('image_story')) {
+        //     $storyData['image_story'] = $request->file('image_story')->store('story-images', 'public');
+        // }
+    }
+
+    public function createOrUpdateSong($request, $uid, $slug)
+    {
+
+        $audio = $request->validate([
+            'audio_path' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,mp4,wav,aac'
         ]);
+        if ($request->songopt == null) {
+            $audio['judul'] = $request->songopt;
+        }
 
-        $story = Story::updateOrCreate(
-            [
-                "user_id" => Auth::id(),
-            ],
-            $storyData
-        );
-        return dd($storyData);
-        return $story;
+        if ($request->songopt) {
+            if ($request->oldSong) {
+                $oldPath = UserSong::select('audio_path')->where('judul', $request->oldSong)
+                    ->where('user_id', $uid)->first();
+                Storage::disk('public')->delete($oldPath->audio_path);
+            }
+            $path = Song::select('link')->where('id', $request->songopt)->first();
+            $audio['audio_path'] = $path->link;
+
+            $audio['judul'] = $request->songopt;
+        }
+
+        if ($request->file('songs')) {
+            if ($request->oldSong) {
+                $oldPath = UserSong::select('audio_path')->where('judul', $request->oldSong)
+                    ->where('user_id', $uid)->first();
+                Storage::disk('public')->delete($oldPath->audio_path);
+            }
+
+            $audio['audio_path'] = $request->file('songs')->store('user-songs', 'public');
+            $audio['judul'] = 'upload';
+        }
+
+        $audio["user_id"] = $uid;
+
+        if (UserSong::where('user_id', $uid)) {
+            UserSong::where('user_id', $uid)->update(
+                $audio
+            );
+        } else {
+            UserSong::create(
+                $audio
+            );
+        }
     }
 
     // fetcch latest record based on slug
@@ -188,13 +278,8 @@ class UndanganController extends Controller
     }
     public function index(Undangan $undangans, Story $story)
     {
-        // $allowedFieldName = [
-        //     "images",
-        //     "bride_images",
-        //     "groom_images",
-        //     "cover_images",
-        // ];
         $uid = Auth::id();
+
         //Get Data Undangan from user_id
         $undangans = DB::table("undangans")
             ->where("user_id", $uid)
@@ -221,7 +306,8 @@ class UndanganController extends Controller
         $latestImagesGroom = $this->getLatestImages('groom_images');
         $latestImagesBride = $this->getLatestImages('bride_images');
         $latestImages = $this->getLatestImages('images');
-        $songs = $this->getLatestImages("songs");
+        $songs = $this->getLatestImages("user_songs");
+        $songopt = DB::table("songs")->get();
         $data = [
             "user" => $user,
             "slug" => $slug,
@@ -232,7 +318,8 @@ class UndanganController extends Controller
             "bride_images" => $latestImagesBride,
             "groom_images" => $latestImagesGroom,
             "images" => $latestImages,
-            "songs" => $songs
+            "songs" => $songs,
+            "songopt" => $songopt
         ];
 
         return view("dashboard.undangan.index", $data);
@@ -240,25 +327,42 @@ class UndanganController extends Controller
 
     public function store(Request $request, Undangan $undangan, Images $images, Song $song)
     {
-        dd($request);
         // Get latitude and longitude from the request
-        $lat = $request->lat;
-        $lng = $request->lng;
+        $lat = $request->akad_lat;
+        $lng = $request->akad_lng;
 
 
         // Comment/Delete the lines below when getting lat and lng from the form.
         $uid = Auth::id();
+        $user = DB::table('users')->select('is_admin')->where('id', $uid)->get();
 
-        $slug = $this->generateUniqueSlug(
-            $request->groom_nickname,
-            $request->bride_nickname,
-            Auth::id()
+        if ($user[0]->is_admin !== 1) {
+            $slug =  $this->generateUniqueSlug(
+                $request->groom_nickname,
+                $request->bride_nickname,
+                Auth::id()
+            );
+        } else {
+            $slug = 'preview';
+        }
+        //call Youtube Function
+        $link = $this->extractYouTubeVideoId($request->link);
+
+        //UpdateStory FUnction
+        $this->createOrUpdateStory(
+            $request,
+            $uid,
+            $slug,
         );
 
-        $link = $this->extractYouTubeVideoId($request->link);
-        // sent data to other function so the data can be stored in database
+        $this->createOrUpdateSong(
+            $request,
+            $uid,
+            $slug,
+        );
 
-        $undangan = $this->createOrUpdateUndangan(
+        // sent data to other function so the data can be stored in database
+        $this->createOrUpdateUndangan(
             $request,
             $uid,
             $slug,
@@ -276,20 +380,28 @@ class UndanganController extends Controller
             ->with("success", "Data berhasil ditambahkan.");
     }
 
-    public function show(Undangan $undangan, Ucapan $ucapans)
+    public function show(Undangan $undangan, Ucapan $ucapans, $slug = null, $theme = null)
     {
         $currentUrl = url()->current();
         $userId = Auth::id();
         $slug = basename(parse_url($currentUrl, PHP_URL_PATH));
+        $uid = DB::table('undangans')->select('id')->where('slug', $slug)->first();
+        if ($theme != 0) {
+            $currentUrl = dirname($currentUrl);
+            $slug = basename(parse_url($currentUrl, PHP_URL_PATH));
+            $undangan = Undangan::where('slug', $slug)->first();
+        }
         $undanganDate = DB::table("undangans")
-            ->select("akad_date", "reception_date")
+            ->select("akad_date", "resepsi_date")
             ->where("slug", $slug)
             ->first();
-
+        // Mendapatkan tanggal akad dari undanganDate atau menggunakan default jika tidak tersedia
         $akadDateRaw = $undanganDate->akad_date !== "" ? $undanganDate->akad_date : "2023-06-06";
-        $receptionDateRaw = $undanganDate->reception_date !== "" ? $undanganDate->akad_date : "2023-06-06";
+        $receptionDateRaw = $undanganDate->resepsi_date !== "" ? $undanganDate->resepsi_date : "2023-06-06";
+
         $akadDay = $this->formatDay($akadDateRaw, "id_ID");
         $akadDate = $this->formatDate($akadDateRaw, "id_ID");
+
         $receptionDay = $this->formatDay(
             $receptionDateRaw,
             "id_ID"
@@ -300,9 +412,12 @@ class UndanganController extends Controller
         );
 
         $ucapans = $this->fetchLatestRecord("ucapans", $slug, null);
-        $stories = $this->fetchLatestRecord("stories", $slug, 1);
+        $stories =  DB::table('stories')->where('slug', $slug)->get();
 
-        $songs = $this->fetchLatestRecord("songs", $slug, 1);
+
+
+        $songs = DB::table('user_songs')->where("slug", $slug)->get();
+
         $images = $this->fetchAllRecords("images", $slug);
         $groomImage = $this->fetchAllRecords("groom_images", $slug);
         $brideImage = $this->fetchAllRecords("bride_images", $slug);
@@ -310,8 +425,14 @@ class UndanganController extends Controller
         $theme_id = DB::table("users")
             ->where("id", $undangan->user_id)
             ->value("theme");
+
+        if ($theme != null) {
+            $theme_id = (int)$theme;
+        }
+
+
         return view(
-            "dashboard.theme.{$theme_id}.index",
+            "dashboard.template.{$theme_id}.index",
             compact(
                 "songs",
                 "undangan",
@@ -328,5 +449,52 @@ class UndanganController extends Controller
                 "receptionDate"
             )
         );
+    }
+
+    // public function calendarEvents(Request $request)
+    // {
+
+    //     switch ($request->type) {
+    //         case 'create':
+    //             $event = CrudEvents::create([
+    //                 'event_name' => $request->event_name,
+    //                 'event_start' => $request->event_start,
+    //                 'event_end' => $request->event_end,
+    //             ]);
+
+    //             return response()->json($event);
+    //             break;
+
+    //         case 'edit':
+    //             $event = CrudEvents::find($request->id)->update([
+    //                 'event_name' => $request->event_name,
+    //                 'event_start' => $request->event_start,
+    //                 'event_end' => $request->event_end,
+    //             ]);
+
+    //             return response()->json($event);
+    //             break;
+
+    //         case 'delete':
+    //             $event = CrudEvents::find($request->id)->delete();
+
+    //             return response()->json($event);
+    //             break;
+
+    //         default:
+    //             # ...
+    //             break;
+    //     }
+    // }
+
+    public function destroy($id)
+    {
+        $story = Story::find($id);
+
+        if ($story->image) {
+            Storage::delete($story->image);
+        }
+        $delete = story::destroy($story->id);
+        return $delete;
     }
 }

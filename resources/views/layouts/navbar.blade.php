@@ -13,7 +13,7 @@
           <a class="nav-link" href="/#harga">Harga</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Template</a>
+          <a class="nav-link {{ ($active === "themes") ? 'active' : '' }}" href="/template">Template</a>
         </li>
         <li class="nav-item">
           <a class="nav-link {{ ($active === "blogs") ? 'active' : '' }}" href="/blogs">Blogs</a>
@@ -28,7 +28,7 @@
             Welcome back, {{ auth()->user()->name }}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-layout-text-sidebar-reverse"></i> My Dashboard</a></li>
+            <li><a class="dropdown-item" href="/login"><i class="bi bi-layout-text-sidebar-reverse"></i> My Dashboard</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>

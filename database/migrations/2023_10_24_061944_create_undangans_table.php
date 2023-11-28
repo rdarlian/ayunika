@@ -38,9 +38,10 @@ return new class extends Migration
             $table->date('resepsi_date')->nullable();
             $table->time('resepsi_time')->nullable();
 
-            $table->boolean('timetitle')->nullable();
+            $table->boolean('timetitle')->default(0)->nullable();
             $table->boolean('isSameAddress')->nullable();
 
+            $table->string('akad_loc')->nullable();
             $table->string('akad_lat')->nullable();
             $table->string('akad_lng')->nullable();
             $table->string('resepsi_lat')->nullable();

@@ -18,7 +18,7 @@
 
   <div class="py-80 bg-brown-100 mt-104">
     <div class="container">
-      <div class="row justify-content-center">
+      <div class="row justify-content-center pb-80">
         <div class="col-12 col-lg-4 px-4">
           <img src="assets/svg/Company logo.svg" alt="" />
           <p class="font-16 fw-light pb-lg-4 mt-4">
@@ -51,9 +51,10 @@
         </div>
       </div>
       <hr class="w-100 border-2" />
-      <div class="d-flex justify-content-center text-center justify-content-lg-between flex-column-reverse flex-lg-column">
-        <p>©Ayunika All Rights Reserved 2023</p>
-        <div>
+
+      <div class="d-flex flex-column-reverse flex-lg-row text-sm-center justify-content-lg-between mt-5">
+        <p class="text-center">©Ayunika All Rights Reserved 2023</p>
+        <div class="d-flex justify-content-center justify-content-lg-start text-center">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
             <path d="M29.3334 16.405C29.3334 8.99625 23.3639 2.99023 16 2.99023C8.63622 2.99023 2.66669 8.99625 2.66669 16.405C2.66669 23.1006 7.54247 28.6505 13.9167 29.6569V20.2828H10.5313V16.405H13.9167V13.4496C13.9167 10.0875 15.9074 8.23039 18.9528 8.23039C20.4118 8.23039 21.9375 8.49241 21.9375 8.49241V11.7937H20.2563C18.6 11.7937 18.0834 12.8279 18.0834 13.8888V16.405H21.7812L21.1902 20.2828H18.0834V29.6569C24.4576 28.6505 29.3334 23.1009 29.3334 16.405Z" fill="#302323" />
           </svg>
@@ -66,6 +67,12 @@
           <img class="" src="assets/svg/socialmedia/twitter.svg" alt="" />
         </div>
       </div>
+    </div>
+    <div class="position-relative start-0" style="top: 0px;">
+      <img class="ornament-kiri" src="assets/png/aw.png" alt="" />
+    </div>
+    <div class="position-relative end-0" style="top: -50px;">
+      <img class="ornament-kanan" src="assets/png/footer-2.png" alt="" />
     </div>
   </div>
   <script type="module">

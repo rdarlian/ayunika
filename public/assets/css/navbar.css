@@ -82,7 +82,10 @@ li {
 .sidebar-item a {
     text-decoration: none;
 }
-
+.pesan-tamu:hover {
+    background: #f7f7f7;
+    cursor: pointer;
+}
 .sidebar-header {
     color: #e9ecef;
     font-size: 0.75rem;
@@ -123,6 +126,15 @@ a.sidebar-link {
 .navbar.scrolled {
     background-color: #fff !important;
     transition: background-color 200ms linear;
+}
+.box-p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    width: 100%;
+    white-space: wrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
 }
 
 /* Responsive */

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('period')->nullable();
             $table->date('period_date');
             $table->integer('theme')->nullable();
+            $table->unsignedInteger('invitation_word')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

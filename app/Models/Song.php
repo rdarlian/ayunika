@@ -8,10 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Song extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
     public function undangan()
     {
         return $this->belongsTo(Undangan::class);
     }
-    use HasFactory;
-    protected $guarded = [];
 }

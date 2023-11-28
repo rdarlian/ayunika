@@ -270,6 +270,7 @@
         border-radius: 50%;
     }
 
+
     /* .dz-remove{
             display: none!important;
         } */

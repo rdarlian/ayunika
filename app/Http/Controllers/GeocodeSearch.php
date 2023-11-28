@@ -13,7 +13,6 @@ class GeocodeSearch extends Controller
 
     public function action(Request $request)
     {
-
         if ($request->ajax()) {
             $query = $request->get('query');
             $data = null;

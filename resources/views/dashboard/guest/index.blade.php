@@ -14,8 +14,28 @@
 
 @endif
 
+<div class="d-flex flex-row mb-3">
+  <div class="me-2">
+    <a href="/dashboard/guests/create" class="btn btn-primary">Create new guest</a>
+  </div>
+  <div class="me-2">
+    <a href="/dashboard/guests/greeting/{{$guests}}" class="btn btn-primary">Ucapan WA</a>
+  </div>
+  <div class="">
+    <form action="{{ route('import-tamu') }}" method="POST" enctype="multipart/form-data" class="d-flex">
+      @csrf
+      <div class="form-group">
+        <input type="file" name="file" id="file" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-primary">Import</button>
+    </form>
+  </div>
+
+  <a href="/export/guest" class="btn btn-success ms-2">Export</a>
+
+</div>
+
 <div class="table-responsive col-lg-12">
-  <a href="/dashboard/guests/create" class="btn btn-primary mb-3">Create new guest</a>
   <table class="table table-striped">
     <form action="{{ route('guests.index') }}" method="get">
       <div class="row">
@@ -27,6 +47,7 @@
         </div>
       </div>
     </form>
+
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -37,13 +58,24 @@
       </tr>
     </thead>
     <tbody>
+
       @foreach ($guests as $guest )
       <tr>
         <td> {{ ($guests->currentpage()-1) * $guests->perpage() + $loop->index + 1 }}</td>
         <td>{{ $guest->name }}</td>
         <td>
+          <?php
+
+
+          $replaced = str_replace(['#TAMU#', '#LINK#', '#WANITA#', '#PRIA#'], [$guest->name, $link, $both["bride_nickname"], $both["groom_nickname"]], $greet);
+
+          $apa = str_replace(["\r\n", "\n", ' '], ['%0A', '%0A', '%20'], $replaced);
+          ?>
+
           <a href="/dashboard/guests/{{ $guest->slug }}" class="btn bg-info"><i class="fa-regular fa-eye"></i></a>
-          <a href="https://wa.me//?text=urlencodedtext" data-action="share/whatsapp/share" class="btn bg-info" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="https://wa.me/+6282234810637/?text={!! $apa !!}" data-action="share/whatsapp/share" class="btn bg-info" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+
+
 
           <a href="/dashboard/guests/{{ $guest->slug }}/edit" class="btn bg-warning"><i class="fa-regular fa-pen-to-square"></i></a>
           <form action="/dashboard/guests/{{ $guest->slug }}" method="guest" class="d-inline">
@@ -64,4 +96,6 @@
 <div class="d-flex justify-content-end">
   {{ $guests->withQueryString()->links('pagination::bootstrap-5') }}
 </div>
+
+
 @endsection

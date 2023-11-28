@@ -1,3 +1,15 @@
+var count_class = (count_class = 0) ? 1 : filtered_arr_length;
+<label class="label-form mt-2" for="a">Foto Kisah ${count_class}</label>
+<div class="col-12"><input class="form-control @error('image_story') is-invalid @enderror" type="file" id="image_story" name="image_story"></div>
+<!-- 
+$validateData = [
+            'title_story.*' => 'nullable|max:255',
+            'tgl_story.*' => 'nullable',
+            'slug.*' => '',
+            'description_story.*' => 'nullable',
+            'image_story.*' => 'image|file',
+        ]); -->
+
 <div class="row justify-content-center align-items-start g-2">
   <div class=" col-lg-5">
     <p class="title">Dokumentasi</p>
@@ -11,7 +23,6 @@
         </form>
       </div>
     </div>
-
     <div class="row py-lg-2">
       <div class=" py-3 py-lg-0">
         <label class="label-form" for="a">Foto Cover</label>
@@ -45,7 +56,6 @@
         {{-- <button type="button" class="btn btn-danger" id="btn-del-img">Delete Image</button> --}}
       </div>
     </div>
-
     <div class="row  py-lg-2">
       <div class=" py-3 py-lg-0">
         <label class="label-form" for="a">Lagu Background</label>
@@ -55,7 +65,6 @@
         <div id="audioPreview"></div>
       </div>
     </div>
-
     <div class="row py-lg-2">
       <div class="col">
         <label class="label-form" for="a">Link Youtube</label>

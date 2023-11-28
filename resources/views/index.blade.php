@@ -2,8 +2,8 @@
 
 @section('content')
 <div id="beranda" class="container">
-  <div class="mt-4 flex-md-row row pt-80">
-    <div class="col-xs-2 col-md-6 pt-48">
+  <div class="flex-md-row row pt-80 pb-2">
+    <div class="col-xs-2 col-md-6 pt-40">
       <h1 class="playfair lh-sm font-64">
         Buat dan Bagikan Undangan Online Pernikahanmu
       </h1>
@@ -17,7 +17,7 @@
         <button class="btn-outline-brown">Lihat Katalog</button>
       </div>
     </div>
-    <div class="col-md-6 d-flex justify-content-end pt-4">
+    <div class="col-md-6 d-flex justify-content-end">
       <img class="img-fluid" src="assets/png/Image.png" alt="" />
       <img class="bg-absolute top-0 end-0 img-375" src="assets/svg/background/bg1.svg" alt="" />
     </div>
@@ -26,8 +26,8 @@
 
 <div class="container pt-80 pb-5">
   <div class="text-center col-md-6 mx-auto">
-    <h1 class="font-40 fw-semibold playfair">Kenapa Harus Ayunika?</h1>
-    <p class="font-20 fw-normal">
+    <h1 class="font-40 fw-semibold playfair pb-1">Kenapa Harus Ayunika?</h1>
+    <p class="font-20 fw-normal pt-3">
       Kami hadir sebagai solusi untuk membuat undangan online untuk acara
       spesial kamu dengan cepat, murah, dan mudah.
     </p>
@@ -89,10 +89,10 @@
 </div>
 
 <div class="bg-card-gradient pb-5 pb-md-4">
-  <div id="fitur" class="container pt-80 h-100">
+  <div id="fitur" class="container pt-40 h-100 pb-40">
     <div class="text-center col-12 col-md-6 mx-auto">
       <h1 class="font-40 fw-semibold playfair">Fitur Unggulan Kami</h1>
-      <p class="font-20 fw-normal mt-4 text-body-secondary">
+      <p class="font-20 fw-normal mt-30 text-body-secondary">
         Kami memberikan fitur terbaik untuk undangan pernikahan yang luar
         biasa, agar momen pernikahanmu yang tak terlupakan.
       </p>
@@ -187,13 +187,13 @@
       </div>
       <div class="pt-4">
         <p class="font-20 fw-semibold ">{{ $themes->name }}</p>
-        <a class="btn-outline-brown col-5 text-decoration-none">Lihat Tema</a>
+        <a class="btn-outline-brown col-5 text-decoration-none" href="{{ $themes->slug }}/{{$themes->theme_id}}" target="_blank">Lihat Tema</a>
       </div>
     </div>
     @endforeach
   </div>
   <div class="mt-md-5 pt-4">
-    <button class="btn-brown col-12 col-sm-2 mx-auto">Lihat Semua</button>
+    <a href="/template" class="btn-brown col-12 col-sm-2 mx-auto text-decoration-none" style="cursor: pointer;">Lihat Semua</a>
 
     <div class="position-relative d-flex justify-content-center">
       <img class="position-absolute bottom-40 end-0 hide-style" src="assets/svg/ornament-tema-right.svg" alt="" />
@@ -205,7 +205,7 @@
   <div class="mx-auto d-flex justify-content-center py-4 mt-5">
     <img src="assets/png/ornament-harga.png" alt="" />
   </div>
-  <div class="text-center col-md-7 mx-auto pt-80">
+  <div class="text-center col-md-6 mx-auto pt-80">
     <h1 class="font-40 fw-semibold playfair">
       Pilih Paket Undangan Digital Sesuai Kebutuhanmu
     </h1>
@@ -462,13 +462,13 @@
       mendapatkan kualitas udangan terbaik untuk momen spesial dalam
       hidupmu.
     </p>
-    <button class="btn-brown col-11 col-lg-3 py-2 py-lg-3">
+    <button class="btn-brown col-11 col-lg-3 py-lg-3">
       Hubungi Kami
     </button>
   </div>
 </div>
 
-<div class="container mt-104">
+<div class="container-lg mt-104">
   <div class="text-center col-md-7 mx-auto pt-80">
     <h1 class="font-40 fw-semibold playfair">Blogs</h1>
     <p class="font-20 fw-normal mt-24">
@@ -477,43 +477,19 @@
     </p>
   </div>
   <div class="row-lg-1 pt-48 overflow-auto d-flex">
-    <div class="col-12 col-lg-4 px-4">
-      <img class="img-card" src="assets/png/card-1.jpeg" alt="" />
+    @foreach($posts as $item)
+    <div class="col-11 col-lg-4 px-4">
+      <img class="img-card" src="{{  asset('storage/'.$item->image) }}" alt="" />
       <div class="">
         <h1 class="font-20 fw-semibold mt-24 box-p">
-          Tips memilih tema photoshot yang kekinian, ini contoh judul yang
-          panjang 123
+          {{ $item->title }}
         </h1>
         <p class="font-14 fw-light text-body-secondary mt-3">
-          Senin, 20 Sep 2023
+          {{ $item->created_at }}
         </p>
       </div>
     </div>
-    <div class="col-12 col-lg-4 px-4">
-      <img class="img-card" src="assets/png/card-2.jpeg" alt="" />
-      <div class="">
-        <h1 class="font-20 fw-semibold mt-24 box-p">
-          Tips memilih tema photoshot yang kekinian, ini contoh judul yang
-          panjang 123
-        </h1>
-        <p class="font-14 fw-light text-body-secondary mt-3">
-          Senin, 20 Sep 2023
-        </p>
-      </div>
-    </div>
-    <div class="col-12 col-lg-4 px-4">
-      <img class="img-card" src="assets/png/card-3.jpeg" alt="" />
-      <div class="">
-        <h1 class="font-20 fw-semibold mt-24 box-p">
-          Tips memilih tema photoshot yang kekinian, ini contoh judul yang
-          panjang 123
-        </h1>
-        <p class="font-14 fw-light text-body-secondary mt-3">
-          Senin, 20 Sep 2023
-        </p>
-      </div>
-    </div>
+    @endforeach
   </div>
 </div>
-
 @endsection

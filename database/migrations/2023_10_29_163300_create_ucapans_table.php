@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('guest_name');
             $table->longText('ucapan');
-            $table->boolean('konfirmasi');
-            $table->integer('jumlah_kehadiran');
+            // $table->boolean('konfirmasi');
+            // $table->integer('jumlah_kehadiran');
             $table->string('slug');
             $table->timestamps();
         });

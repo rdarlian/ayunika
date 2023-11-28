@@ -111,6 +111,7 @@ class DashboardThemeController extends Controller
         return redirect('/dashboard/themes')->with('success', 'Theme has been deleted');
     }
 
+
     public function checkSlug(Request $request)
     {
 

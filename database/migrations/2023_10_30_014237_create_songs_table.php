@@ -15,9 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('judul');
             $table->string('link');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
-            $table->string('slug');
             $table->timestamps();
         });
     }

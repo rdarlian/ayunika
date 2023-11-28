@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Post;
+use App\Models\Undangan;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -22,7 +23,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        User::factory()->create();
+        // User::factory()->create();
+        Undangan::factory()->create();
         // Post::factory()
         //     ->count(25)
         //     ->create();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Story;
+use App\Models\Undangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -66,6 +67,7 @@ class UserController extends Controller
         }
 
         User::create($validatedData);
+        Undangan::create();
 
         $users = User::all();
         $count = User::select("username")->count();

@@ -10,20 +10,17 @@ class ThemeController extends Controller
 {
     public function index(Request $request)
     {
-        $posts = Theme::latest()->paginate(12);
+        $themes = Theme::latest()->paginate(12);
         if ($request->ajax()) {
-            $view = view('infinitepost', compact('posts'))->render();
-            return Response::json(['view' => $view, 'nextPageUrl' => $posts->nextPageUrl()]);
+            $view = view('infinitetheme', compact('themes'))->render();
+            return Response::json(['view' => $view, 'nextPageUrl' => $themes->nextPageUrl()]);
         }
-        // if (request('author')) {
-        //     $author = User::firstWhere('username', request('author'));
-        //     $title = ' by ' . $author->name;
-        // }
+
         return view('theme', [
-            "title" => "Blogs",
-            "active" => 'blogs',
-            // "posts" => Post::latest()->filter(request(['search', 'category', 'author']))::paginate(10)
-            "posts" => $posts,
+            "title" => "Themes",
+            "active" => 'themes',
+            // "themes" => Post::latest()->filter(request(['search', 'category', 'author']))::paginate(10)
+            "themes" => $themes,
         ]);
     }
 }
