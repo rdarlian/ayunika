@@ -5,18 +5,19 @@ namespace App\Http\Controllers;
 use DateTime;
 use Carbon\Carbon;
 use App\Models\Song;
+use App\Models\User;
 use App\Models\Story;
 use App\Models\Theme;
 use App\Models\Images;
 use App\Models\Ucapan;
 use App\Models\Undangan;
-use App\Models\User;
 use App\Models\UserSong;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 use function Laravel\Prompts\error;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -126,6 +127,7 @@ class UndanganController extends Controller
     }
     public function createOrUpdateStory($request, $uid, $slug)
     {
+        dd($request);
 
         $title_story = $request->title_stories;
         $tgl_story = $request->tgl_stories;
@@ -411,7 +413,7 @@ class UndanganController extends Controller
             "id_ID"
         );
 
-        $ucapans = $this->fetchLatestRecord("ucapans", $slug, null);
+        $ucapans = $this->fetchLatestRecord("ucapans", $slug, 5);
         $stories =  DB::table('stories')->where('slug', $slug)->get();
 
 
@@ -429,7 +431,6 @@ class UndanganController extends Controller
         if ($theme != null) {
             $theme_id = (int)$theme;
         }
-
 
         return view(
             "dashboard.template.{$theme_id}.index",
