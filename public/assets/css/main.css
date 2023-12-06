@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Birthstone+Bounce&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&family=Rouge+Script&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500&display=swap");
 
 * {
     padding: 0;
@@ -18,13 +21,15 @@ body {
     position: relative;
     width: 375px;
     height: 100vh;
+    min-height: 812px;
     flex-shrink: 0;
     box-shadow: 0px 0px 80px 0px rgba(0, 0, 0, 0.25) inset;
-    padding-top: 20px;
 }
 
 .main-container {
-    width: 390px;
+    width: 100%;
+    min-width: 375px;
+    max-width: 412px;
     overflow-x: hidden;
     padding-top: 0;
 }
@@ -60,6 +65,9 @@ body {
 .align-center {
     align-items: center;
 }
+.align-end {
+    align-items: end;
+}
 .flex {
     display: flex;
 }
@@ -76,7 +84,12 @@ body {
 }
 
 .light-red {
-    background: #831e1f;
+    background: radial-gradient(
+            56.52% 56.67% at 50.13% 50%,
+            #bb2123 0%,
+            rgba(187, 33, 35, 0) 100%
+        ),
+        #831e1f;
 }
 .dark-red {
     background: #3d161a;
@@ -94,8 +107,7 @@ body {
     background: black;
 }
 .color-linear {
-    background: linear-gradient(117deg, #ffe68e 17%, #d8a217 129.46%);
-    background-clip: text;
+    background: -webkit-linear-gradient(275deg, #ffe5a8, #e8b439, #d8a217);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -129,6 +141,9 @@ body {
 }
 .color-grey {
     color: #7b7b7b;
+}
+.color-555 {
+    background: #555;
 }
 
 /* Font nih bos */
@@ -185,15 +200,16 @@ body {
     font-style: normal;
     line-height: normal;
 }
-.married-jakarta {
-    font-family: "Plus Jakarta Sans", sans-serif;
-    font-style: normal;
-    line-height: normal;
+.married-great {
+    font-family: "Great Vibes", cursive;
 }
 .married-jakarta {
     font-family: "Plus Jakarta Sans", sans-serif;
     font-style: normal;
     line-height: normal;
+}
+.married-playfair {
+    font-family: "Playfair Display", serif;
 }
 
 /* Menentukan properti-properti khusus untuk tiap ukuran teks */
@@ -232,6 +248,9 @@ body {
 
 .font-28 {
     font-size: 28px;
+}
+.font-30 {
+    font-size: 30px;
 }
 .font-32 {
     font-size: 32px;
@@ -277,26 +296,23 @@ body {
 .gap-6 {
     gap: 6px;
 }
-.m-0 {
-    margin: 0px;
-}
 .mt-10 {
     margin-top: 10px;
 }
 .mt-12 {
     margin-top: 12px;
 }
-.mt-20 {
-    margin-top: 20px;
-}
-.mt-42 {
-    margin-top: 42px;
-}
 .mt-16 {
     margin-top: 16px;
 }
 .mt-24 {
     margin-top: 24px;
+}
+.mt-20 {
+    margin-top: 20px;
+}
+.mt-42 {
+    margin-top: 42px;
 }
 .mt-31 {
     margin-top: 31px;
@@ -359,6 +375,9 @@ body {
 }
 .pb-60 {
     padding-bottom: 60px;
+}
+.pb-120 {
+    padding-bottom: 120px;
 }
 .pb-136 {
     padding-bottom: 136px;
@@ -505,8 +524,7 @@ body {
 
 .bubble {
     display: inline-flex;
-    min-width: 180px;
-    padding: 10px 18px;
+    padding: 12px 16px;
     flex-direction: column;
     justify-content: center;
     gap: 4px;
@@ -529,7 +547,6 @@ body {
 }
 .bubble-title {
     color: #10288a;
-    text-decoration: none;
     font-family: Poppins;
     font-size: 13px;
     font-style: normal;
@@ -546,7 +563,6 @@ body {
     font-weight: 400;
     line-height: 21px; /* 161.538% */
     letter-spacing: -0.3px;
-    margin: 0px;
 }
 .message-title {
     flex-direction: column;
@@ -647,8 +663,8 @@ body {
 }
 .btn-submit {
     display: flex;
-    width: 327px;
-    padding: 16px 32px;
+    width: 339px;
+    padding: 18px 32px;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -662,7 +678,7 @@ body {
     font-weight: 500;
     line-height: normal;
     margin-top: 32px;
-    margin-bottom: 32px;
+    margin-bottom: 34px;
 }
 
 /* Amplop Digital */
@@ -873,7 +889,7 @@ body {
     object-fit: cover;
 }
 .name-item-mempelai {
-    width: 327px;
+    width: 180px;
     height: 124px;
 }
 .name-item-mempelai hr {
@@ -908,23 +924,20 @@ body {
 .w-168 {
     width: 168px;
 }
+.w-230 {
+    width: 230px;
+}
 .w-327 {
     width: 327px;
 }
-
-.wrapper {
-    display: grid;
-    place-items: center;
-    overflow: hidden;
-    max-height: 812px;
+.w-303 {
+    width: 303px;
 }
-
-.slider {
-    width: 375px;
-    height: 580px;
-    position: relative;
-    /* padding-top: 320px; */
-    margin: 0px;
+.w-318 {
+    width: 318px;
+}
+.w-315 {
+    width: 315px;
 }
 .sliderlabel {
     position: relative;
@@ -975,6 +988,7 @@ body {
 .swiper img {
     width: 100%;
 }
+
 .swiper_thumbnail .swiper-slide {
     cursor: pointer;
     opacity: 0.1;
@@ -995,4 +1009,26 @@ body {
     bottom: 10px;
     right: 10px;
     position: fixed;
+}
+
+.slider {
+    width: 375px;
+    height: 580px;
+    position: relative;
+    /* padding-top: 320px; */
+    margin: 0px;
+}
+
+.wrapper {
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    max-height: 812px;
+}
+.swiper_thumbnail {
+    margin-top: 10px;
+}
+.swiper-button-next,
+.swiper-button-prev {
+    visibility: hidden;
 }
