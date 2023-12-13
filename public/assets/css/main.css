@@ -311,6 +311,9 @@ body {
 .mt-20 {
     margin-top: 20px;
 }
+.mt-40 {
+    margin-top: 40px;
+}
 .mt-42 {
     margin-top: 42px;
 }
@@ -584,19 +587,44 @@ body {
     margin-right: auto;
 }
 .form-linear {
+    color: #000;
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%; /* 22.4px */
+
     width: 100%;
-    padding: 15px 31px 15px 16px;
+    padding: 15px 16px;
+    align-items: center;
+    gap: 8px;
     border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+
+    background: #fff;
+    box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
+
     outline: none;
-    border-width: 1px;
 }
 .form-select {
     position: relative;
+    color: #000;
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%; /* 22.4px */
+
     width: 100%;
-    padding: 14px;
+    padding: 15px 16px;
+    align-items: center;
+    gap: 8px;
     border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+
+    background: #fff;
+    box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
     outline: none;
-    border-width: 1px;
 }
 select {
     -webkit-appearance: none;
@@ -609,21 +637,19 @@ select {
     justify-content: start;
     text-align: start;
     gap: 4px;
-    margin-top: 12px;
 }
 .select-grup {
     position: relative;
 }
 .select-grup::after {
-    content: "v";
+    content: url("../../assets/svg/toggle-select.svg");
     font-size: 1rem;
-    top: 33px;
+    top: 40px;
     right: 16px;
     position: absolute;
 }
 .form-grup label {
-    padding-left: 10px;
-    font-size: 11px;
+    padding: 0px 12px;
 }
 .form-grup-col {
     display: flex;
@@ -635,6 +661,7 @@ select {
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
+    gap: 12px;
 }
 
 .btn-add {
