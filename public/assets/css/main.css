@@ -29,7 +29,7 @@ body {
 .main-container {
     width: 100%;
     min-width: 375px;
-    max-width: 412px;
+    max-width: 430px;
     overflow-x: hidden;
     padding-top: 0;
 }
@@ -591,9 +591,18 @@ body {
     border-width: 1px;
 }
 .form-select {
-    width: 142px;
-    height: 52px;
+    position: relative;
+    width: 100%;
+    padding: 14px;
+    border-radius: 16px;
+    outline: none;
+    border-width: 1px;
 }
+select {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
 .form-grup {
     display: flex;
     flex-direction: column;
@@ -601,6 +610,16 @@ body {
     text-align: start;
     gap: 4px;
     margin-top: 12px;
+}
+.select-grup {
+    position: relative;
+}
+.select-grup::after {
+    content: "v";
+    font-size: 1rem;
+    top: 33px;
+    right: 16px;
+    position: absolute;
 }
 .form-grup label {
     padding-left: 10px;
@@ -927,6 +946,10 @@ body {
 .w-230 {
     width: 230px;
 }
+.w-239 {
+    width: 239px;
+}
+
 .w-327 {
     width: 327px;
 }
@@ -988,11 +1011,14 @@ body {
 .swiper img {
     width: 100%;
 }
+.jarak {
+    display: flex;
+    gap: 8px;
+}
 
 .swiper_thumbnail .swiper-slide {
     cursor: pointer;
     opacity: 0.1;
-    width: 20%;
     height: 100%;
 }
 .swiper_thumbnail .swiper-slide-thumb-active {
@@ -1002,6 +1028,7 @@ body {
     vertical-align: bottom;
     width: 72px;
     height: 72px;
+    border-radius: 4px;
     object-fit: cover;
 }
 
@@ -1009,14 +1036,6 @@ body {
     bottom: 10px;
     right: 10px;
     position: fixed;
-}
-
-.slider {
-    width: 375px;
-    height: 580px;
-    position: relative;
-    /* padding-top: 320px; */
-    margin: 0px;
 }
 
 .wrapper {
@@ -1027,6 +1046,9 @@ body {
 }
 .swiper_thumbnail {
     margin-top: 10px;
+    width: 100%;
+    max-width: 406px;
+    padding: 0px 24px;
 }
 .swiper-button-next,
 .swiper-button-prev {

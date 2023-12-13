@@ -4,7 +4,22 @@
     }
 
     50% {
-        transform: translate(0px, 20px);
+        transform: translate(0px, 6px);
+    }
+    /* 50% {
+        transform: translate(0px, 50px);
+    } */
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
+@keyframes wiggle-up {
+    0% {
+        transform: translate(0px, 0px);
+    }
+
+    50% {
+        transform: translate(0px, -6px);
     }
     /* 50% {
         transform: translate(0px, 50px);
@@ -16,5 +31,29 @@
 
 .wiggle {
     display: inline-block;
-    animation: wiggle 2s 0s infinite;
+    animation: wiggle 2.5s 0s infinite;
+}
+.wiggle-up {
+    display: inline-block;
+    animation: wiggle-up 2.5s 0s infinite;
+}
+
+@keyframes rotate {
+    50% {
+        transform: rotate(-6deg);
+    }
+}
+@keyframes rotate2 {
+    50% {
+        transform: rotate(6deg);
+    }
+}
+.rotate {
+    display: inline-block;
+    animation: rotate 2s 0s infinite;
+}
+
+.rotate2 {
+    display: inline-block;
+    animation: rotate2 2s 0s infinite;
 }
