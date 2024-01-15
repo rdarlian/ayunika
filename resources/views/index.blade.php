@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="beranda" class="container-fluid">
+<div id="beranda" class="custom-container">
   <div class="flex-md-row row pt-80 pb-2">
-    <div class="col-xs-2 col-md-6 pt-40">
+    <div class="col-12 col-md-6 pt-40">
       <h1 class="playfair lh-120 font-64">
         Buat dan Bagikan Undangan Online Pernikahanmu
       </h1>

@@ -15,8 +15,15 @@ $container-max-widths: (
     margin-right: auto;
     margin-left: auto;
 }
+
 .custom-container {
     @include make-container(150px);
+}
+
+@media (max-width: 576px) {
+    .custom-container {
+        @include make-container(16px);
+    }
 }
 // Typography
 $font-family: "Poppins", sans-serif;
