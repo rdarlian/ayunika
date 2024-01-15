@@ -404,6 +404,9 @@
     }
 }
 @media (max-width: 576px) {
+    #beranda {
+        padding: 0px 16px;
+    }
     .font-64 {
         font-size: 40px;
     }
