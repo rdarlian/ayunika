@@ -103,6 +103,8 @@ class UndanganController extends Controller
 
             "timetitle" => $request->timetitle,
 
+            "isSameAddress" => $request->isSameAddress,
+            "isUserSong" => $request->isUserSong,
             "resepsi_loc" => $request->resepsi_loc,
             "resepsi_date" => $request->resepsi_date,
             "resepsi_time" => $request->resepsi_time,
@@ -127,12 +129,14 @@ class UndanganController extends Controller
     }
     public function createOrUpdateStory($request, $uid, $slug)
     {
-        dd($request);
-
         $title_story = $request->title_stories;
         $tgl_story = $request->tgl_stories;
         $description_story = $request->description_stories;
-        $all = Story::where('user_id', $uid)->get();
+        $image_story = $request->file('images');
+        $oldImage = $request->oldImage;
+
+        $data = Story::where('slug', $slug)->get();
+
         if ($title_story != null)
             foreach ($title_story as $index => $title) {
                 $details = new Story();
@@ -143,7 +147,6 @@ class UndanganController extends Controller
                 $details->user_id = $uid;
                 $details->slug = $slug;
 
-
                 $validateData = [
                     'title_story' => $details->title_story,
                     'tgl_story' => $details->tgl_story,
@@ -151,12 +154,18 @@ class UndanganController extends Controller
                     'description_story' =>   $details->description_story,
                 ];
 
-                // if (($all[$index]->title_story == $details->title_story)) {
-                //     $details["title_story"] = $all[$index]->title_story;
-                // }
-                Story::where('id', $all[$index]->id)
-                    ->update($validateData);
+                if (isset($image_story[$index])) {
+                    if ($oldImage[$index] != null) {
+                        Storage::disk('public')->delete($oldImage);
+                    }
+                    $validateData['image_story'] = $image_story[$index]->store('undangan-images', 'public');
+                } else {
+                    $validateData['image_story'] = $oldImage[$index];
+                }
+                // Update records directly without using a loop
+                Story::where('id', $data[$index]->id)->update($validateData);
             }
+
         if ($request->title_story != '') {
             $storyData = $request->validate([
                 'title_story' => 'nullable|max:255',
@@ -165,17 +174,25 @@ class UndanganController extends Controller
                 'description_story' => 'nullable',
                 'image_story' => 'image|file',
             ]);
-            if ($request->file('image_story')) {
-                if ($request->oldImage) {
-                    Storage::disk('public')->delete($request->oldImage);
+
+            // dd($storyData['title_story'], $request->title_story);
+
+            foreach ($request->title_story as $index => $title) {
+                $validated["title_story"] = $storyData['title_story'][$index];
+                $validated["tgl_story"] = $storyData['tgl_story'][$index];
+                $validated["description_story"] = $storyData['description_story'][$index];
+
+                if (isset($request->file('image_story')[$index])) {
+                    $validated['image_story'] = $request->file('image_story')[$index]->store('undangan-images', 'public');
+                } else {
+                    $validated['image_story'] = null;
                 }
-                $storyData['image_story'] = $request->file('image_story')->store('undangan-images', 'public');
+                $validated["user_id"] = $uid;
+                $validated["slug"] = $slug;
+
+                // Use updateOrCreate for simplicity
+                $story = Story::Create($validated);
             }
-            $storyData["user_id"] = $uid;
-            $storyData["slug"] = $slug;
-            $story = Story::updateOrCreate(
-                $storyData
-            );
         }
 
 
@@ -187,7 +204,6 @@ class UndanganController extends Controller
 
     public function createOrUpdateSong($request, $uid, $slug)
     {
-
         $audio = $request->validate([
             'audio_path' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,mp4,wav,aac'
         ]);
@@ -195,25 +211,31 @@ class UndanganController extends Controller
             $audio['judul'] = $request->songopt;
         }
 
-        if ($request->songopt) {
+        if (isset($request->songopt) && $request->songopt !== $request->oldSong) {
             if ($request->oldSong) {
-                $oldPath = UserSong::select('audio_path')->where('judul', $request->oldSong)
-                    ->where('user_id', $uid)->first();
-                Storage::disk('public')->delete($oldPath->audio_path);
+                $isSongopt = Song::where('id', $request->oldSong)->first();
+
+                if (!isset($isSongopt)) {
+                    $oldPath = UserSong::select('audio_path')->where('judul', $request->oldSong)
+                        ->where('slug', $slug)->first();
+                    Storage::disk('public')->delete($oldPath->audio_path);
+                }
             }
             $path = Song::select('link')->where('id', $request->songopt)->first();
             $audio['audio_path'] = $path->link;
-
             $audio['judul'] = $request->songopt;
         }
 
-        if ($request->file('songs')) {
-            if ($request->oldSong) {
-                $oldPath = UserSong::select('audio_path')->where('judul', $request->oldSong)
-                    ->where('user_id', $uid)->first();
-                Storage::disk('public')->delete($oldPath->audio_path);
-            }
 
+        if ($request->file('songs') != null && $request->file('songs') !== $request->oldSong) {
+            if ($request->oldSong) {
+                $isSongopt = Song::where('id', $request->oldSong)->first();
+                if (!isset($isSongopt)) {
+                    $oldPath = UserSong::select('audio_path')->where('judul', $request->oldSong)
+                        ->where('slug', $slug)->first();
+                    Storage::disk('public')->delete($oldPath->audio_path);
+                }
+            }
             $audio['audio_path'] = $request->file('songs')->store('user-songs', 'public');
             $audio['judul'] = 'upload';
         }
@@ -273,25 +295,37 @@ class UndanganController extends Controller
     {
         return DB::table($table)
             // ->select($table, "filesize") // Add 'filesize' to the select statement
-            ->where("user_id", Auth::id())
+            ->where("slug", Auth::user()->slug)
             ->orderBy("created_at", "desc")
             ->take(20)
+            ->get();
+    }
+    public function getSingleData($table)
+    {
+        return DB::table($table)
+            // ->select($table, "filesize") // Add 'filesize' to the select statement
+            ->where("slug", Auth::user()->slug)
+            ->orderBy("created_at", "desc")
+            ->take(1)
             ->get();
     }
     public function index(Undangan $undangans, Story $story)
     {
         $uid = Auth::id();
+        $slug = Auth::user()->slug;
 
         //Get Data Undangan from user_id
         $undangans = DB::table("undangans")
-            ->where("user_id", $uid)
+            ->where("slug", $slug)
             ->latest()
             ->get()
             ->toArray();
+
         //Get stories with user_id
         $stories = DB::table("stories")
-            ->where("user_id", $uid)
+            ->where("slug", $slug)
             ->get();
+
         //Get tier with user_id
         $tier = DB::table("users")
             ->where("id", $uid)
@@ -302,11 +336,10 @@ class UndanganController extends Controller
         $user = DB::table("users")
             ->where("id", Auth::id())
             ->get();
-        $slug = DB::table('undangans')->where("user_id", Auth::id())->value("slug");
 
-        $latestImagesCover = $this->getLatestImages('cover_images');
-        $latestImagesGroom = $this->getLatestImages('groom_images');
-        $latestImagesBride = $this->getLatestImages('bride_images');
+        $latestImagesCover = $this->getSingleData('cover_images');
+        $latestImagesGroom = $this->getSingleData('groom_images');
+        $latestImagesBride = $this->getSingleData('bride_images');
         $latestImages = $this->getLatestImages('images');
         $songs = $this->getLatestImages("user_songs");
         $songopt = DB::table("songs")->get();
@@ -336,17 +369,19 @@ class UndanganController extends Controller
 
         // Comment/Delete the lines below when getting lat and lng from the form.
         $uid = Auth::id();
+        $slug = Auth::user()->slug;
         $user = DB::table('users')->select('is_admin')->where('id', $uid)->get();
 
-        if ($user[0]->is_admin !== 1) {
-            $slug =  $this->generateUniqueSlug(
-                $request->groom_nickname,
-                $request->bride_nickname,
-                Auth::id()
-            );
-        } else {
-            $slug = 'preview';
-        }
+        // if ($user[0]->is_admin !== 1) {
+        //     $slug =  $this->generateUniqueSlug(
+        //         $request->groom_nickname,
+        //         $request->bride_nickname,
+        //         Auth::id()
+        //     );
+        // } else {
+        //     $slug = 'preview';
+        // }
+
         //call Youtube Function
         $link = $this->extractYouTubeVideoId($request->link);
 
@@ -382,15 +417,25 @@ class UndanganController extends Controller
             ->with("success", "Data berhasil ditambahkan.");
     }
 
-    public function show(Undangan $undangan, Ucapan $ucapans, $slug = null, $theme = null)
+    public function show(Undangan $undangan, Ucapan $ucapans, $theme = null)
     {
         $currentUrl = url()->current();
         $userId = Auth::id();
+
         $slug = basename(parse_url($currentUrl, PHP_URL_PATH));
         $uid = DB::table('undangans')->select('id')->where('slug', $slug)->first();
+
+        $theme = DB::table('users')->select('theme')->where('slug', $slug)->first();
+        if ($theme != null) {
+            $theme = $theme->theme;
+        }
+        if ($theme == null && $slug != null) {
+            $slug =  basename(parse_url(dirname($currentUrl), PHP_URL_PATH));
+            $theme = basename(parse_url($currentUrl, PHP_URL_PATH));
+        }
+
         if ($theme != 0) {
             $currentUrl = dirname($currentUrl);
-            $slug = basename(parse_url($currentUrl, PHP_URL_PATH));
             $undangan = Undangan::where('slug', $slug)->first();
         }
         $undanganDate = DB::table("undangans")
@@ -398,8 +443,9 @@ class UndanganController extends Controller
             ->where("slug", $slug)
             ->first();
         // Mendapatkan tanggal akad dari undanganDate atau menggunakan default jika tidak tersedia
-        $akadDateRaw = $undanganDate->akad_date !== "" ? $undanganDate->akad_date : "2023-06-06";
-        $receptionDateRaw = $undanganDate->resepsi_date !== "" ? $undanganDate->resepsi_date : "2023-06-06";
+        $akadDateRaw = $undanganDate->akad_date ?? "2023-06-06";
+
+        $receptionDateRaw = $undanganDate->resepsi_date ?? "2023-06-06";
 
         $akadDay = $this->formatDay($akadDateRaw, "id_ID");
         $akadDate = $this->formatDate($akadDateRaw, "id_ID");
@@ -424,9 +470,6 @@ class UndanganController extends Controller
         $groomImage = $this->fetchAllRecords("groom_images", $slug);
         $brideImage = $this->fetchAllRecords("bride_images", $slug);
         $coverImage = $this->fetchAllRecords("cover_images", $slug);
-        $theme_id = DB::table("users")
-            ->where("id", $undangan->user_id)
-            ->value("theme");
 
         if ($theme != null) {
             $theme_id = (int)$theme;

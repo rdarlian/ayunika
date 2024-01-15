@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="beranda" class="container">
+<div id="beranda" class="container-fluid">
   <div class="flex-md-row row pt-80 pb-2">
     <div class="col-xs-2 col-md-6 pt-40">
-      <h1 class="playfair lh-sm font-64">
+      <h1 class="playfair lh-120 font-64">
         Buat dan Bagikan Undangan Online Pernikahanmu
       </h1>
-      <p class="font-20 fw-normal mt-24">
+      <p class="font-20 fw-normal mt-24 lh-150 fw-400 grayc1">
         Bagikan momen bahagiamu dengan mudah dan cepat. Cukup dengan memilih
         tema, atur tanggal, dan, upload foto, kamu dapat membuat undangan
         digitalmu sendiri.
       </p>
-      <div class="col-md-6 d-flex gap-2 justify-content-between mt-40">
-        <button class="btn-brown">Hubungi Kami</button>
-        <button class="btn-outline-brown">Lihat Katalog</button>
+      <div class="col-md-8 d-flex gap-2 justify-content-between mt-40">
+        <button class="btn-brown font-16 fw-600 lhs-150">Hubungi Kami</button>
+        <button class="btn-outline-brown font-16 fw-normal">Lihat Katalog</button>
       </div>
     </div>
     <div class="col-md-6 d-flex justify-content-end">
@@ -24,24 +24,24 @@
   </div>
 </div>
 
-<div class="container pt-80 pb-5">
-  <div class="text-center col-md-6 mx-auto">
-    <h1 class="font-40 fw-semibold playfair pb-1">Kenapa Harus Ayunika?</h1>
-    <p class="font-20 fw-normal pt-3">
+<div class="custom-container pt-80 pb-5">
+  <div class="text-center col-md-7 mx-auto">
+    <h1 class="font-40 fw-semibold lh-150 ls-04 playfair">Kenapa Harus Ayunika?</h1>
+    <p class="font-20 fw-light lh-150 grayc1 mt-20">
       Kami hadir sebagai solusi untuk membuat undangan online untuk acara
       spesial kamu dengan cepat, murah, dan mudah.
     </p>
   </div>
   <div class="mt-48 d-flex flex-md-row flex-column flex-column-reverse">
-    <div class="col-md-6 pt-4 position-relative">
+    <div class="col-md-6 position-relative">
       <img class="bg-absolute-1" src="assets/png/image 7.png" alt="" />
-      <img class="img-fluid" src="assets/png/Container.png" alt="" />
+      <img class="img-fluid pt-10" src="assets/png/Container.png" alt="" />
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 ms-2">
       <div class="row g-2">
         <div class="col-12 col-md-6">
-          <div class="p-4">
-            <img src="assets/svg/dolar.svg" alt="" />
+          <div class="p-8">
+            <img class="p-8" src="assets/svg/dolar.svg" alt="" />
             <h1 class="font-24 fw-semibold playfair mt-24">
               Harga Bersahabat
             </h1>
@@ -89,7 +89,7 @@
 </div>
 
 <div class="bg-card-gradient pb-5 pb-md-4">
-  <div id="fitur" class="container pt-40 h-100 pb-40">
+  <div id="fitur" class="custom-container pt-40 h-100 pb-40">
     <div class="text-center col-12 col-md-6 mx-auto">
       <h1 class="font-40 fw-semibold playfair">Fitur Unggulan Kami</h1>
       <p class="font-20 fw-normal mt-30 text-body-secondary">
@@ -122,8 +122,9 @@
           </p>
         </div>
       </div>
+
       <div class="col-12 col-md-4">
-        <div class="bg-card-col">
+        <div class="h-100 bg-card-col">
           <img src="assets/svg/notebook.svg" alt="" />
           <h1 class="font-24 fw-semibold playfair mt-24">Buku Tamu</h1>
           <p class="font-18 fw-light text-body-secondary">
@@ -152,7 +153,7 @@
         </div>
       </div>
       <div class="col-12 col-md-4">
-        <div class="bg-card-col">
+        <div class="h-100 bg-card-col">
           <img src="assets/svg/video.svg" alt="" />
           <h1 class="font-24 fw-semibold playfair mt-24">Live Streaming</h1>
           <p class="font-18 fw-light text-body-secondary">
@@ -165,21 +166,22 @@
   </div>
 </div>
 
-<div class="container pt-80">
+<div class="custom-container pt-80">
   <div class="d-flex justify-content-center flex-column pt-5">
     <img class="position-absolute hide-style" src="assets/svg/ornament-tema.svg" alt="" />
     <img class="mx-auto hide-style-2" src="assets/png/ornament-harga.png" alt="" />
-    <div class="text-center mx-auto col-md-7 mt-5">
-      <h1 class="font-40 fw-semibold playfair">
-        Pilihan Tema Udangan Ekslusif Ayunika
+    <div class="text-center mx-auto col-md-8 mt-5">
+      <h1 class="font-40 fw-semibold playfair lh-120">
+        Pilihan Tema Undangan Ekslusif Ayunika
       </h1>
-      <p class="font-20 fw-normal text-body-secondary pt-4">
+      <p class="font-20 fw-normal text-body-secondary pt-4 lh-150">
         Jelajahi lebih dari 100+ template eksklusif dan premium dari kami,
         jadikan undangan kami untuk momen spesialmu.
       </p>
     </div>
   </div>
   <div class="row gy-5 gx-4 px-2 pt-5">
+    @if($theme)
     @foreach ($theme as $themes)
     <div class="col-12 col-md-4">
       <div class="pt-4 col-12 d-flex justify-content-center">
@@ -191,6 +193,7 @@
       </div>
     </div>
     @endforeach
+    @endif
   </div>
   <div class="mt-md-5 pt-4">
     <a href="/template" class="btn-brown col-12 col-sm-2 mx-auto text-decoration-none" style="cursor: pointer;">Lihat Semua</a>
@@ -201,12 +204,12 @@
   </div>
 </div>
 
-<div id="harga" class="container pt-80">
+<div id="harga" class="custom-container pt-80">
   <div class="mx-auto d-flex justify-content-center py-4 mt-5">
     <img src="assets/png/ornament-harga.png" alt="" />
   </div>
-  <div class="text-center col-md-6 mx-auto pt-80">
-    <h1 class="font-40 fw-semibold playfair">
+  <div class="text-center col-md-8 mx-auto pt-80">
+    <h1 class="font-40 fw-semibold playfair col-md-10 mx-auto">
       Pilih Paket Undangan Digital Sesuai Kebutuhanmu
     </h1>
     <p class="font-20 fw-normal pt-3 pb-4 text-body-secondary">
@@ -479,7 +482,7 @@
   <div class="row-lg-1 pt-48 overflow-auto d-flex">
     @foreach($posts as $item)
     <div class="col-11 col-lg-4 px-4">
-      <img class="img-card" src="{{  asset('storage/'.$item->image) }}" alt="" />
+      <img class="img-card" src="{{$item->image ? asset('storage/'.$item->image) : 'https://placehold.co/600x400' }}  " alt="" />
       <div class="">
         <h1 class="font-20 fw-semibold mt-24 box-p">
           {{ $item->title }}

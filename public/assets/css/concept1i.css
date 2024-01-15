@@ -99,9 +99,6 @@
     color: #426720;
 }
 /* COVER */
-.cover-date {
-    background: url("/public/concept1i/png/cover1i.png");
-}
 .box-315 {
     width: 315px;
     height: 282px;
@@ -306,17 +303,18 @@
     width: 100%;
     min-width: 360px;
     height: 100%;
-    max-height: 100vh;
+    min-height: 100vh;
     position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
-    /* left: 0; */
     overflow-x: hidden; /* Hide horizontal scrollbar */
     overflow-y: scroll; /* Add vertical scrollbar */
-    top: 0;
     z-index: 99;
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(15px);
 }
+
 .img-story {
     width: 56px;
     height: 56px;
@@ -325,6 +323,7 @@
     margin-left: auto;
     margin-right: auto;
 }
+
 .box-triangle {
     position: absolute;
     bottom: -4px;

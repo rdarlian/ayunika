@@ -1,0 +1,12 @@
+<svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Ellipse 499">
+<circle cx="16" cy="16" r="14.5" stroke="white" stroke-width="3"/>
+<circle cx="16" cy="16" r="14.5" stroke="url(#paint0_linear_299_15031)" stroke-width="3"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_299_15031" x1="8.92454" y1="-1.48837" x2="52.0934" y2="20.217" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFE68E"/>
+<stop offset="1" stop-color="#D8A217"/>
+</linearGradient>
+</defs>
+</svg>

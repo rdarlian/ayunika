@@ -1,7 +1,24 @@
 // Body
-$body-bg: #f8fafc;
+// $body-bg: #f8fafc;
 
+$container-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px,
+    xxl: 1440px,
+);
+@mixin make-container($padding-x: $container-padding-x) {
+    width: 100%;
+    padding-right: $padding-x;
+    padding-left: $padding-x;
+    margin-right: auto;
+    margin-left: auto;
+}
+.custom-container {
+    @include make-container(150px);
+}
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
+$font-family: "Poppins", sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;

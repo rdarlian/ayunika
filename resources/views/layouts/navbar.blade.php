@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg container">
   <div class="container-fluid">
     <a class="navbar-brand" href="/"><img src="/assets/svg/Company logo.svg" alt="" /></a>
-    <div class="collapse navbar-collapse justify-content-end pe-5 me-4" id="navbarNav">
-      <ul class="navbar-nav">
+    <div class="collapse navbar-collapse justify-content-end pe-1 me-4" id="navbarNav">
+      <ul class="navbar-nav d-flex gap-4">
         <li class="nav-item">
           <a class="nav-link {{ ($active === "beranda") ? 'active' : '' }}" aria-current="page" href="/#">Beranda</a>
         </li>
@@ -43,7 +43,7 @@
         @else
 
 
-        <a href="/login" type="button" class="btn-brown col-md-12 text-decoration-none">
+        <a href="/login" class="btn-brown col-md-12 text-decoration-none">
           Login
         </a>
         @endauth

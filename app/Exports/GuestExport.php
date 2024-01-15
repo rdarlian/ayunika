@@ -13,7 +13,7 @@ class GuestExport implements FromCollection, ShouldAutoSize, WithMapping, WithHe
     /**
      * @return \Illuminate\Support\Collection
      */
-    protected $id;
+    protected $id, $index = 0;
     function __construct($id)
     {
         $this->id = $id;
@@ -26,7 +26,7 @@ class GuestExport implements FromCollection, ShouldAutoSize, WithMapping, WithHe
     public function map($item): array
     {
         return [
-            $item->id,
+            ++$this->index,
             $item->name,
             $item->nohp,
             $item->status

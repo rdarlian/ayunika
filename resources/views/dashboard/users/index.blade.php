@@ -29,6 +29,7 @@
       <th scope="col">Theme</th>
       <th scope="col">Tier</th>
       <th scope="col">Role</th>
+      <th scope="col">Slug</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -82,6 +83,9 @@
         @else
         Admin
         @endif
+      </td>
+      <td>
+        {{ $item->slug }}
       </td>
       <td>
         <form action="{{ route('users.destroy', $item->id) }}" method="POST">

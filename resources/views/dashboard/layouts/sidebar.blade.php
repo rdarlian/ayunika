@@ -1,7 +1,9 @@
 <aside id="sidebar">
-  <div class="h-100">
+  <div class="h-100" id="sidebar-content">
     <div class="sidebar-logo">
-      <a class="text-decoration-none" href="#">Ayunika</a>
+      <a class="text-decoration-none" href="#">
+        <img src="{{ asset('/assets/svg/dashboard/logo.svg') }}" alt=""> <img src="{{ asset('/assets/svg/dashboard/ayunika.svg') }}" alt="">
+      </a>
     </div>
     <!-- Sidebar Navigation -->
     <ul class="sidebar-nav">

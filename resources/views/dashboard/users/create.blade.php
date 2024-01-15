@@ -37,10 +37,19 @@
       @endif
     </div>
 
+    <div id="slug" class="mb-3">
+      <label for="slug" class="form-label">Slug</label>
+      <input type="text" name="slug" value="{{ old('slug') }}" id="slugin" class="form-control" placeholder="slug" aria-describedby="helpId" hidden>
+      <small id="helpId" class="text-muted">Pastikan mudah diingat</small>
+      <br>
+      @if ($errors->has('slug'))
+      <span class="text-danger text-left">{{ $errors->first('slug') }}</span>
+      @endif
+    </div>
     <div id="showRole" style="display: none;">
       <div class="mb-3">
         <label for="" class="form-label">Theme</label>
-        <input type="number" id="theme" name="theme" value="{{ old('theme') }}" class="form-control" placeholder="" aria-describedby="helpId">
+        <input type="number" id="theme" name="theme" value="{{ old('theme') }}" class="form-control" placeholder="" aria-describedby="helpId" min="1">
       </div>
 
       <div class="mb-3">

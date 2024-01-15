@@ -15,12 +15,7 @@
 @endif
 
 <div class="d-flex flex-row mb-3">
-  <div class="me-2">
-    <a href="/dashboard/guests/create" class="btn btn-primary">Create new guest</a>
-  </div>
-  <div class="me-2">
-    <a href="/dashboard/guests/greeting/{{$guests}}" class="btn btn-primary">Ucapan WA</a>
-  </div>
+
   <div class="">
     <form action="{{ route('import-tamu') }}" method="POST" enctype="multipart/form-data" class="d-flex">
       @csrf
@@ -30,31 +25,34 @@
       <button type="submit" class="btn btn-primary">Import</button>
     </form>
   </div>
-
   <a href="/export/guest" class="btn btn-success ms-2">Export</a>
 
 </div>
 
-<div class="table-responsive col-lg-12">
+<div class="table-responsive col-lg-12 border p-4 mt-4 rounded-4" style="background: #f0f0f0;">
   <table class="table table-striped">
-    <form action="{{ route('guests.index') }}" method="get">
-      <div class="row">
-        <div class="col-md-10">
-          <input type="text" class="form-control mb-3" placeholder="search" name="q">
-        </div>
-        <div class="col-md-2">
-          <input type="submit" class="form-control mb-3 btn btn-primary" value="Search">
-        </div>
+    <div class="row">
+      <div class="col-md-8 mb-2">
+        <a href="/dashboard/guests/create" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Tambah Data</a>
+        <a href="/dashboard/guests/greeting/{{$guests}}" class="btn btn-primary">Template Ucapan</a>
       </div>
-    </form>
+
+      <div class="col-md-4 mb-3">
+        <!-- <form action="{{ route('guests.index') }}" method="get">
+          <div class="d-flex gap-2">
+            <input type="text" class="form-control" placeholder="search" name="q">
+            <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+        </form> -->
+      </div>
+    </div>
 
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">Nama</th>
-        <th scope="col">Action</th>
         <th scope="col">WhatsApp</th>
-        <th scope="col">Status</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -64,30 +62,28 @@
         <td> {{ ($guests->currentpage()-1) * $guests->perpage() + $loop->index + 1 }}</td>
         <td>{{ $guest->name }}</td>
         <td>
+          {{ $guest->nohp }}
+        </td>
+        <td>
           <?php
-
-
-          $replaced = str_replace(['#TAMU#', '#LINK#', '#WANITA#', '#PRIA#'], [$guest->name, $link, $both["bride_nickname"], $both["groom_nickname"]], $greet);
+          $share = $link . "/" . $slug . "?r=" . $guest->name;
+          $replaced = str_replace(['#TAMU#', '#LINK#', '#WANITA#', '#PRIA#'], [$guest->name, $share, $both["bride_nickname"], $both["groom_nickname"]], $greet);
 
           $apa = str_replace(["\r\n", "\n", ' '], ['%0A', '%0A', '%20'], $replaced);
           ?>
+          <input type="text" value="{{ $greet }}" id="copyText" hidden>
+          <button class="btn bg-info" onclick="copy('copyku{{$loop->index}}')" id="copyku{{$loop->index}}"><i class="fa-regular fa-copy"></i></button>
+          <a href="https://wa.me/{{$guest->nohp}}/?text={!! $apa !!}" data-action="share/whatsapp/share" class="btn bg-success" target="_blank"><i class="fa-brands text-white fa-whatsapp"></i></a>
 
-          <a href="/dashboard/guests/{{ $guest->slug }}" class="btn bg-info"><i class="fa-regular fa-eye"></i></a>
-          <a href="https://wa.me/+6282234810637/?text={!! $apa !!}" data-action="share/whatsapp/share" class="btn bg-info" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 
 
-
-          <a href="/dashboard/guests/{{ $guest->slug }}/edit" class="btn bg-warning"><i class="fa-regular fa-pen-to-square"></i></a>
-          <form action="/dashboard/guests/{{ $guest->slug }}" method="guest" class="d-inline">
+          <a href="/dashboard/guests/{{ $guest->id }}/edit" class="btn bg-warning"><i class="fa-regular fa-pen-to-square"></i></a>
+          <form action="/dashboard/guests/{{ $guest->id }}" method="post" class="d-inline">
             @method('delete')
             @csrf
             <button class="btn bg-danger border-0" onclick="return confirm('Hapus data sekarang ?')"><i class="fa-solid fa-trash-can"></i></button>
           </form>
         </td>
-        <td>
-          {{ $guest->nohp }}
-        </td>
-        <td>{{ $guest->status }}</td>
       </tr>
       @endforeach
     </tbody>
@@ -97,5 +93,26 @@
   {{ $guests->withQueryString()->links('pagination::bootstrap-5') }}
 </div>
 
+<script>
+  function copy(id) {
+    const btn = document.getElementById('copyBtn');
+    const text = document.getElementById('copyText');
+    text.readOnly = true;
 
+    text.select();
+    text.setSelectionRange(0, 99999);
+    // Alert the copied text
+    try {
+      navigator.clipboard.writeText(text.value);
+      text.type = 'hidden';
+      $(`#${id}`).text("Copied");
+      setTimeout(function() {
+        // $(`#${id}`).text('');
+        location.reload();
+      }, 3000);
+    } catch (err) {
+      console.error(err.name, err.message);
+    }
+  }
+</script>
 @endsection

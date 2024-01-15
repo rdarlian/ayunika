@@ -25,7 +25,7 @@ class DashboardThemeController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'slug' => 'required|unique:themes',
+            'slug' => 'required',
             'image' => 'image|file|max:5048',
             'theme_id' => 'required',
 
@@ -104,8 +104,9 @@ class DashboardThemeController extends Controller
      */
     public function destroy(Theme $theme)
     {
+
         if ($theme->image) {
-            Storage::delete($theme->image);
+            Storage::disk('public')->delete($theme->image);
         }
         Theme::destroy($theme->id);
         return redirect('/dashboard/themes')->with('success', 'Theme has been deleted');

@@ -40,7 +40,7 @@
         <td> {{ ($posts->currentpage()-1) * $posts->perpage() + $loop->index + 1 }}</td>
         <td>{{ $post->title }}</td>
         <td>
-          <a href="/dashboard/posts/{{ $post->slug }}" class="btn bg-info"><i class="fa-regular fa-eye"></i></a>
+          <!-- <a href="/dashboard/posts/{{ $post->slug }}" class="btn bg-info"><i class="fa-regular fa-eye"></i></a> -->
           <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn bg-warning"><i class="fa-regular fa-pen-to-square"></i></a>
           <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline">
             @method('delete')
