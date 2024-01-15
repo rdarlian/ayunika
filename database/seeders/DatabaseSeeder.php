@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        // User::factory()->create();
-        Undangan::factory()->create();
+        User::factory()->create();
+        // Undangan::factory()->create();
         // Post::factory()
         //     ->count(25)
         //     ->create();
