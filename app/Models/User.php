@@ -25,6 +25,7 @@ class User extends Authenticatable
         'period',
         'period_date',
         'theme',
+        'slug',
         'invitation_word'
     ];
 

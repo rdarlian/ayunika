@@ -19,7 +19,7 @@ class UcapanController extends Controller
         $validatedData = $request->validate([
             'guest_name' => 'required',
             'ucapan' => 'required',
-            // 'konfirmasi' => 'required',
+            'konfirmasi' => 'required',
             // 'jumlah_kehadiran' => 'required',
             'slug' => 'required',
         ]);

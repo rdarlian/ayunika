@@ -10,7 +10,9 @@ body {
     font-family: "Poppins", sans-serif;
     margin: 0;
 }
-
+main {
+    background: #f9fafb;
+}
 h3 {
     font-size: 1.2375rem;
     color: #fff;
@@ -28,24 +30,59 @@ li {
 
 /* Layout skeleton */
 
+.card-dashboard {
+    border-radius: 8px !important;
+    border: 1px solid #eaecf0 !important;
+    background: #fff;
+}
 .wrapper {
     align-items: stretch;
     display: flex;
     width: 100%;
 }
+.mb-64 {
+    margin-bottom: 64px;
+}
 
+.images-dashboard {
+    width: 138px;
+    height: 138px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 8px;
+    background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+}
+.images-dashboard:hover {
+    fill: rgba(66, 66, 66, 0.2);
+    backdrop-filter: blur(2px);
+}
+
+.sticky-dashboard {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+.loveStoryClass {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
 #sidebar {
     max-width: 264px;
     min-width: 264px;
     transition: all 0.35s ease-in-out;
     z-index: 1111;
     background-color: #212121;
+    min-height: 100vh;
 }
 
 /* Sidebar collapse */
 
 #sidebar.collapsed {
     margin-left: -264px;
+}
+.ml-100 {
+    padding-left: 260px;
 }
 
 .main {
@@ -62,9 +99,8 @@ li {
 }
 
 .sidebar-logo a {
-    color: #e9ecef;
-    font-size: 1.25rem;
-    font-weight: 600;
+    width: 224px;
+    height: 32px;
 }
 
 .sidebar-nav {
@@ -143,4 +179,12 @@ a.sidebar-link {
     .content {
         width: auto;
     }
+    /* .ml-100 {
+        margin-left: 260px;
+    } */
+}
+@media only screen and (max-width: 768px) {
+    /* .ml-100 {
+        margin-left: 260px;
+    } */
 }

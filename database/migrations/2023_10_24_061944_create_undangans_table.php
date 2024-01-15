@@ -40,6 +40,7 @@ return new class extends Migration
 
             $table->boolean('timetitle')->default(0)->nullable();
             $table->boolean('isSameAddress')->nullable();
+            $table->boolean('isUserSong')->nullable();
 
             $table->string('akad_loc')->nullable();
             $table->string('akad_lat')->nullable();

@@ -33,7 +33,7 @@
         <td>{{ $theme->name }}</td>
         <td>{{ $theme->slug }}</td>
 
-        <td> <img width="100px" src=" {{ asset('storage/'.$theme->image) }}" alt=""></td>
+        <td> <img width="100px" height="100px" src=" {{ asset('storage/'.$theme->image) }}" alt=""></td>
         <td>
 
           <a href="/dashboard/themes/{{ $theme->id }}/edit" class="btn bg-warning"><i class="fa-regular fa-pen-to-square"></i></a>

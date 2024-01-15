@@ -38,7 +38,7 @@
         display: flex;
         /* Shadow/xs */
         box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-        padding: 10px 16px;
+        padding: 8px 16px;
         justify-content: center;
         align-items: center;
         color: black !important;
@@ -51,7 +51,7 @@
         display: flex;
         /* Shadow/xs */
         box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-        padding: 10px 16px;
+        padding: 8px 16px;
         justify-content: center;
         align-items: center;
         gap: 8px;
@@ -95,6 +95,15 @@
         font-weight: 400;
         line-height: 24px;
         /* 150% */
+    }
+
+    .line {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #AAA;
+        margin: 1em 0;
+        padding: 0;
     }
 
     .dropzone {
@@ -169,7 +178,7 @@
     }
 
     .dropzone.dz-clickable {
-        cursor: default;
+        cursor: pointer;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -280,14 +289,11 @@
     <div id="app" class="wrapper">
         @include('dashboard.layouts.sidebar')
         <div class="main">
-            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-
-                <div class="container">
-                    <button class="btn" type="button">
+            <nav class="navbar navbar-light bg-white shadow-sm" id="navbar_top">
+                <div class="container-fluid">
+                    <button class="btn" type="button" id="toggler">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
-
                     <div class="" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav me-auto">
@@ -317,7 +323,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -331,9 +337,12 @@
                     </div>
                 </div>
             </nav>
+            <div id="tambahan">
 
-            <main class="content px-3 py-2">
-                <div class="container-fluid">
+            </div>
+
+            <main class="content" id="mainnih">
+                <div class="container-fluid overflow-scroll">
                     <div class="mb-3">
                         @yield('content')
                     </div>
@@ -367,15 +376,18 @@
             console.log(valSelect);
             if (valSelect == 1) {
                 $("#showRole").css('display', 'none');
+                $("#slug").attr('hidden', true);
+                $("#slugin").val('preview');
                 $("#theme").attr('required', false);
                 $("#periodSelect").attr('required', false);
                 $("#selectTier").attr('required', false);
             } else {
                 $("#showRole").css('display', 'block');
+                $("#slug").attr('hidden', false);
+                $("#slugin").attr('hidden', false);
                 $("#theme").attr('required', true);
                 $("#periodSelect").attr('required', true);
                 $("#selectTier").attr('required', true);
-
             }
         });
     </script>
@@ -400,7 +412,60 @@
         //     deleteUser();
         //     $("#deleteusr").click(deleteUser);
         // });
+        let burger = false;
+        let mobile = false
+        let sidebar_width = document.querySelector('#sidebar').offsetWidth;
+        $("#toggler").on("click", function() {
+            this.addEventListener('touchend', function(e) {
+                mobile = true;
+                console.log("Mobile " + mobile)
+            }, false);
+
+            if (burger == false) {
+                burger = true
+                console.log("true")
+                document.getElementById('mainnih').style.paddingLeft = 0;
+                document.getElementById('toggler').style.paddingLeft = 0;
+            } else {
+                burger = false
+                console.log("false")
+                if (window.scrollY != 0) {
+                    if (mobile == false) {
+                        document.getElementById('mainnih').style.paddingLeft = sidebar_width + 'px';
+                    }
+                    document.getElementById('toggler').style.paddingLeft = sidebar_width + 'px';
+                }
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 0.5) {
+                    document.getElementById('navbar_top').classList.add('fixed-top');
+                    document.getElementById('sidebar').classList.add('fixed-top');
+
+                    if (burger == false) {
+                        if (mobile == false) {
+                            document.getElementById('mainnih').style.paddingLeft = sidebar_width + 'px';
+                        }
+
+                        document.getElementById('toggler').style.paddingLeft = sidebar_width + 'px';
+                    }
+
+                } else {
+                    document.getElementById('navbar_top').classList.remove('fixed-top');
+                    document.getElementById('sidebar').classList.remove('fixed-top');
+
+                    // remove padding top from body
+                    document.getElementById('mainnih').style.paddingLeft = 0;
+                    document.getElementById('toggler').style.paddingLeft = 0;
+                    // document.body.style.paddingTop = '0';
+                }
+            });
+        });
     </script>
+
+
 </body>
 
 </html>

@@ -15,6 +15,7 @@ class DashboardGuestController extends Controller
 
     public function index()
     {
+        $slug = Auth::user()->slug;
         $id = Auth::id();
 
         $data = Greeting::where('user_id', $id)->first();
@@ -32,8 +33,9 @@ class DashboardGuestController extends Controller
         // $link = Undangan::where('id', $id)->select('slug')->get();
 
         $record = Undangan::select('groom_nickname', 'bride_nickname')
-            ->where('user_id', $id)
+            ->where('slug', $slug)
             ->first();
+
         if ($record) {
             $both = [
                 'groom_nickname' => $record->groom_nickname,
@@ -41,15 +43,16 @@ class DashboardGuestController extends Controller
             ];
         }
 
-        $link = url()->current();
+        $link = url('');
         $guest = Guest::select('name')->get();
-
 
         return view('dashboard.guest.index', [
             'guests' => Guest::latest()->where('user_id', $id)->paginate(10),
             'greet' => $greeting,
             'link' => $link,
-            'both' => $both
+            'both' => $both,
+            'copy' => $data,
+            'slug' => $slug,
         ]);
     }
 
@@ -72,7 +75,6 @@ class DashboardGuestController extends Controller
                 $nama = $item;
                 $nohp = null;
             }
-
             // Simpan data ke database
             Guest::create(['name' => $nama, 'nohp' => $nohp, 'user_id' => $uid]);
         }
@@ -80,36 +82,28 @@ class DashboardGuestController extends Controller
 
         return redirect('/dashboard/guests')->with('success', 'New Guest has been added');
     }
+
+    public function edit(Guest $guest)
+    {
+        return view('dashboard.guest.edit', [
+            'guest' => $guest,
+        ]);
+    }
+
     public function update(Request $request, Guest $guest)
     {
         $rules = [
-            'title' => 'required|max:255',
-            'image' => 'image|file|max:2048',
-            'body' => 'required'
-
+            'name' => 'required|max:255',
+            'nohp' => 'nullable',
         ];
 
-
-
-        if ($request->slug != $guest->slug) {
-            $rules['slug'] = 'required|unique:guests';
-        }
-
         $validatedData = $request->validate($rules);
-
-        if ($request->file('image')) {
-            if ($request->oldImage) {
-                Storage::disk('public')->delete($request->oldImage);
-            }
-            $validatedData['image'] = $request->file('image')->store('guest-images', 'public');
-        }
         $validatedData['user_id'] = auth()->user()->id;
-        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200, '...');
 
         Guest::where('id', $guest->id)
             ->update($validatedData);
 
-        return redirect('/dashboard/guests')->with('success', 'New Guest has been updated');
+        return redirect('/dashboard/guests')->with('success', 'Tamu Berhasil diupdate');
     }
 
     public function updateGreeting(Request $request, Guest $guest)
@@ -130,5 +124,10 @@ class DashboardGuestController extends Controller
             ->update($validatedData);
 
         return redirect('/dashboard/guests')->with('success', 'New Guest has been updated');
+    }
+    public function destroy(Guest $guest)
+    {
+        Guest::destroy($guest->id);
+        return redirect('/dashboard/guests')->with('success', 'Tamu Sudah Dihapus');
     }
 }

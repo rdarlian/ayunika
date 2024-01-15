@@ -244,11 +244,9 @@ class FileUploadController extends Controller
         $filename = $request->get("filename");
         $name = $request->get("name");
         $fieldName = $request->get("fieldName");
-
         try {
             $response = Cloudinary::destroy($filename);
-            $image = DB::table($fieldName)->where($fieldName, '=', $name);
-
+            $image = DB::table($fieldName)->where('images', '=', $name);
             // If the deletion is successful, the API response will contain 'result' => 'ok'
             if ($response['result'] === 'ok' && $image->exists()) {
                 $image->delete();

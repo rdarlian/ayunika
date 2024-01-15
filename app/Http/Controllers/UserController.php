@@ -4,10 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Story;
+use App\Models\Images;
+use App\Models\Greeting;
 use App\Models\Undangan;
+use App\Models\BrideImage;
+use App\Models\CoverImage;
+use App\Models\GroomImage;
+use App\Models\Guest;
+use App\Models\Ucapan;
+use App\Models\UserSong;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Contracts\Support\ValidatedData;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class UserController extends Controller
 {
@@ -16,7 +29,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        // return view("admin.index");
         $isAdmin = Auth::user()->is_admin;
         if (!$isAdmin) {
             return view("error.forbidden");
@@ -50,24 +62,48 @@ class UserController extends Controller
         if ($request['period2'] != null) {
             $request['period'] = $request['period2'];
         }
-
         $request['period_date'] = Carbon::now()->toDateTimeString();
-        $validatedData = $request->validate([
+        $validationRules = [
             "username" => "required|unique:users",
             "password" => "required",
             "is_admin" => "required|boolean",
-        ]);
+        ];
+
         if ($request['is_admin'] == "0") {
-            $validatedData  += $request->validate([
+            $validationRules += [
+                "slug" => ['required', Rule::unique("users", 'slug')],
                 "period" => "required",
                 "period_date" => "required",
                 "tier" => "required",
                 "theme" => "required",
-            ]);
+            ];
+        } elseif ($request['is_admin'] == "1") {
+            $request['slug'] = 'preview';
+            $validationRules += [
+                "slug" => "required"
+            ];
         }
 
-        User::create($validatedData);
-        Undangan::create();
+        $validatedData = $request->validate($validationRules);
+        $user = User::create($validatedData);
+
+        if ($request['is_admin'] == "1") {
+            $isPreview = User::where("slug", 'preview')->select('slug')->first();
+            if (!isset($isPreview)) {
+                Undangan::create([
+                    "slug" => $request->input("slug"),
+                    // Add other undangan fields as needed
+                    "user_id" => $user->id, // Assuming user_id is the foreign key in Undangan
+                ]);
+            }
+        } else {
+            // If it's not an admin request, create the undangan
+            Undangan::create([
+                "slug" => $request->input("slug"),
+                // Add other undangan fields as needed
+                "user_id" => $user->id, // Assuming user_id is the foreign key in Undangan
+            ]);
+        }
 
         $users = User::all();
         $count = User::select("username")->count();
@@ -124,6 +160,11 @@ class UserController extends Controller
             "period_date" => "",
             "tier" => "required",
         ]);
+
+        if ($request["slug"]) {
+            dd("hayoo");
+        }
+
         $user->update($validatedData);
 
         $users = User::all();
@@ -143,7 +184,94 @@ class UserController extends Controller
                 ->route("users.index")
                 ->with(["error" => "Tidak dapat menghapus user saat ini"]);
         } else {
+            $story = Story::Where('slug', $user->slug)->get();
+            $bride_images = BrideImage::Where('slug', $user->slug)->first();
+            $cover_images = CoverImage::where('slug', $user->slug)->first();
+            $groom_images = GroomImage::where('slug', $user->slug)->first();
+            $gallery = Images::where('slug', $user->slug)->get();
+            $greeting = Greeting::where('id', $user->id)->first();
+            $guest = Guest::where('id', $user->id)->first();
+            $ucapan = Ucapan::where('slug', $user->slug)->first();
+            $song = UserSong::where('slug', $user->slug)->first();
+            $undangan = Undangan::where('slug', $user->slug)->first();
+
+            //Handle Delete Cloudinary
+            $imageTypes = [$bride_images, $cover_images, $groom_images];
+            foreach ($imageTypes as $imageType) {
+                $images = $imageType;
+                if ($images != null) {
+                    $cloudinaryURL = $images->images;
+                    $regex = '~\/([^/.]+)(\.\w+)$~';
+                    preg_match($regex, $cloudinaryURL, $matches);
+                    $extractedString = $matches[1];
+                    $finalString = "pxl-ayunika-dev/$extractedString";
+
+                    $response = Cloudinary::destroy($finalString);
+
+                    // If the deletion is successful, the API response will contain 'result' => 'ok'
+                    if ($response['result'] === 'ok' && $images->exists()) {
+                        $images->delete();
+                    } elseif ($images->doesntExist()) {
+                        return response()->json(['error' => 'Data not found in the database.']);
+                    } else {
+                        return response()->json(['error' => "Failed to remove {$imageType}."]);
+                    }
+                }
+            }
+
+            foreach ($gallery ?? [] as $galeri) {
+                $images = $galeri;
+                if ($images != null) {
+                    $cloudinaryURL = $images->images;
+                    $regex = '~\/([^/.]+)(\.\w+)$~';
+                    preg_match($regex, $cloudinaryURL, $matches);
+                    $extractedString = $matches[1];
+                    $finalString = "pxl-ayunika-dev/$extractedString";
+
+                    $response = Cloudinary::destroy($finalString);
+
+                    // If the deletion is successful, the API response will contain 'result' => 'ok'
+                    if ($response['result'] === 'ok' && $images->exists()) {
+                        $images->delete();
+                    } elseif ($images->doesntExist()) {
+                        return response()->json(['error' => 'Data not found in the database.']);
+                    } else {
+                        return response()->json(['error' => "Failed to remove {$imageType}."]);
+                    }
+                }
+            }
+
+
+            if ($story != null) {
+                foreach ($story as $stori) {
+                    if ($stori->image) {
+                        Storage::delete($stori->image);
+                    }
+                }
+                $storyIds = $story->pluck('id');
+                Story::whereIn('id', $storyIds)->delete();
+            }
+
+            if ($greeting != null) {
+                Greeting::where('user_id', $user->id)->delete();
+            }
+            if ($guest != null) {
+                Guest::where('user_id', $user->id)->delete();
+            }
+            if ($ucapan != null) {
+                Ucapan::where('slug', $user->slug)->delete();
+            }
+
+            if ($song != null) {
+                if ($song->audio_path) {
+                    Storage::delete($song->audio_path);
+                }
+                $song->delete();
+            }
+
             $user->delete();
+            $undangan->delete();
+
             $users = User::all();
             return redirect()
                 ->route("users.index")

@@ -17,6 +17,7 @@ use App\Http\Controllers\DashboardSongController;
 use App\Http\Controllers\DashboardGuestController;
 use App\Http\Controllers\DashboardThemeController;
 use App\Http\Controllers\DashboardGreetingController;
+use App\Http\Controllers\ReverseGeocodeSearch;
 use App\Http\Controllers\ThemeController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -51,6 +52,7 @@ Route::get('/dashboard/home', [App\Http\Controllers\HomeController::class, 'inde
 
 // Geocoding routes
 Route::get('/get-geocode', [GeocodeSearch::class, 'action'])->name('get-geocode');
+Route::get('get-reverse-geocode', [ReverseGeocodeSearch::class, 'action'])->name('get-reverse-geocode');
 
 // Excell
 Route::post('/import-excel', [ExcelImportController::class, 'import'])->name('import-tamu');

@@ -32,7 +32,7 @@
         <td>{{ $song->judul }}</td>
         <td>
           <audio controls>
-            <source src="{{ url('storage/' . $song->link) }}" type="audio/mpeg">
+            <source src="{{ asset('storage/' . $song->link) }}" type="audio/mpeg">
           </audio>
         </td>
         <td>

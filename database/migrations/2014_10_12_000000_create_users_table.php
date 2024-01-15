@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->boolean('is_admin')->default(false);
+            $table->string('slug');
             $table->tinyInteger('tier')->nullable();
             $table->integer('period')->nullable();
-            $table->date('period_date');
+            $table->date('period_date')->nullable();
             $table->integer('theme')->nullable();
             $table->unsignedInteger('invitation_word')->nullable();
             $table->rememberToken();

@@ -43,7 +43,7 @@
     </div>
 
     <div class="col-12">
-      <div class="form-check">
+      <div class="">
         <input class="form-check-input" id="validPeriod" type="checkbox" value="">
         <label class="form-check-label" for="invalidCheck">
           Centang untuk update periode

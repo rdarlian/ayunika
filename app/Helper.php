@@ -15,7 +15,8 @@ class Helper
 {
   public static function get_geocode($query)
   {
-    return "https://maps.googleapis.com/maps/api/place/textsearch/json?query={$query}&key=AIzaSyAzurpnT2Vr1PoDWu9enQcmqMjX_u-lx58";
+
+    return "https://maps.googleapis.com/maps/api/place/textsearch/json?query={" . $query . "}&key=AIzaSyAzurpnT2Vr1PoDWu9enQcmqMjX_u-lx58";
     // return "https://nominatim.openstreetmap.org/search.php?format=json&q={$query}&limit=50&email=iskandarjava@gmail.com";
   }
 

@@ -11,7 +11,7 @@
 </div>
 
 @if ($themes->count())
-<div class="container">
+<div class="custom-container">
   <div class="row" id="themes-container">
     @include('infinitetheme')
   </div>

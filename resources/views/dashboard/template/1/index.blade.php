@@ -107,7 +107,9 @@
       <div class="invitation text-white mlr-auto ">
         <div class="invitation-box text-center">
           <p class="dear">Dear</p>
-          <p class="name">Grahacaesara</p>
+          @if(request()->filled('r'))
+          <p class="name">{{ request()->r }}</p>
+          @endif
         </div>
         <p class="font-14 regular text-center">You are cordially invited to our wedding</p>
       </div>
@@ -118,10 +120,10 @@
   <div id="main" class="main-container married-pop bg-blue-1">
     <div>
       <audio autoplay loop>
-        <source src="{{isset($songs[0]->audio_path) && url('storage/' . $songs[0]->audio_path) ?? '' }}">
+        <source src="{{isset($songs[0]->audio_path) ? url('storage/' . $songs[0]->audio_path) : '' }}">
       </audio>
       <span class="suara" onclick="togglePlay()">
-        <i class="fa-solid fa-volume-high"></i>
+        <img src="{{ asset('/concept1i/png/suara.png') }}" alt="">
       </span>
 
     </div>
