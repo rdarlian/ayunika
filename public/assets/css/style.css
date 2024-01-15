@@ -159,8 +159,27 @@
     background: rgba(149, 111, 72, 1);
     transition: 0.3s;
 }
-.btn-outline-brown {
+.btn-mini-outline-brown {
+    display: flex;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
     border-radius: 4px;
+    border: 1px solid var(--Secondary-orange-500, #d29d66);
+    text-decoration: none;
+    cursor: pointer;
+
+    color: var(--Secondary-orange-500, #d29d66);
+    font-family: Plus Jakarta Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 19.6px */
+    letter-spacing: -0.21px;
+}
+.btn-outline-brown {
+    border-radius: 4px;vscode-remote://ssh-remote%2B194.163.37.216/home/u796644135/public_html/index.php vscode-remote://ssh-remote%2B194.163.37.216/home/u796644135/public_html/.htaccessvscode-remote://ssh-remote%2B194.163.37.216/home/u796644135/public_html/index.php vscode-remote://ssh-remote%2B194.163.37.216/home/u796644135/public_html/.htaccess
     color: #d29d66;
     background: white;
     border: 1px solid #d29d66;
