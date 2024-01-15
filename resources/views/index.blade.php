@@ -171,25 +171,25 @@
     <img class="position-absolute hide-style" src="assets/svg/ornament-tema.svg" alt="" />
     <img class="mx-auto hide-style-2" src="assets/png/ornament-harga.png" alt="" />
     <div class="text-center mx-auto col-md-8 mt-5">
-      <h1 class="font-40 fw-semibold playfair lh-120">
+      <h1 class="font-40 fw-semibold playfair lh-120 ls-04">
         Pilihan Tema Undangan Ekslusif Ayunika
       </h1>
-      <p class="font-20 fw-normal text-body-secondary pt-4 lh-150">
+      <p class="font-20 fw-normal text-body-secondary pt-3 lh-150">
         Jelajahi lebih dari 100+ template eksklusif dan premium dari kami,
         jadikan undangan kami untuk momen spesialmu.
       </p>
     </div>
   </div>
-  <div class="row gy-5 gx-4 px-2 pt-5">
+  <div class="row gy-5 gx-4 px-2 pt-2">
     @if($theme)
     @foreach ($theme as $themes)
     <div class="col-12 col-md-4">
       <div class="pt-4 col-12 d-flex justify-content-center">
         <img class="card-iphone" src="{{  asset('storage/'.$themes->image) }}" alt="">
       </div>
-      <div class="pt-4">
+      <div class="pt-3">
         <p class="font-20 fw-semibold ">{{ $themes->name }}</p>
-        <a class="btn-outline-brown col-5 text-decoration-none" href="{{ $themes->slug }}/{{$themes->theme_id}}" target="_blank">Lihat Tema</a>
+        <a class="btn-mini-outline-brown col-5 text-decoration-none" href="{{ $themes->slug }}/{{$themes->theme_id}}" target="_blank">Lihat Tema</a>
       </div>
     </div>
     @endforeach
