@@ -44,9 +44,6 @@ Route::get('/', function () {
 Route::get('/blogs', [PostController::class, 'index']);
 Route::get('/template', [ThemeController::class, 'index']);
 
-Route::get('/dashboard', function () {
-    return view('coba');
-});
 
 Route::get('/dashboard/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

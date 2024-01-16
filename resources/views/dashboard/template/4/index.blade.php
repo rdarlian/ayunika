@@ -92,119 +92,106 @@
         <img class="img-cover-11" src="{{$coverImage[0]->images ?? ''}}" alt="" />
       </div>
     </div>
-    <div class="w-343 mt-6 mlr-auto pt-30 bg-white br-24 married-pop">
-      <div class="cover-left">
-        <h2 class="font-18 medium">بِسْمِ اللّهِ الرَّحْمَنِ الرَّحِيْ</h2>
-        <h3 class="font-18 large mt-10 mb-38">
-          Assalamu’allaikum Warrahmatullahi Wabarrakatuh
-        </h3>
-        <div class="w-303 mb-38">
-          <hr class="color-opacity" />
-          <p class="font-14 regular color-grey mt-16">
-            Dengan memohon
-            <span class="large text-underline color-black">Rahmat</span> dan
-            <span class="large text-underline color-black">Ridho</span>
-            <span class="large color-black">Allah</span>
-            SWT, Mohon
-            <span class="large color-black">Doa restu</span> Bapak/Ibu/ <br />
-            Saudara/I dalam rangka melangsungkan
-            <span class="large color-black">Pernikahan </span>Putra-Putri kami
-            :
-          </p>
-        </div>
-      </div>
-      <div class="mempelai display-center flex-column">
-        <div class="person mlr-auto">
-          <div class="border-24-black">
-            <img src="{{ asset('/concept11/svg/rightarrowblack.svg') }}" alt="" />
-            <div class="w-165">
-              <h1 class="font-18 large">{{$undangan->groom_name}}</h1>
-              <hr />
-              <p class="font-12 regular">
-                Putra {{ $undangan->groom_child_order }} dari <br />{{$undangan->groom_father}} & <br />{{$undangan->groom_mother}}
-              </p>
-            </div>
+    <div class="local-box">
+      <div class="mt-6 mlr-auto pt-30 pb-16 bg-white br-24 married-pop">
+        <div class="">
+          <h2 class="local-box font-18 medium">بِسْمِ اللّهِ الرَّحْمَنِ الرَّحِيْ</h2>
+          <h3 class="local-box font-18 large mt-10 mb-38">
+            Assalamu’allaikum Warrahmatullahi Wabarrakatuh
+          </h3>
+          <div class="w-303 mb-38 cover-left">
+            <hr class="color-opacity" />
+            <p class="font-14 regular color-grey mt-16">
+              Dengan memohon
+              <span class="large text-underline color-black">Rahmat</span> dan
+              <span class="large text-underline color-black">Ridho</span>
+              <span class="large color-black">Allah</span>
+              SWT, Mohon
+              <span class="large color-black">Doa restu</span> Bapak/Ibu/ <br />
+              Saudara/I dalam rangka melangsungkan
+              <span class="large color-black">Pernikahan </span>Putra-Putri kami
+              :
+            </p>
           </div>
-          <img class="img-mempelai" src="{{$groomImage[0]->images ?? ''}}" alt="" />
         </div>
-        <div class="person">
-          <img class="img-mempelai" src="{{$brideImage[0]->images ?? ''}}" alt="" />
-          <div class="border-24-black">
-            <img src="{{ asset('/concept11/svg/rightarrowblack.svg') }}" alt="" />
-            <div class="w-165">
-              <h1 class="font-18 large">{{$undangan->bride_name}}</h1>
-              <hr />
-              <p class="font-12 regular">
-                Putri {{ $undangan->bride_child_order }} dari <br /> {{$undangan->bride_father}} & <br />{{$undangan->bride_mother}}
-              </p>
+        <div class="display-center flex-column">
+          <div class="local-box person mlr-auto">
+            <div class="border-24-black">
+              <img src="{{ asset('/concept11/svg/rightarrowblack.svg') }}" alt="" />
+              <div class="w-165">
+                <h1 class="font-18 large">{{$undangan->groom_name}}</h1>
+                <p class="font-12 regular">
+                  Putra {{ $undangan->groom_child_order }} dari <br />{{$undangan->groom_father}} & <br />{{$undangan->groom_mother}}
+                </p>
+              </div>
+            </div>
+            <img class="img-mempelai" src="{{$groomImage[0]->images ?? ''}}" alt="" />
+          </div>
+          <div class="person local-box">
+            <img class="img-mempelai" src="{{$brideImage[0]->images ?? ''}}" alt="" />
+            <div class="border-24-black">
+              <img src="{{ asset('/concept11/svg/rightarrowblack.svg') }}" alt="" />
+              <div class="w-165">
+                <h1 class="font-18 large">{{$undangan->bride_name}}</h1>
+                <p class="font-12 regular">
+                  Putri {{ $undangan->bride_child_order }} dari <br /> {{$undangan->bride_father}} & <br />{{$undangan->bride_mother}}
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="ringkasan-acara mt-6">
+    <div id="ringkasan-acara" class="local-box mt-6">
       <div class="border-header11 color-white mlr-auto married-pop">
         <h1 class="font-18 large w-327 text-center">Ringkasan Acara</h1>
         <p class="font-14 regular">Serangkaian acara kami nantinya</p>
       </div>
     </div>
-    <div class="box-orange-2 married-pop">
-      <div class="box-header-orange">
-        <a href="#" class="a-border font-14 regular">Gmaps Ready</a>
-        <a href=""><img src="{{ asset('/concept11/svg/rightarrowblack.svg') }}" alt="" /></a>
-      </div>
-      <div>
-        <h3 class="font-14 large">Akad Nikah</h3>
-        <h1 class="title-place">{{ $undangan->alamatAkad }}</h1>
-        <p class="font-14 regular"> {{$akadDay}}, {{$akadDate}} - {{ date('H:i', strtotime($undangan->akad_time)) }}</p>
-      </div>
-    </div>
-    <div class="box-blue-2 married-pop color-white">
-      <div class="box-header-orange">
-        <a href="#" class="a-border-2 font-14 regular">Gmaps Ready</a>
-        <a href=""><img src="{{ asset('/concept11/svg/rightarrow.svg') }}" alt="" /></a>
-      </div>
-      <div>
-        <h3 class="font-14 large">Resepsi Pernikahan</h3>
-        <h1 class="title-place">{{ $undangan->alamatResepsi }}</h1>
-        <p class="font-14 regular">{{ $receptionDay }}, {{$receptionDate}} - {{ date('H:i', strtotime($undangan->resepsi_time)) }}</p>
-      </div>
-    </div>
-    <div class="display-center flex-column mt-6">
-      <div class="border-header11 color-white mlr-auto married-pop">
-        <h1 class="font-18 large w-327 text-center">Our Story Begin</h1>
-        <p class="font-14 regular">Cerita bagaimana kami dipertemukan</p>
-      </div>
-      <div class="display-center married-pop gap-6 mt-6">
-        <div class="mempelaiputih">
-          <h1 class="font-16 large">03 Maret 2021</h1>
-          <p>
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          </p>
+    <div class="local-box">
+      <div class="box-orange-2 married-pop">
+        <div class="box-header-orange">
+          <a href="#" class="a-border font-14 regular">Gmaps Ready</a>
+          <a href=""><img src="{{ asset('/concept11/svg/rightarrowblack.svg') }}" alt="" /></a>
         </div>
-        <img class="img-mempelai-11" src="assets/concept11/png/pasangan.png" alt="" />
-      </div>
-      <div class="space-border mlr-auto mt-6"></div>
-      <div class="display-center married-pop gap-6 mt-6">
-        <img class="img-mempelai-11" src="assets/concept11/png/pasangan.png" alt="" />
-        <div class="mempelaiputih">
-          <h1 class="font-16 large">03 Maret 2021</h1>
-          <p>
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          </p>
+        <div>
+          <h3 class="font-14 large">Akad Nikah</h3>
+          <h1 class="title-place">{{ $undangan->alamatAkad }}</h1>
+          <p class="font-14 regular"> {{$akadDay}}, {{$akadDate}} - {{ date('H:i', strtotime($undangan->akad_time)) }}</p>
         </div>
       </div>
-      <div class="space-border mlr-auto mt-6"></div>
-      <div class="display-center married-pop gap-6 mt-6">
-        <div class="mempelaiputih">
-          <h1 class="font-16 large">03 Maret 2021</h1>
-          <p>
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          </p>
+      <div class="box-blue-2 married-pop color-white">
+        <div class="box-header-orange">
+          <a href="#" class="a-border-2 font-14 regular">Gmaps Ready</a>
+          <a href=""><img src="{{ asset('/concept11/svg/rightarrow.svg') }}" alt="" /></a>
         </div>
-        <img class="img-mempelai-11" src="assets/concept11/png/pasangan.png" alt="" />
+        <div>
+          <h3 class="font-14 large">Resepsi Pernikahan</h3>
+          <h1 class="title-place">{{ $undangan->alamatResepsi }}</h1>
+          <p class="font-14 regular">{{ $receptionDay }}, {{$receptionDate}} - {{ date('H:i', strtotime($undangan->resepsi_time)) }}</p>
+        </div>
+      </div>
+      <div class="display-center flex-column mt-6">
+        <div class="border-header11 color-white mlr-auto married-pop">
+          <h1 class="font-18 large w-327 text-center">Our Story Begin</h1>
+          <p class="font-14 regular">Cerita bagaimana kami dipertemukan</p>
+        </div>
+        @foreach($stories as $key=>$story)
+        <div class="display-center married-pop gap-6 mt-6 story-11">
+          <div class="mempelaiputih">
+            <h1 class="font-16 large">{{ $story->tgl_story }}</h1>
+            <p class="text-story">
+              {{ $story->description_story }}
+            </p>
+          </div>
+          <img class="img-mempelai-11" src="{{ isset($story->image_story) ? url('storage/' . $story->image_story) : ''  }}" alt="" />
+        </div>
+        <div class="space-border mlr-auto mt-6"></div>
+        @endforeach
+
       </div>
     </div>
+
 
     <div class="display-center mt-6 married-pop flex-column">
       <div class="border-header11 color-white mlr-auto married-pop">
@@ -213,29 +200,15 @@
           Rangkaian kata kata untuk kami yang Sedang berbagahia
         </p>
       </div>
+      @foreach($ucapans as $ucapan)
       <div class="box-3 bg-box-blue">
         <p class="font-14 small">Doa Dari</p>
-        <h1 class="font-32 xlarge">Dadang CS</h1>
+        <h1 class="font-32 xlarge">{{ $ucapan->guest_name }}</h1>
         <p class="font-14 regular">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat,
-          delectus rerum. Ipsum non autem necessitatibus!
+          {{$ucapan->ucapan}}
         </p>
       </div>
-      <div class="box-3 bg-box-white">
-        <p class="font-14 small">Doa Dari</p>
-        <h1 class="font-32 xlarge">Darlian</h1>
-        <p class="font-14 regular">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </p>
-      </div>
-      <div class="box-3 bg-box-orange">
-        <p class="font-14 small">Doa Dari</p>
-        <h1 class="font-32 xlarge">Desta</h1>
-        <p class="font-14 regular">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat,
-          delectus rerum. Ipsum non autem necessitatibus!
-        </p>
-      </div>
+      @endforeach
     </div>
 
     <div class="border-box-11 mlr-auto mt-6">
@@ -249,26 +222,11 @@
               <input class="formku" type="text" placeholder="" />
             </div>
             <div class="form-grup">
-              <label for="name" class="">Alamat</label>
-              <input class="formku" type="text" placeholder="" />
-            </div>
-
-            <div class="form-grup-col">
-              <div class="form-grup">
-                <label for="undangan-dari" class="">Undangan Dari</label>
-                <select class="formku" name="undangan-dari" id="">
-                  <option value="keluarga pria">Keluarga Pria</option>
-                  <option value="keluarga pria">Keluarga Wanita</option>
-                </select>
-              </div>
-              <div class="form-grup">
-                <label for="jumlah kehadiran" class="">Jumlah Kehadiran</label>
-                <select class="formku" name="jumlah-kehadiran">
-                  <option value="1">1 Tamu</option>
-                  <option value="2">2 Tamu</option>
-                  <option value="3">3 Tamu</option>
-                </select>
-              </div>
+              <label for="undangan-dari" class="">Undangan Dari</label>
+              <select class="formku" name="undangan-dari" id="">
+                <option value="keluarga pria">Keluarga Pria</option>
+                <option value="keluarga pria">Keluarga Wanita</option>
+              </select>
             </div>
 
             <div class="form-grup">
@@ -283,7 +241,7 @@
       </div>
     </div>
 
-    <div class="box-3 bg-box-white married-pop">
+    <div class="box-close bg-box-white married-pop">
       <div class="w-327">
         <hr class="mt-70 color-opacity" />
         <p class="font-14 regular">

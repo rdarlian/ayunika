@@ -43,7 +43,7 @@
         @else
 
 
-        <a href="/login" class="btn-brown col-md-12 text-decoration-none">
+        <a href="/login" class="btn-brown btn-brown-login col-md-12 text-decoration-none">
           Login
         </a>
         @endauth

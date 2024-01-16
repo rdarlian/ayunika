@@ -17,7 +17,7 @@
         <button class="btn-outline-brown font-16 fw-normal">Lihat Katalog</button>
       </div>
     </div>
-    <div class="col-md-6 d-flex justify-content-end">
+    <div class="col-md-6 d-flex pt-4 pt-md-0 justify-content-end">
       <img class="img-fluid" src="assets/png/Image.png" alt="" />
       <img class="bg-absolute top-0 end-0 img-375" src="assets/svg/background/bg1.svg" alt="" />
     </div>
@@ -180,7 +180,7 @@
       </p>
     </div>
   </div>
-  <div class="row gy-5 gx-4 px-2 pt-2">
+  <div class="row gy-5 gx-4 px-md-2 pt-2">
     @if($theme)
     @foreach ($theme as $themes)
     <div class="col-12 col-md-4">
@@ -218,17 +218,8 @@
     </p>
   </div>
 
-  <div class="row gy-5 hide-style">
-    <div class="col-4"></div>
-    <div class="col-4 p-penawaran-o d-flex justify-content-center">
-      <div class="ornament-penawaran col-12 font-16 fw-semibold text-white">
-        Penawaran Terbaik
-      </div>
-    </div>
-    <div class="col-4"></div>
-  </div>
 
-  <div class="row gy-5">
+  <div class="row gy-md-5  gy-3">
     <div class="col-12 col-lg-4">
       <div class="p-penawaran border border-18 border-dark-subtle">
         <p class="text-center font-24 fw-semibold playfair">Basic</p>

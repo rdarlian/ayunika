@@ -458,6 +458,7 @@ class UndanganController extends Controller
             $receptionDateRaw,
             "id_ID"
         );
+        $explodeReception = explode(" ", $receptionDate);
 
         $ucapans = $this->fetchLatestRecord("ucapans", $slug, 5);
         $stories =  DB::table('stories')->where('slug', $slug)->get();
@@ -490,7 +491,8 @@ class UndanganController extends Controller
                 "akadDay",
                 "akadDate",
                 "receptionDay",
-                "receptionDate"
+                "receptionDate",
+                "explodeReception",
             )
         );
     }
