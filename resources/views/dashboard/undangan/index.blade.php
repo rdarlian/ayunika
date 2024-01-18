@@ -970,10 +970,13 @@
           croppie.result({
             type: 'blob',
             size: {
-              width: 256,
-              height: 256
-            }
+              width: 512,
+              height: 512,
+            },
+            quality: 1,
+
           }).then(function(blob) {
+
             // Create a new Dropzone file thumbnail
             myDropZone.createThumbnail(
               blob,
@@ -1032,11 +1035,15 @@
         buttonConfirm.addEventListener('click', function() {
           // Get the output file data from Croppie
           croppie.result({
-            enableResize: false,
+            enableResize: true,
             type: 'blob',
-            size: 'original',
+            size: {
+              width: 1133,
+              height: 1752,
+            },
             quality: 1,
           }).then(function(blob) {
+            console.log(blob);
             // Create a new Dropzone file thumbnail
             myDropZone.createThumbnail(
               blob,
@@ -1055,12 +1062,13 @@
           editor.parentNode.removeChild(editor);
         });
         var croppie = new Croppie(editor, {
-          enableResize: false,
+          enableResize: true,
           viewport: {
             width: 375,
             height: 580,
             type: 'square'
           },
+          enforceBoundary: true,
           quality: 1,
         });
         croppie.bind({

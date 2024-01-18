@@ -256,24 +256,20 @@
           <div class="box-form">
             <div class="form-grup">
               <label for="name" class="font-14 color-white">Nama</label>
-              <input class="form-linear" type="text" placeholder="" />
+              <input class="form-linear" type="text" name="guest_name" placeholder="" id="name" />
             </div>
-
-
-
-            <div class="form-grup">
-              <label for="undangan-dari" class="font-14 color-white">Kehadiran</label>
-              <select class="form-linear form-select" name="undangan-dari" id="">
-                <option value="keluarga pria">Hadir</option>
-                <option value="keluarga pria">Tidak Hadir</option>
+            <div class="form-grup select-grup">
+              <label for="konfirmasi" class="font-14 color-white">Kehadiran</label>
+              <select class="form-linear form-select" name="konfirmasi" id="konfirmasi">
+                <option value="1">Hadir</option>
+                <option value="0">Tidak Hadir</option>
               </select>
             </div>
-
-
             <div class="form-grup">
               <label for="ucapan" class="font-14 color-white">Ucapan</label>
-              <textarea class="form-linear"></textarea>
+              <textarea class="form-linear" name="ucapan"></textarea>
             </div>
+            <input data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" type="hidden" name="slug" value="{{$undangan->slug}}">
 
             <button type="submit" class="btn-submit font-18">
               Submit Ucapan
@@ -292,7 +288,7 @@
         </p>
       </div>
 
-      <div class="message-box mt-103 mlr-auto">
+      <div class="mt-103">
         <h1 class="font-36 medium">{{ $undangan->groom_nickname }} & {{ $undangan->bride_nickname }}</h1>
         <p class="font-12 regular pt-60">Himbauan Protocol Kesehatan :</p>
         <div class="close-item-left">

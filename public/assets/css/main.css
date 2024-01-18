@@ -413,7 +413,6 @@ body {
     gap: 10px;
 }
 
-/* ringkasan acara  */
 .img-radius {
     border-radius: 4px;
     object-fit: cover;
@@ -465,9 +464,9 @@ body {
     width: 279px;
 }
 
-/* Message */
-
 .bubble {
+    width: 100%;
+    max-width: 225px;
     display: inline-flex;
     padding: 12px 16px;
     flex-direction: column;
@@ -481,19 +480,7 @@ body {
     -ms-border-radius: 4px 16px 16px 16px;
     -o-border-radius: 4px 16px 16px 16px;
 }
-.bubble-right {
-    position: relative;
-    right: -166px;
-    padding: 12px 16px;
-    align-items: flex-end;
-    text-align: end;
-    gap: 4px;
-    border-radius: 16px 4px 16px 16px;
-    background: #fff;
-    margin-top: 20px;
-    margin-right: 18px;
-    max-width: 194px;
-}
+
 .bubble-title {
     color: #10288a;
     font-family: Poppins;
@@ -543,6 +530,7 @@ body {
 
     outline: none;
 }
+
 .form-select {
     position: relative;
     color: #000;
