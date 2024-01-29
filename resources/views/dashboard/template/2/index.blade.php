@@ -104,12 +104,9 @@
     <div class="bg-green color-white">
       <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="box-327 mlr-auto text-center py-48">
         <p class="font-14 regular lineletter-160">
-          "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan
-          pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung
-          dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa
-          kasih dan sayang."
+          "{{ $undangan->quote }}"
         </p>
-        <h1 class="mt-24 married-great font-30 regular">QS Ar-rum 21</h1>
+        <h1 class="mt-24 married-great font-30 regular">{{ $undangan->quote_source }}</h1>
       </div>
     </div>
     <div class="bg-pastel py-48">
@@ -166,7 +163,7 @@
         <div class="pt-40 flex flex-column gap-24">
           @foreach($stories as $key=>$story)
           <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="card-reseption">
-            <div class="border-img-story display-center align-center">
+            <div class="{{ isset($story->image_story) ? '' : 'border-img-story' }} display-center align-center">
               <div class="{{ isset($story->image_story) ? 'img-story' : '' }} display-center align-center">
                 <img class="{{ isset($story->image_story) ? 'img-story' : '' }}" src="{{ isset($story->image_story) ? url('storage/' . $story->image_story) : asset('/concept1i/svg/story'. $key+1 .'.svg')  }}" alt="" />
               </div>
@@ -174,6 +171,7 @@
 
             <div class="w-100">
               <p class="regular font-16 large text-green lineletter-160">{{ $story->title_story }}</p>
+              <p class="font-14 medium">{{ $story->tgl_story }}</p>
               <p class="font-14 regular lineletter-160">{{ $story->description_story }}</p>
             </div>
           </div>

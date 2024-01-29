@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Birthstone+Bounce&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&family=Rouge+Script&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
+
 @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
 
 @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500&display=swap");
@@ -54,6 +56,9 @@ body {
     display: flex;
     justify-content: right;
 }
+.justify-left {
+    justify-content: left;
+}
 .align-center {
     align-items: center;
 }
@@ -67,12 +72,18 @@ body {
 .flex-column {
     flex-direction: column;
 }
+.flex-wrap {
+    flex-wrap: wrap;
+}
 .flex-row {
     flex-direction: row;
 }
 
 .spacebetween {
     justify-content: space-between;
+}
+.spacearround {
+    justify-content: space-around;
 }
 
 .light-red {
@@ -196,7 +207,7 @@ body {
     font-family: "Great Vibes", cursive;
 }
 .married-jakarta {
-    font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Plus Jakarta Sans";
     font-style: normal;
     line-height: normal;
 }
@@ -266,10 +277,14 @@ body {
 .font-60 {
     font-size: 60px;
 }
+
+.font-64 {
+    font-size: 64px;
+}
 .font-72 {
     font-size: 72px;
 }
-.font-86 {
+.font-80 {
     font-size: 80px;
 }
 .font-100 {
@@ -333,11 +348,20 @@ body {
 .mt-97 {
     margin-top: 97px;
 }
+.mb-12 {
+    margin-bottom: 12px;
+}
+.mb-16 {
+    margin-bottom: 16px;
+}
 .mt-120 {
     margin-top: 120px;
 }
 .mb-38 {
     margin-bottom: 38px;
+}
+.mb-40 {
+    margin-bottom: 40px;
 }
 
 .pt-30 {
@@ -394,10 +418,12 @@ body {
 }
 
 .scope-24 {
-    padding: 0px 24px;
+    padding-left: 24px;
+    padding-right: 24px;
 }
 .scope-30 {
-    padding: 0px 30px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .mlr-auto {
@@ -435,20 +461,6 @@ body {
     margin-left: auto;
     margin-right: auto;
     object-fit: cover;
-}
-
-.akad-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    margin-top: 16px;
-    width: 327px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 32px;
 }
 
 /* Our Story Section */
@@ -517,7 +529,6 @@ body {
     font-style: normal;
     font-weight: 400;
     line-height: 160%; /* 22.4px */
-
     width: 100%;
     padding: 15px 16px;
     align-items: center;
@@ -581,11 +592,10 @@ select {
     gap: 17px;
 }
 .box-form {
+    width: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
     gap: 12px;
 }
 
