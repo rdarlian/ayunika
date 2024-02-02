@@ -181,6 +181,11 @@
     line-height: 140%; /* 19.6px */
     letter-spacing: -0.21px;
 }
+.btn-mini-outline-brown:hover {
+    background: var(--Secondary-orange-500, #d29d66);
+    color: white;
+    transition: 0.3s;
+}
 .btn-outline-brown {
     border-radius: 4px;
     color: #d29d66;

@@ -1,12 +1,34 @@
 .mt-8 {
     margin-top: 8px;
 }
+.mt-12 {
+    margin-top: 12px;
+}
+.mt-52 {
+    margin-top: 52px;
+}
 .mt-103 {
     margin-top: 103px;
 }
 .py-60 {
     padding-top: 60px;
     padding-bottom: 60px;
+}
+.lh-140 {
+    line-height: 140%;
+    letter-spacing: -0.3px;
+}
+.btn-cover {
+    display: inline-flex;
+    padding: 14px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 0;
+    border-radius: 6px;
+    background: #e98e24;
+    box-shadow: 0px 10px 50px 0px rgba(11, 18, 5, 0.2);
+    cursor: pointer;
 }
 
 .nav {
@@ -42,6 +64,7 @@
 }
 .cover-header {
     gap: 24px;
+    justify-content: space-between;
     margin-top: 66px;
 }
 .cover-header-img {
@@ -53,22 +76,32 @@
     object-fit: cover;
 }
 .btn-rsvp {
-    width: 145px;
+    width: 100%;
+    max-width: 140px;
     height: 80px;
+    padding: 16px;
     flex-shrink: 0;
     border-radius: 18px;
     border: 0.6px solid #3b779c;
     background: #3b779c;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 17px;
+    justify-content: space-between;
+    gap: 4px;
 }
+
 .img-cover-12 {
+    width: 100%;
+    max-width: 410px;
+    max-height: 400px;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+.img-or-cover {
     width: 32px;
     height: 32px;
-    flex-shrink: 0;
 }
+
 .img-subheader {
     width: 62.5px;
     height: 80px;
@@ -114,7 +147,18 @@
     width: 315px;
     gap: 10px;
 }
-
+.hidden {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    /* left: 0; */
+    top: 0;
+    z-index: 99;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    visibility: hidden;
+}
 .message-box {
     width: 100%;
     max-width: 330px;

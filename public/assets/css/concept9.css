@@ -1,9 +1,62 @@
 body {
     background: #f2f6f9;
 }
+.w-100 {
+    width: 100%;
+    max-width: 410px;
+}
+
+.hr-cover {
+    width: 220px;
+    height: 1px;
+    opacity: 0.3;
+    background: #fff;
+}
+.btn-inv {
+    display: inline-flex;
+    padding: 14px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0px 10px 16px 0px rgba(14, 21, 89, 0.16);
+    cursor: pointer;
+    border: 0;
+}
 
 .mt-6 {
     margin-top: 6px;
+}
+.mt-136 {
+    margin-top: 136px;
+}
+.dan {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+}
+.cover-container {
+    width: 100%;
+    min-width: 360px;
+    height: 100%;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    overflow-y: scroll; /* Add vertical scrollbar */
+    z-index: 99;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(15px);
 }
 
 .diagonal-black {
@@ -173,6 +226,9 @@ body {
     height: 120px;
     flex-shrink: 0;
     object-fit: cover;
+}
+.hidden {
+    overflow: hidden;
 }
 .card-9 {
     width: 100%;

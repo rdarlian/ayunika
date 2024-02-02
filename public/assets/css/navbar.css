@@ -50,7 +50,7 @@ li {
     flex-shrink: 0;
     object-fit: cover;
     border-radius: 8px;
-    background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+    background: lightgray 50% / cover no-repeat;
 }
 .images-dashboard:hover {
     fill: rgba(66, 66, 66, 0.2);

@@ -1,0 +1,344 @@
+.mt-8 {
+    margin-top: 8px;
+}
+.mb-40 {
+    margin-bottom: 40px;
+}
+.mt-385 {
+    margin-top: 385px;
+}
+.pb-48 {
+    padding-bottom: 48px;
+}
+.py-48 {
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
+.gap-24 {
+    gap: 24px;
+}
+.font-40 {
+    font-size: 40px;
+}
+.bg-3i {
+    background: #faf2ec;
+}
+.text-brown {
+    color: #af7245;
+}
+.text-white {
+    color: white;
+}
+.text-gray-3i {
+    color: #555;
+}
+.w-100 {
+    width: 100%;
+}
+.font-48 {
+    font-size: 48px;
+}
+.lh-150 {
+    line-height: 150%;
+}
+.lh-165 {
+    line-height: 165%;
+}
+.ls-8 {
+    letter-spacing: 8px;
+}
+
+.cover-container {
+    width: 100%;
+    min-width: 360px;
+    height: 100%;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    overflow-y: scroll; /* Add vertical scrollbar */
+    z-index: 99;
+}
+.cover-border {
+    width: 100%;
+    max-width: 380px;
+    display: inline-flex;
+    padding: 16px 16px 60px 16px;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 300px 300px 0px 0px;
+    border: 2px solid #af7245;
+}
+.img-cover-3i {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 294px;
+    height: 294px;
+    border-radius: 300px;
+    background: #f4e9df;
+    object-fit: cover;
+}
+.dan-3i {
+    position: relative;
+    top: 0px;
+    left: 10px;
+}
+.relative {
+    position: relative;
+}
+.cover-nama {
+    width: 100%;
+    max-width: 246px;
+    display: flex;
+}
+.btn-cover {
+    display: flex;
+    padding: 14px 28px;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 300px;
+    background: #af7245;
+    border: 0;
+    margin-top: 24px;
+}
+.or-cover {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+
+.hidden {
+    overflow: hidden;
+}
+
+.img-cover-u {
+    width: 100%;
+    min-width: 360px;
+    max-width: 410px;
+    height: 515px;
+    align-self: stretch;
+    border-radius: 0px 0px 150px 150px;
+    background: #fff;
+    object-fit: cover;
+    padding-top: 385px;
+}
+.or-mempelair {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.or-mempelail {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.border-mempelai img {
+    width: 227px;
+    height: 227px;
+    border-radius: 300px 300px 16px 16px;
+    border: 2px solid #af7245;
+    background: #fff;
+    display: flex;
+    padding: 8px;
+    align-items: flex-start;
+    gap: 8px;
+    -webkit-border-radius: 300px 300px 16px 16px;
+    -moz-border-radius: 300px 300px 16px 16px;
+    -ms-border-radius: 300px 300px 16px 16px;
+    -o-border-radius: 300px 300px 16px 16px;
+}
+.border-kiri {
+    position: absolute;
+    top: 97px;
+    left: 24px;
+}
+.border-kanan {
+    position: absolute;
+    top: 97px;
+    right: 24px;
+}
+.card-story {
+    padding: 16px;
+    border-radius: 16px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.border-countdown {
+    display: flex;
+    width: 64px;
+    height: 75px;
+    padding: 16px 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border: 2px solid #af7245;
+}
+.card-acara {
+    display: flex;
+    padding: 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 16px;
+    border: 2px solid #af7245;
+}
+.or-ucapan {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.or-ucapan2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.form-linear-3i {
+    border-radius: 8px;
+    border: 1px solid rgba(16, 44, 87, 0.2);
+    background: #fff;
+    display: flex;
+    padding: 10px 14px;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+}
+.form-select-3i {
+    display: flex;
+    padding: 10px 14px;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+    border-radius: 8px;
+    border: 1px solid rgba(16, 44, 87, 0.2);
+    background: #fff;
+}
+.select-grup-3i {
+    position: relative;
+}
+.select-grup-3i::after {
+    content: url("../../assets/svg/toggle-select.svg");
+    font-size: 1rem;
+    top: 30px;
+    right: 12px;
+    position: absolute;
+}
+.card-ucapan {
+    display: flex;
+    padding: 16px 0px;
+    gap: 8px;
+    align-items: start;
+    border-bottom: 1px solid rgba(97, 103, 133, 0.5);
+}
+.card-green {
+    display: flex;
+    padding: 2px 8px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    background: #ecfdf3;
+    color: #027a48;
+    font-size: 12px;
+}
+.card-red {
+    display: flex;
+    padding: 2px 8px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    background: #fef3f2;
+    color: #b42318;
+    font-size: 12px;
+}
+/* MAPS */
+.boxtempat {
+    border: 0px;
+    width: 220px;
+    display: flex;
+    padding: 16px 24px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 16px;
+    background: #af7245;
+    color: white;
+    z-index: 1;
+}
+.pinbox {
+    position: absolute;
+    bottom: 124px;
+    right: 50px;
+}
+.box-triangle {
+    position: absolute;
+    top: -40px;
+    left: -20px;
+    width: 40px;
+    height: 40px;
+    background: #af7245;
+    border-radius: 4px;
+    transform: rotate(45deg);
+    -webkit-border-radius: ;
+    -moz-border-radius: ;
+    -ms-border-radius: ;
+    -o-border-radius: ;
+}
+.pin {
+    width: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 68px;
+    flex-shrink: 0;
+    border-radius: 1000px;
+    background: rgba(0, 0, 0, 0.13);
+    backdrop-filter: blur(2px);
+}
+.box-pinloc {
+    display: inline-flex;
+    padding: 10px;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 1000px;
+    background: #fff;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.06);
+}
+.maps {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-width: 327px;
+    max-width: 400px;
+    min-height: 327px;
+}
+.img-maps {
+    width: 100%;
+    height: 100%;
+    min-width: 310px;
+    min-height: 310px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+.btn-maps {
+    display: flex;
+    padding: 12px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 8px;
+    background: #af7245;
+    border: 0;
+    text-decoration: none;
+    color: white;
+}
