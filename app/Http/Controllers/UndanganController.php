@@ -153,15 +153,6 @@ class UndanganController extends Controller
                     'slug' =>  $details->slug = $slug,
                     'description_story' =>   $details->description_story,
                 ];
-
-                if (isset($image_story[$index])) {
-                    if ($oldImage[$index] != null) {
-                        Storage::disk('public')->delete($oldImage);
-                    }
-                    $validateData['image_story'] = $image_story[$index]->store('undangan-images', 'public');
-                } else {
-                    $validateData['image_story'] = $oldImage[$index];
-                }
                 // Update records directly without using a loop
                 Story::where('id', $data[$index]->id)->update($validateData);
             }
@@ -184,8 +175,6 @@ class UndanganController extends Controller
 
                 if (isset($request->file('image_story')[$index])) {
                     $validated['image_story'] = $request->file('image_story')[$index]->store('undangan-images', 'public');
-                } else {
-                    $validated['image_story'] = null;
                 }
                 $validated["user_id"] = $uid;
                 $validated["slug"] = $slug;
@@ -228,7 +217,7 @@ class UndanganController extends Controller
 
 
         if ($request->file('songs') != null && $request->file('songs') !== $request->oldSong) {
-            if ($request->oldSong) {
+            if ($request->oldSong != null) {
                 $isSongopt = Song::where('id', $request->oldSong)->first();
                 if (!isset($isSongopt)) {
                     $oldPath = UserSong::select('audio_path')->where('judul', $request->oldSong)
@@ -241,8 +230,9 @@ class UndanganController extends Controller
         }
 
         $audio["user_id"] = $uid;
+        $audio['slug'] = $slug;
 
-        if (UserSong::where('user_id', $uid)) {
+        if (UserSong::where('user_id', $uid)->first() != null) {
             UserSong::where('user_id', $uid)->update(
                 $audio
             );
@@ -325,6 +315,10 @@ class UndanganController extends Controller
         $stories = DB::table("stories")
             ->where("slug", $slug)
             ->get();
+        //Get latest stories with user_id
+        $endStory = DB::table("stories")
+            ->where("slug", $slug)->latest()
+            ->first();
 
         //Get tier with user_id
         $tier = DB::table("users")
@@ -348,6 +342,7 @@ class UndanganController extends Controller
             "slug" => $slug,
             "undangans" => $undangans,
             "stories" => $stories,
+            "endStory" => $stories,
             "tier" => $tier,
             "cover_images" => $latestImagesCover,
             "bride_images" => $latestImagesBride,
@@ -462,8 +457,6 @@ class UndanganController extends Controller
 
         $ucapans = $this->fetchLatestRecord("ucapans", $slug, 5);
         $stories =  DB::table('stories')->where('slug', $slug)->get();
-
-
 
         $songs = DB::table('user_songs')->where("slug", $slug)->get();
 
