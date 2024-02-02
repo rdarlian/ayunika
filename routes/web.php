@@ -18,6 +18,7 @@ use App\Http\Controllers\DashboardGuestController;
 use App\Http\Controllers\DashboardThemeController;
 use App\Http\Controllers\DashboardGreetingController;
 use App\Http\Controllers\ReverseGeocodeSearch;
+use App\Http\Controllers\StoriesController;
 use App\Http\Controllers\ThemeController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -90,6 +91,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dz/upload-ui', [FileUploadController::class, 'dropzoneUi'])->name('upload.dropzone');
     Route::post('/dz/file-upload', [FileUploadController::class, 'dropzoneFileUpload'])->name('dropzoneFileUpload');
     Route::post('/dz/file-delete', [FileUploadController::class, 'filedestroy'])->name('dropzoneFileDelete');
+    Route::post('/dz/story-delete', [StoriesController::class, 'destroy'])->name('dropzoneStoryDelete');
+    Route::post('/dz/story-upload', [StoriesController::class, 'submitForm'])->name('dropzoneStoryUpload');
 });
 
 
