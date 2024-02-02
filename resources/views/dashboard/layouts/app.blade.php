@@ -110,6 +110,7 @@
         border-radius: 8px;
         border: 1px dashed #EAECF0;
         background: #FFF;
+        cursor: pointer;
     }
 
     .dz-icon {
@@ -120,6 +121,10 @@
         width: 20px;
         height: 20px;
         display: inline-table
+    }
+
+    cursor-pointer {
+        cursor: pointer;
     }
 
     .dz-icon img {
@@ -186,11 +191,15 @@
     }
 
     .dropzone.dz-clickable .dz-message {
-        cursor: default;
+        cursor: pointer;
     }
 
     .dropzone.dz-clickable .dz-message * {
-        cursor: default;
+        cursor: pointer;
+    }
+
+    .dz-default {
+        cursor: pointer;
     }
 
     .dz-details {
@@ -249,7 +258,7 @@
         content: "";
         height: 20px;
         width: 20px;
-        left: 2px;
+        left: 1px;
         bottom: 2px;
         background-color: white;
         -webkit-transition: .4s;
