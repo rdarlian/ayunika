@@ -110,7 +110,7 @@
       </div>
     </div>
     <div class="bg-pastel py-48">
-      <div class="w-327 color-green display-center align-center flex-column mlr-auto">
+      <div class="w-327 color-green display-center align-center flex-column mlr-auto text-center">
         <p data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="font-28 regular married-great">{{$undangan->bride_name}}</p>
         <img data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="img-mempelai1i mt-24" src="{{$brideImage[0]->images ?? ''}}" alt="" />
       </div>
@@ -134,7 +134,7 @@
         <img class="img-orl wiggle-up" src="{{ asset('/concept1i/svg/mkr.svg') }}" alt="" />
       </div>
 
-      <div class="w-327 color-green display-center align-center flex-column mlr-auto mt-32">
+      <div class="w-327 color-green display-center align-center flex-column mlr-auto mt-32 text-center">
         <p data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="font-32 regular married-great">{{$undangan->groom_name}}</p>
         <img data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="img-mempelai1i mt-24" src="{{$groomImage[0]->images ?? ''}}" alt="" />
       </div>

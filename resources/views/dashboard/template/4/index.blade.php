@@ -10,7 +10,7 @@
 </head>
 
 <body class="slate-900">
-  <div class="cover" id="cover">
+  <div class="cover-container mt-16 mb-16" id="cover">
     <div class="cover-main-11 married-pop">
       <div class="text-left">
         <img class="img-11" src="{{$groomImage[0]->images ?? ''}}" alt="" />
@@ -193,7 +193,7 @@
     </div>
 
 
-    <div class="display-center mt-6 married-pop flex-column">
+    <div class="display-center mt-6 married-pop flex-column scope-16">
       <div class="border-header11 color-white mlr-auto married-pop">
         <h1 class="font-18 large w-327 text-center">Kirim Ucapan</h1>
         <p class="font-14 regular text-center w-327 color-opacity">
@@ -209,70 +209,75 @@
         </p>
       </div>
       @endforeach
-    </div>
+      <div class="border-box-11 mlr-auto mt-6">
+        <div class="married-pop color-white text-center">
+          <h1 class="font-18">Tulis Ucapanmu</h1>
 
-    <div class="border-box-11 mlr-auto mt-6">
-      <div class="married-pop color-white text-center">
-        <h1 class="font-18">Tulis Ucapanmu</h1>
+          <form data-action="{{ route('ucapan.store') }}" method="POST" enctype="multipart/form-data" id="add-user-form">
+            @csrf
+            <div class="box-form married-jakarta font-11 large">
+              <div class="form-grup">
+                <label for="name" class="">Nama</label>
+                <input class="formku" type="text" placeholder="" />
+              </div>
+              <div class="form-grup select-grup">
+                <label for="konfirmasi" class="">Konfirmasi</label>
+                <select class="form-select formku" name="konfirmasi" id="">
+                  <option value="1">Hadir</option>
+                  <option value="0">Tidak Hadir</option>
+                </select>
+              </div>
 
-        <form action="">
-          <div class="box-form married-jakarta font-11 large">
-            <div class="form-grup">
-              <label for="name" class="">Nama</label>
-              <input class="formku" type="text" placeholder="" />
+              <div class="form-grup">
+                <label for="ucapan" class="">Ucapan</label>
+                <textarea class="formku"></textarea>
+              </div>
             </div>
-            <div class="form-grup">
-              <label for="undangan-dari" class="">Undangan Dari</label>
-              <select class="formku" name="undangan-dari" id="">
-                <option value="keluarga pria">Keluarga Pria</option>
-                <option value="keluarga pria">Keluarga Wanita</option>
-              </select>
-            </div>
-
-            <div class="form-grup">
-              <label for="ucapan" class="">Ucapan</label>
-              <textarea class="formku"></textarea>
-            </div>
-          </div>
-          <button type="submit" class="btn-orange married-pop font-18 medium mt-24">
-            Submit Ucapan
-          </button>
-        </form>
+            <button type="submit" class="btn-orange married-pop font-18 medium mt-24">
+              Submit Ucapan
+            </button>
+          </form>
+        </div>
       </div>
     </div>
 
-    <div class="box-close bg-box-white married-pop">
-      <div class="w-327">
-        <hr class="mt-70 color-opacity" />
-        <p class="font-14 regular">
-          Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
-          Bapak/ibu/ <br />
-          Saudara/i berkenan hadir untuk memberikan do’a restu kepada kedua
-          mempelai.
-        </p>
-        <h1 class="font-36 xlarge mt-24 mb-30">Adin & Lisa</h1>
+
+
+    <div class="scope-16">
+      <div class="box-close bg-box-white married-pop">
+        <div>
+          <hr class="mt-70 color-opacity" />
+          <p class="font-14 regular">
+            Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
+            Bapak/ibu/
+            Saudara/i berkenan hadir untuk memberikan do’a restu kepada kedua
+            mempelai.
+          </p>
+          <h1 class="font-36 xlarge mt-24 mb-30">Adin & Lisa</h1>
+        </div>
       </div>
     </div>
-    <div class="display-center married-pop mt-10 gap-6 mb-70">
+
+    <div class="display-center married-pop mt-10 gap-6 mb-70 scope-16">
       <div class="set-border11 bg-box-orange pl-16">
         <div class="flex">
-          <img class="img-ellipse-36-normal" src="assets/concept10/svg/clean-hand.svg" alt="" />
-          <img class="img-ellipse-36-normal" src="assets/concept10/svg/face-mask.svg" alt="" />
-          <img class="img-ellipse-36-normal" src="assets/concept10/svg/social-distance.svg" alt="" />
+          <img class="img-ellipse-36-normal" src="{{ asset('/concept12/svg/hand-wash-black.svg') }}" alt="" />
+          <img class="img-ellipse-36-normal" src="{{ asset('/concept12/svg/face-mask-black.svg') }}" alt="" />
+          <img class="img-ellipse-36-normal" src="{{ asset('/concept12/svg/social-distance-black.svg') }}" alt="" />
         </div>
         <p class="font-16 small">Himbauan Protokol</p>
         <h1 class="font-32 xlarge">Kesehatan</h1>
       </div>
       <div class="border-last">
         <p class="font-12 regular color-white mb-14">Powered by</p>
-        <img src="assets/concept10/svg/brandmark.svg" alt="" />
-        <img class="" src="assets/concept10/svg/Logotype.svg" alt="" />
+        <img src="{{ asset('/concept11/svg/logo.svg') }}" alt="" />
+        <img class="" src="{{ asset('/concept11/svg/name.svg') }}" alt="" />
       </div>
     </div>
   </div>
   <script>
     function hide() {
-      document.getElementById("cover").style.visibility = "hidden";
+      document.getElementById("cover").style.display = "none";
       document.getElementById("main").classList.remove("hidden");
     }
   </script>
