@@ -317,8 +317,7 @@ class UndanganController extends Controller
             ->get();
         //Get latest stories with user_id
         $endStory = DB::table("stories")
-            ->where("slug", $slug)->latest()
-            ->first();
+            ->where("slug", $slug)->orderByDesc('created_at')->get();
 
         //Get tier with user_id
         $tier = DB::table("users")
@@ -342,7 +341,7 @@ class UndanganController extends Controller
             "slug" => $slug,
             "undangans" => $undangans,
             "stories" => $stories,
-            "endStory" => $stories,
+            "endStory" => $endStory,
             "tier" => $tier,
             "cover_images" => $latestImagesCover,
             "bride_images" => $latestImagesBride,

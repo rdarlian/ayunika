@@ -17,7 +17,6 @@ h3 {
     font-size: 1.2375rem;
     color: #fff;
 }
-
 a {
     cursor: pointer;
     text-decoration: none;
@@ -29,7 +28,13 @@ li {
 }
 
 /* Layout skeleton */
-
+.font-18 {
+    font-size: 18px;
+}
+.married-pop {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+}
 .card-dashboard {
     border-radius: 8px !important;
     border: 1px solid #eaecf0 !important;

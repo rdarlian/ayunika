@@ -102,7 +102,8 @@
         height: 1px;
         border: 0;
         border-top: 1px solid #AAA;
-        margin: 1em 0;
+        margin-top: 24px;
+        margin-bottom: 24px;
         padding: 0;
     }
 
