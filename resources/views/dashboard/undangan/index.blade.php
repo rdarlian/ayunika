@@ -85,7 +85,7 @@
             <div class=" py-3 py-lg-0">
               <div class="card bg-white py-4 card-dashboard">
                 <div class="card-body">
-                  <h6 class="card-title fw-bold" for="#">Unggah foto Mempelai wanita</h6>
+                  <h6 class="card-title font-18 fw-bold" for="#">Unggah Foto Mempelai Wanita</h6>
 
                   <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
                     @forelse($bride_images as $item)
@@ -166,7 +166,7 @@
             <div class="py-3 py-lg-0">
               <div class="card bg-white py-4 card-dashboard">
                 <div class="card-body">
-                  <h6 class="card-title fw-bold">Unggah foto Mempelai Pria</h6>
+                  <h6 class="card-title font-18 fw-bold">Unggah foto Mempelai Pria</h6>
 
                   <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
                     @forelse($groom_images as $item)
@@ -296,20 +296,17 @@
         </div>
         <div class="col-lg-7 column">
           <div class="card bg-white p-4 card-dashboard">
-            <div class="row py-lg-2 mt-4">
-              <div class=" py-3 py-lg-0 col-lg-2 align-self-center">
-                <h5 class="fw-bold">Tanggal</h5>
-              </div>
-              <div class="col-lg-11">
-                <hr>
+            <div class="row py-lg-2">
+              <div class="py-lg-0 col-lg-2 align-self-center">
+                <h5 class="fw-bold">Akad Nikah</h5>
               </div>
             </div>
             <div class="row py-lg-2">
-              <div class=" py-3 py-lg-0 col-lg-6">
+              <div class=" py-lg-3 py-2 py-lg-0 col-lg-6">
                 <label class="label-form">Tanggal Akad</label>
                 <input type="date" class="form-control" value="{{$undangans[0]->akad_date ?? '' }}" name="akad_date" id="akad_date">
               </div>
-              <div class=" py-3 py-lg-0 col-lg-6">
+              <div class=" py-lg-3 py-2 py-lg-0 col-lg-6">
                 <label class="label-form">Waktu Akad</label>
                 <input type="time" class="form-control" value="{{$undangans[0]->akad_time ?? '' }}" name="akad_time">
               </div>
@@ -324,6 +321,37 @@
                 <p class="text-secondary ms-2">Gunakan sebagai tanggal di cover</p>
               </div>
             </div>
+            <div class="row py-lg-2">
+              <div class="col">
+                <label class="form-label" for="alamatAkad">Alamat Akad</label>
+                <input class="form-control" type="text" placeholder="Nama Tempat" aria-label="default input example" name="alamatAkad" id="alamatAkad" value="{{$undangans[0]->alamatAkad ?? '' }}">
+                <textarea class="form-control mt-2" id="alamatlengkapA" rows="3" name="alamatAkadLengkap" id="alamatLengkapA" placeholder="Alamat Lengkap"><?php echo htmlspecialchars($undangans[0]->alamatAkadLengkap ?? '') ?></textarea>
+              </div>
+            </div>
+            <div class="row py-lg-2">
+              <div class="col d-flex mt-2">
+                <label class="switch">
+                  <input id="validAlamat" type="checkbox" name="isSameAddress" value="1" {{ isset($undangans[0]->isSameAddress) && $undangans[0]->isSameAddress == 1 ? 'checked' : '' }}>
+
+                  <span class="slider round"></span>
+                </label>
+                <p class="text-secondary ms-2" for="invalidCheck">
+                  Gunakan sebagai alamat resepsi
+                </p>
+              </div>
+            </div>
+            <div class="row py-lg-2 my-2">
+              <div class="col-lg-12">
+                <hr>
+              </div>
+            </div>
+            <div class="row py-lg-2">
+              <div class="col-lg-4">
+                <h5 class="fw-bold">Resepsi Pernikahan</h5>
+              </div>
+            </div>
+
+
             <div class="row py-lg-2">
               <div class=" py-3 py-lg-0 col-lg-6">
                 <label class="label-form">Tanggal Resepsi</label>
@@ -344,39 +372,11 @@
                 <p class="text-secondary ms-2">Gunakan sebagai tanggal di cover</p>
               </div>
             </div>
-
-            <div class="row py-lg-2 mt-5">
-              <div class="col-lg-2">
-                <h5 class="fw-bold">Alamat</h5>
-              </div>
-              <div class="col-lg-12">
-                <hr>
-              </div>
-            </div>
-            <div class="row py-lg-2">
-              <div class="col">
-                <label class="form-label" for="alamatAkad">Alamat Akad</label>
-                <input class="form-control" type="text" placeholder="Judul alamat" aria-label="default input example" name="alamatAkad" id="alamatAkad" value="{{$undangans[0]->alamatAkad ?? '' }}">
-                <textarea class="form-control mt-2" id="alamatlengkapA" rows="3" name="alamatAkadLengkap" id="alamatLengkapA"><?php echo htmlspecialchars($undangans[0]->alamatAkadLengkap ?? '') ?></textarea>
-              </div>
-            </div>
-            <div class="row py-lg-2">
-              <div class="col d-flex">
-                <label class="switch">
-                  <input id="validAlamat" type="checkbox" name="isSameAddress" value="1" {{ isset($undangans[0]->isSameAddress) && $undangans[0]->isSameAddress == 1 ? 'checked' : '' }}>
-
-                  <span class="slider round"></span>
-                </label>
-                <p class="text-secondary ms-2" for="invalidCheck">
-                  Gunakan alamat ini sebagai alamat resepsi
-                </p>
-              </div>
-            </div>
             <div class="row py-lg-2">
               <div class="col">
                 <label class="form-label" for="alamatResepsi">Alamat Resepsi</label>
-                <input class="form-control" type="text" id="alamatResepsi" placeholder="Judul alamat" aria-label="default input example" name="alamatResepsi" value="{{$undangans[0]->alamatResepsi ?? '' }}">
-                <textarea class="form-control mt-2" id="alamatLengkapR" rows="3" name="alamatResepsiLengkap"><?php echo htmlspecialchars($undangans[0]->alamatResepsiLengkap ?? '') ?></textarea>
+                <input class="form-control" type="text" id="alamatResepsi" placeholder="Nama Tempat" aria-label="default input example" name="alamatResepsi" value="{{$undangans[0]->alamatResepsi ?? '' }}">
+                <textarea class="form-control mt-2" id="alamatLengkapR" rows="3" name="alamatResepsiLengkap" placeholder="Alamat Lengkap"><?php echo htmlspecialchars($undangans[0]->alamatResepsiLengkap ?? '') ?></textarea>
               </div>
             </div>
           </div>
@@ -402,12 +402,12 @@
                 <p class="fs-6 text-black-50">Gunakan Alamat Jika Lokasi Sudah Terdaftar Pada Maps</p>
                 <div class="d-flex gap-2 flex-sm-column flex-md-row mt-4">
                   <div class="col-lg-6">
-                    <label class="label-form">Koordinat maps</label>
-                    <input type="text" class="form-control p-2" name="akad_loc" placeholder="Masukkan Koordinat" value="{{$undangans[0]->akad_loc ?? ''}}" id="alamat" aria-label="First name">
+                    <label class="label-form">Nama Tempat</label>
+                    <input type="text" class="form-control p-2" name="akad_loc" placeholder="Masukkan titik koordinat" value="{{$undangans[0]->akad_loc ?? ''}}" id="alamat" aria-label="First name">
                   </div>
                   <div class="d-flex align-items-end mt-2">
-                    <button type="button" id="geocode" onclick="getGeocode()" class="btn btn-black">Cek Koordinat</button>
-                    <button type="button" id="geoaddress" onclick="geoCodeName()" class="btn btn-black" hidden>Cek Alamat</button>
+                    <button type="button" id="geocode" onclick="getGeocode()" class="btn btn-dark">Cek Koordinat</button>
+                    <button type="button" id="geoaddress" onclick="geoCodeName()" class="btn btn-dark" hidden>Cek Alamat</button>
                   </div>
 
                 </div>
@@ -436,7 +436,7 @@
             <div class=" py-3 py-lg-0">
               <div class="card bg-white py-4 card-dashboard">
                 <div class="card-body">
-                  <h6 class="card-title fw-bold">
+                  <h6 class="card-title font-18 fw-bold">
                     Foto Cover
                   </h6>
                   <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
@@ -462,7 +462,7 @@
             <div class="py-3 py-lg-0">
               <div class=" card bg-white py-4 card-dashboard">
                 <div class="card-body">
-                  <h6 class="card-title fw-bold" for="#">Foto Gallery</h6>
+                  <h6 class="card-title font-18 fw-bold" for="#">Foto Gallery</h6>
                   <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
                     @forelse($images as $item)
                     <div class="">
@@ -501,8 +501,8 @@
           <div class="row  py-lg-2">
             <div class=" py-3 py-lg-0">
               <div class="card bg-white p-4 card-dashboard">
-                <label class="fw-bold mb-2">Lagu Background</label>
-                <div class="d-flex gap-2">
+                <label class="fw-bold font-18 mb-2">Lagu Background</label>
+                <div class="d-flex gap-2 mb-2">
                   <input id="r1" onclick="document.getElementById('songs').disabled = false; document.getElementById('songayunika').disabled = true;" type="radio" name="isUserSong" value="0" @if(old('isUserSong', $undangans[0]->isUserSong ?? "") == 0) checked @endif>
                   <h6 class="mb-0">Upload Manual</h6>
                 </div>
@@ -510,7 +510,8 @@
                 <input type="hidden" name="oldSong" value="{{ $songs[0]->judul ?? "" }}">
                 <!-- <audio id="ausongs" controls src=""></audio> -->
                 <input class="form-control col-6 @error('songs') is-invalid @enderror" type="file" id="songs" name="songs" accept="audio/*"">
-                <div class=" d-flex gap-2 align-items-center mt-3">
+                
+                <div class=" d-flex gap-2 align-items-center mt-3 mb-2">
                 <input id="r2" onclick="document.getElementById('songs').disabled = true; document.getElementById('songayunika').disabled = false;" type="radio" name="isUserSong" value="1" @if(old('isUserSong', $undangans[0]->isUserSong ?? "") == 1) checked @endif>
                 <h6 class="mb-0">Pilih Lagu Bawaan</h6>
               </div>
@@ -528,7 +529,7 @@
                 @endif
               </audio>
 
-              <h6 class="fw-bold mt-4">Video (Link Youtube)</h6>
+              <h6 class="fw-bold font-18 mt-4">Video (Link Youtube)</h6>
               <input type="text" class="form-control" value="{{$undangans[0]->link ?? "" }}" name="link">
               {{-- ? "https://www.youtube.com/watch?v=" . $undangans[0]->link : ""  --}}
             </div>
@@ -634,6 +635,7 @@
       $("#alamatLengkapR,#alamatResepsi").css({
         "pointer-events": "none",
         "background": "#f4f6f6",
+        "color": "#a3a3a3",
         "display": "block"
       });
 
@@ -642,7 +644,8 @@
       $("#alamatLengkapR,#alamatResepsi").css({
         "pointer-events": "fill",
         "background": "#FFF",
-        "display": "block"
+        "display": "block",
+        "color": "#111"
       });
     }
   }
@@ -668,9 +671,12 @@
     if (mapSelect == 'geocode') {
       $("#geocode").attr('hidden', false);
       $("#geoaddress").attr('hidden', true);
+      $("#alamat").attr("placeholder", "Masukkan Titik Koordinat");
     } else {
       $("#geocode").attr('hidden', true);
       $("#geoaddress").attr('hidden', false);
+      $("#alamat").attr("placeholder", "Masukkan Alamat");
+
     }
   })
 
@@ -1123,7 +1129,7 @@
   let max = tier == 3 ? "Max 20 Foto" : "Max 10 Foto";
   // Initialize Dropzone for the first div
   initializeDropzone('dzCoverImage',
-    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p><span class='bolded'>Klik untuk Upload</span><span class='normalized'> atau drag dan drop</span></p> <p class='second-text'>PNG, JPEG atau JPG (Max 1 Foto)</p>",
+    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p><span class='bolded married-pop'>Klik untuk Upload</span><span class='normalized married-pop'> atau drag dan drop</span></p> <p class='second-text'>PNG, JPEG atau JPG (Max 1 Foto)</p>",
     1, ".jpeg,.jpg,.png,.gif", "cover_images", false);
 
   // Initialize Dropzone for the second div
@@ -1193,9 +1199,9 @@
       timeout: 50000,
 
       init: function() {
-        // this.on('queuecomplete', function() {
-        //   location.reload();
-        // })
+        this.on('queuecomplete', function() {
+          location.reload();
+        })
         latestDataJson = @json($stories);
         var dropzoneInstance = this;
 
@@ -1355,7 +1361,7 @@
   function maFunction() {
     count_class++
     // document.getElementById('count_val').value = count
-    if (count_class <= 10) {
+    if (count_class <= 4) {
       let div = document.createElement('div');
       div.classList.add('mb-3', `love_story${count_class}`, 'form-group', 'row', 'bg-white', 'card-dashboard', 'card', 'py-4');
       div.innerHTML =
@@ -1374,7 +1380,7 @@
       document.getElementById('loveStoryClass').appendChild(div);
       document.forms["formku"].submit();
     } else {
-      alert("Cant Have more than 10")
+      alert("Hanya 4 Kisah Cinta")
     }
 
   }
