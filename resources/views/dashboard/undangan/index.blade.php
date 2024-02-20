@@ -93,7 +93,7 @@
                       <img class="images-dashboard" src="{{ $item->images }}" alt="">
                       <div class="d-flex justify-content-center align-items-center gap-1 p-2">
                         <img src="{{ asset('/assets/svg/dashboard/hapus.svg') }}" alt="">
-                        <a class="text-danger mb-0" onclick="deleteDropzone('bride_images', 'images','{{ $item->images }}')">Hapus Foto</a>
+                        <a class="text-danger mb-0 inter" onclick="deleteDropzone('bride_images', 'images','{{ $item->images }}')">Hapus Foto</a>
                       </div>
                     </div>
                     @empty
@@ -174,7 +174,7 @@
                       <img class="images-dashboard" src="{{ $item->images }}" alt="">
                       <div class="d-flex justify-content-center align-items-center gap-1 p-2">
                         <img src="{{ asset('/assets/svg/dashboard/hapus.svg') }}" alt="">
-                        <a class="text-danger mb-0" onclick="deleteDropzone('groom_images', 'images','{{ $item->images }}')">Hapus Foto</a>
+                        <a class="text-danger mb-0 inter" onclick="deleteDropzone('groom_images', 'images','{{ $item->images }}')">Hapus Foto</a>
                       </div>
                     </div>
                     @empty
@@ -254,7 +254,7 @@
                           <img class="images-dashboard" src="{{ url('storage/' . $story->image_story) }}" alt="">
                           <div class="d-flex justify-content-center align-items-center gap-1 p-2">
                             <img src="{{ asset('/assets/svg/dashboard/hapus.svg') }}" alt="">
-                            <a class="text-danger mb-0" onclick="deleteStoryImage('{{ $story->id }}', '{{ $story->image_story }}')">Hapus Foto</a>
+                            <a class="text-danger mb-0 inter" onclick="deleteStoryImage('{{ $story->id }}', '{{ $story->image_story }}')">Hapus Foto</a>
                           </div>
                         </div>
                       </div>
@@ -445,7 +445,7 @@
                       <img src="{{ $item->images }}" alt="" class="images-dashboard">
                       <div class="d-flex justify-content-center align-items-center gap-1 p-2">
                         <img src="{{ asset('/assets/svg/dashboard/hapus.svg') }}" alt="">
-                        <a class="text-danger mb-0" onclick="deleteDropzone('cover_images', 'images', '{{ $item->images }}')">Hapus Foto</a>
+                        <a class="text-danger mb-0 inter" onclick="deleteDropzone('cover_images', 'images', '{{ $item->images }}')">Hapus Foto</a>
                       </div>
                     </div>
                     @empty
@@ -469,7 +469,7 @@
                       <img class="images-dashboard" src="{{ $item->images }}" alt="">
                       <div class="d-flex justify-content-center align-items-center gap-1 p-2">
                         <img src="{{ asset('/assets/svg/dashboard/hapus.svg') }}" alt="">
-                        <a class="text-danger mb-0" onclick="deleteDropzone('images', 'images','{{ $item->images }}')">Hapus Foto</a>
+                        <a class="text-danger mb-0 inter" onclick="deleteDropzone('images', 'images','{{ $item->images }}')">Hapus Foto</a>
                       </div>
                     </div>
                     @empty
@@ -1129,27 +1129,27 @@
   let max = tier == 3 ? "Max 20 Foto" : "Max 10 Foto";
   // Initialize Dropzone for the first div
   initializeDropzone('dzCoverImage',
-    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p><span class='bolded married-pop'>Klik untuk Upload</span><span class='normalized married-pop'> atau drag dan drop</span></p> <p class='second-text'>PNG, JPEG atau JPG (Max 1 Foto)</p>",
+    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p class='dz-image-p'><span class='bolded married-pop'>Klik atau seret untuk unggah atau ganti foto</span></p> <p class='second-text'>PNG atau JPG (Max 1 Foto)</p>",
     1, ".jpeg,.jpg,.png,.gif", "cover_images", false);
 
   // Initialize Dropzone for the second div
   initializeDropzone('dzGroomImage',
-    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p><span class='bolded'>Klik untuk Upload</span><span class='normalized'> atau drag dan drop</span></p> <p class='second-text'>PNG, JPEG atau JPG (Max 1 Foto)</p>",
+    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p class='dz-image-p'><span class='bolded'>Klik atau seret untuk unggah atau ganti foto</span></p> <p class='second-text'>PNG atau JPG (Max 15 Foto)</p>",
     1, ".jpeg,.jpg,.png,.gif", "groom_images", false);
 
   // Initialize Dropzone for the third div
   initializeDropzone('dzBrideImage',
-    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p><span class='bolded'>Klik untuk Upload</span><span class='normalized'> atau drag dan drop</span></p> <p class='second-text'>PNG, JPEG atau JPG (Max 1 Foto)</p>",
+    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p class='dz-image-p'><span class='bolded'>Klik atau seret untuk unggah atau ganti foto</span></p> <p class='second-text'>PNG atau JPG (Max 1 Foto)</p>",
     1, ".jpeg,.jpg,.png,.gif", "bride_images", false);
 
   //reserved line
   initializeDropzone('dzImages',
-    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p><span class='bolded'>Klik untuk Upload</span><span class='normalized'> atau drag dan drop</span></p> <p class='second-text'>PNG, JPEG atau JPG " +
+    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p class='dz-image-p'><span class='bolded'>Klik atau seret untuk unggah foto</span></p> <p class='second-text'>PNG atau JPG " +
     max + "</p>",
     10, ".jpeg,.jpg,.png,.gif", "images", true);
 
   initializeDropzone('dzSong',
-    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p><span class='bolded'>Klik untuk Upload</span><span class='normalized'> atau drag dan drop</span></p> <p class='second-text'>MP3 atau format audio lainnya (Max 3 Lagu)</p>",
+    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p class='dz-image-p'><span class='bolded'>Klik atau seret untuk unggah atau ganti foto</span><span class='normalized'> atau drag dan drop</span></p> <p class='second-text'>MP3 atau format audio lainnya (Max 3 Lagu)</p>",
     10, ".mp4,.mp3,.wav,.flac", "songs", false);
 
   function deleteDropzone($fieldName, $filename, $name) {
@@ -1327,7 +1327,7 @@
   }
 
   initializeDropzone('dzStoryImage',
-    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p><span class='bolded'>Klik untuk Upload</span><span class='normalized'> atau drag dan drop</span></p> <p class='second-text'>PNG, JPEG atau JPG (Max 1 Foto)</p>",
+    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p class='dz-image-p'><span class='bolded'>Klik atau seret untuk unggah atau ganti foto</span></p> <p class='second-text'>PNG atau JPG (Max 1 Foto)</p>",
     1, ".jpeg,.jpg,.png,.gif", "stories", false);
 
   function deleteStoryImage($story, $image) {

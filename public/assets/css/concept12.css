@@ -1,3 +1,6 @@
+.mt-6 {
+    margin-top: 6px;
+}
 .mt-8 {
     margin-top: 8px;
 }
@@ -92,7 +95,7 @@
 
 .img-cover-12 {
     width: 100%;
-    max-width: 410px;
+    max-width: 430px;
     max-height: 400px;
     flex-shrink: 0;
     object-fit: cover;
@@ -269,9 +272,9 @@
     display: flex;
     width: 100%;
     height: 100%;
-    min-width: 327px;
+    min-width: 310px;
     max-width: 400px;
-    min-height: 327px;
+    min-height: 310px;
 }
 .img-maps {
     width: 100%;

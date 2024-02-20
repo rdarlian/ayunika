@@ -1,8 +1,14 @@
 p {
     margin-bottom: 0;
 }
+.m-0 {
+    margin: 0;
+}
 .mt-4 {
     margin-top: 4px;
+}
+.gap-4-1 {
+    gap: 4px;
 }
 .gap-24 {
     gap: 24px;
@@ -144,28 +150,34 @@ p {
     width: 307px;
     justify-content: center;
     align-items: center;
-    gap: 27px;
+    gap: 37px;
 }
 
 .message-box {
-    width: 327px;
+    padding-left: 18px;
+    padding-right: 18px;
 }
-.bubble:nth-child(2n) {
-    position: relative;
-    left: 132px;
+.box-message-looping:nth-child(2n) {
+    justify-content: end;
+    margin-top: 20px;
+}
+.box-message-looping:nth-child(2n) .bubble {
+    width: 100%;
     display: flex;
     justify-content: flex-end;
     padding: 12px 16px;
     align-items: flex-end;
     text-align: end;
     gap: 4px;
-    border-radius: 16px 4px 16px 16px;
     background: #fff;
-    margin-top: 20px;
     max-width: 194px;
     min-width: 100px;
+    border-radius: 16px 4px 16px 16px;
+    -webkit-border-radius: 16px 4px 16px 16px;
+    -moz-border-radius: 16px 4px 16px 16px;
+    -ms-border-radius: 16px 4px 16px 16px;
+    -o-border-radius: 16px 4px 16px 16px;
 }
-
 .btn-ucapan {
     width: 264px;
     display: flex;
@@ -209,4 +221,71 @@ p {
 }
 .orleft-2 {
     left: -52px;
+}
+/* MAPS */
+.boxtempat {
+    border: 0px;
+    width: 220px;
+    display: flex;
+    padding: 16px 24px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 16px;
+    background: #050810;
+    color: white;
+    z-index: 1;
+}
+.pinbox {
+    position: absolute;
+    bottom: 70px;
+    right: 80px;
+}
+.box-triangle {
+    position: absolute;
+    bottom: -4px;
+    left: -22px;
+    width: 40px;
+    height: 40px;
+    background: #06332d;
+    border-radius: 4px;
+    transform: rotate(45deg);
+}
+.pin {
+    width: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 68px;
+    flex-shrink: 0;
+    border-radius: 1000px;
+    background: rgba(0, 0, 0, 0.13);
+    backdrop-filter: blur(2px);
+}
+.box-pinloc {
+    display: inline-flex;
+    padding: 10px;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 1000px;
+    background: #fff;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.06);
+}
+.maps {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-width: 310px;
+    max-width: 400px;
+    min-height: 310px;
+}
+.img-maps {
+    width: 100%;
+    height: 100%;
+    min-width: 310px;
+    min-height: 310px;
+    border-radius: 4px;
+    object-fit: cover;
 }

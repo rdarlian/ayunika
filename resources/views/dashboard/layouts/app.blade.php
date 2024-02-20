@@ -115,22 +115,35 @@
     }
 
     .dz-icon {
-        border-radius: 99990px;
-        border: 5.714px solid #FFECF5;
+        border-radius: 40px;
         background: #FFECF5;
-        padding: 10px;
+        border: 5.714px solid #FFECF5;
+        display: flex;
+        width: 48px;
+        height: 48px;
+        padding: 14px;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
+
+    .dz-icon img {
         width: 20px;
         height: 20px;
-        display: inline-table
+        object-fit: cover;
     }
 
     cursor-pointer {
         cursor: pointer;
     }
 
-    .dz-icon img {
-        width: 30px;
-        height: 30px;
+    dz-icon img {
+        display: flex;
+        width: 48px;
+        height: 48px;
+        padding: 14px;
+        justify-content: center;
+        align-items: center;
     }
 
     .bolded {
