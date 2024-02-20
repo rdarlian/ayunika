@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataAmplop;
 use DateTime;
 use Carbon\Carbon;
 use App\Models\Song;
@@ -243,6 +244,24 @@ class UndanganController extends Controller
         }
     }
 
+    public function createOrUpdateDataAmplop($request, $uid, $slug)
+    {
+        $dataAmplop = [
+            "nama_bank" => $request->nama_bank,
+            "norek" => $request->norek,
+            "pemilik_rekening" => $request->pemilik_rekening,
+            "slug" => $slug,
+        ];
+
+
+        $amplop = DataAmplop::updateOrCreate(
+            ["user_id" => Auth::id()],
+            $dataAmplop
+        );
+
+        return $amplop;
+    }
+
     // fetcch latest record based on slug
     public function fetchLatestRecord($table, $slug, $limit = 1)
     {
@@ -315,6 +334,10 @@ class UndanganController extends Controller
         $stories = DB::table("stories")
             ->where("slug", $slug)
             ->get();
+        //Get Data Amplop with user_id
+        $amplop = DB::table("data_amplops")
+            ->where("slug", $slug)
+            ->get();
         //Get latest stories with user_id
         $endStory = DB::table("stories")
             ->where("slug", $slug)->orderByDesc('created_at')->get();
@@ -341,6 +364,7 @@ class UndanganController extends Controller
             "slug" => $slug,
             "undangans" => $undangans,
             "stories" => $stories,
+            "amplop" => $amplop,
             "endStory" => $endStory,
             "tier" => $tier,
             "cover_images" => $latestImagesCover,
@@ -381,6 +405,11 @@ class UndanganController extends Controller
 
         //UpdateStory FUnction
         $this->createOrUpdateStory(
+            $request,
+            $uid,
+            $slug,
+        );
+        $this->createOrUpdateDataAmplop(
             $request,
             $uid,
             $slug,
@@ -453,12 +482,13 @@ class UndanganController extends Controller
             "id_ID"
         );
         $explodeReception = explode(" ", $receptionDate);
+        $explodeAkad = explode(" ", $akadDate);
 
         $ucapans = $this->fetchLatestRecord("ucapans", $slug, 5);
         $stories =  DB::table('stories')->where('slug', $slug)->get();
 
         $songs = DB::table('user_songs')->where("slug", $slug)->get();
-
+        $amplops = DB::table('data_amplops')->where("slug", $slug)->get();
         $images = $this->fetchAllRecords("images", $slug);
         $groomImage = $this->fetchAllRecords("groom_images", $slug);
         $brideImage = $this->fetchAllRecords("bride_images", $slug);
@@ -475,6 +505,7 @@ class UndanganController extends Controller
                 "undangan",
                 "ucapans",
                 "stories",
+                "amplops",
                 "images",
                 "coverImage",
                 "brideImage",
@@ -485,6 +516,7 @@ class UndanganController extends Controller
                 "receptionDay",
                 "receptionDate",
                 "explodeReception",
+                "explodeAkad",
             )
         );
     }

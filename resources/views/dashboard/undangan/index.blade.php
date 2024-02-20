@@ -279,12 +279,46 @@
             @endforeach
             @endif
           </div>
-          <div class="text-center d-flex align-items-center justify-content-center justify-content-md-end pt-4 pb-5" id="add_story">
+          <div class="text-center d-flex align-items-center justify-content-center justify-content-md-end pt-4" id="add_story">
             @if(isset($endStory[0]->id))
             <button type="button" class="btn-white mx-2" id="del" onclick="maFunctionDel('{{ $endStory[0]->id }}')">Hapus
               Cerita</button>
             @endif
             <button type="button" class="btn-black mx-2" onclick="maFunction()">Tambah Cerita</button>
+          </div>
+        </div>
+      </div>
+      <hr class="line">
+      <div class="row justify-content-center align-items-start g-2">
+        <div class="col-lg-5">
+          <p class="title">Amplop Digital</p>
+          <p class="subtitle">Gunakan Jika Dibutuhkan</p>
+        </div>
+        <div class="col-lg-7 column">
+          <div class="card bg-white p-4 card-dashboard">
+            <div class="row  py-lg-2 gy-lg-3">
+              <div class=" py-3 py-lg-0 col-12">
+                <label class="label-form">Nama Bank</label>
+                <select id="namaBank" name="nama_bank" class="form-select">
+                  <option value="">Pilih Bank</option>
+                  <option @if(old('nama_bank', $amplop[0]->nama_bank ?? "") == "bca") selected @endif value="bca">BCA</option>
+                  <option @if(old('nama_bank', $amplop[0]->nama_bank ?? "") == "bri") selected @endif value="bri">BRI</option>
+                  <option @if(old('nama_bank', $amplop[0]->nama_bank ?? "") == "bni") selected @endif value="bni">BNI</option>
+                  <option @if(old('nama_bank', $amplop[0]->nama_bank ?? "") == "bsi") selected @endif value="bsi">BSI Syariah</option>
+                  <option @if(old('nama_bank', $amplop[0]->nama_bank ?? "") == "jenius") selected @endif value="jenius">Jenius</option>
+                  <option @if(old('nama_bank', $amplop[0]->nama_bank ?? "") == "mandiri") selected @endif value="mandiri">MANDIRI</option>
+                  <option @if(old('nama_bank', $amplop[0]->nama_bank ?? "") == "lain") selected @endif value="lain">Lainnya ...</option>
+                </select>
+              </div>
+              <div class=" py-3 py-lg-0 col-12">
+                <label class="label-form">Nomor Rekening</label>
+                <input type="text" class="form-control" value="{{$amplop[0]->norek ?? '' }}" name="norek">
+              </div>
+              <div class=" py-3 py-lg-0 col-12">
+                <label class="label-form">Pemilik Rekening</label>
+                <input type="text" class="form-control" value="{{$amplop[0]->pemilik_rekening ?? '' }}" name="pemilik_rekening">
+              </div>
+            </div>
           </div>
         </div>
       </div>

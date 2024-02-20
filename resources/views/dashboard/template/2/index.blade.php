@@ -302,6 +302,36 @@
     </div>
 
     <div class="py-48 bg-pastel">
+      <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="py-40 display-center flex-column">
+        <div class="text-center scope-24">
+          <p data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="font-32 regular married-great color-green">Amplop Digital</p>
+          <p class="font-14 regular mt-6 color-green">Doa restu anda merupakan karunia yang sangat berarti bagi kami. dan jika memberi adalah ungkapan terimakasih anda, Anda dapat memberi kado secara cashless</p>
+        </div>
+        <div class="mt-40 card-amplop mlr-auto">
+          @if($amplops[0]->nama_bank == 'bca')
+          <img class="img-bank" src="{{ asset('/assets/svg/bank/bca.svg') }}" alt="">
+          @elseif($amplops[0]->nama_bank == 'mandiri')
+          <img class="img-bank" src="{{ asset('/assets/svg/bank/mandiri.svg') }}" alt="">
+          @elseif($amplops[0]->nama_bank == 'bni')
+          <img class="img-bank" src="{{ asset('/assets/svg/bank/bni.svg') }}" alt="">
+          @elseif($amplops[0]->nama_bank == 'bri')
+          <img class="img-bank" src="{{ asset('/assets/svg/bank/bri.svg') }}" alt="">
+          @elseif($amplops[0]->nama_bank == 'bsi')
+          <img class="img-bank" src="{{ asset('/assets/svg/bank/bsi.svg') }}" alt="">
+          @elseif($amplops[0]->nama_bank == 'jenius')
+          <img class="img-bank" src="{{ asset('/assets/svg/bank/jenius.svg') }}" alt="">
+          @endif
+          <div class="display-center gap-4-1 flex-column text-center">
+            <p class="font-18 large text-uppercase">{{ $amplops[0]->nama_bank }} - {{ $amplops[0]->norek }}</p>
+            <p>A.n. {{$amplops[0]->pemilik_rekening}}</p>
+            <input type="text" value="{{ $amplops[0]->norek }}" id="copyText" hidden>
+            <a class="btn-amplop display-center cursor-pointer" id="copyBtn" onclick="copy()">
+              <img src="{{ asset('/concept1i/svg/copy-green.svg') }}" alt="">
+              <p class="color-green font-14 medium">Salin</p>
+            </a>
+          </div>
+        </div>
+      </div>
       <div class="w-327 mlr-auto text-center">
         <p data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="font-32 regular married-great color-green">Write Speech</p>
 
@@ -530,26 +560,33 @@
       }
     };
   </script>
-
   <script>
-    const swiper_thumbnail = new Swiper(".swiper_thumbnail", {
-      slidesPerView: 5,
-    })
-    const swiper = new Swiper('.swiper_main', {
+    var slider = new Swiper('.swiper_main', {
+      slidesPerView: 1,
+      centeredSlides: true,
       loop: true,
+      loopedSlides: 6,
       autoplay: {
         disableOnInteraction: false,
         pauseOnMouseEnter: true,
         delay: 2000,
       },
       navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
       },
-      thumbs: {
-        swiper: swiper_thumbnail,
-      },
-    })
+    });
+
+
+    var thumbs = new Swiper('.swiper_thumbnail', {
+      slidesPerView: 5,
+      spaceBetween: 10,
+      centeredSlides: true,
+      loop: true,
+      slideToClickedSlide: true,
+    });
+    slider.controller.control = thumbs;
+    thumbs.controller.control = slider;
   </script>
 </body>
 

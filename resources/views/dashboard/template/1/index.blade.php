@@ -171,8 +171,8 @@
         <div class="position-relative w-100">
           <img class="position-absolute end-0" src="{{ asset('/concept1/png/Ornamentright1.png') }}" alt="">
         </div>
-        <div class="w-307 mlr-auto">
-          <img data-aos="zoom-in" data-aos-duration="600" data-aos-easing="ease-in-out" class="img-mempelai mt-40 mb-40" src="{{$groomImage[0]->images ?? ''}}" alt="" />
+        <div class="w-307 mlr-auto mt-30">
+          <img data-aos="zoom-in" data-aos-duration="600" data-aos-easing="ease-in-out" class="img-mempelai" src="{{$groomImage[0]->images ?? ''}}" alt="" />
 
           <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" class="name-item-mempelai text-center">
             <h1 class="font-28 medium married-birth">{{$undangan->groom_name}}</h1>
@@ -182,7 +182,7 @@
             <h3 class="font-14 medium">Ibu. {{$undangan->groom_mother}}</h3>
           </div>
         </div>
-        <h1 data-aos="zoom-in" data-aos-duration="600" data-aos-easing="ease-in-out" class="married-birth text-center font-60 regular pt-30 pb-32">&</h1>
+        <h1 data-aos="zoom-in" data-aos-duration="600" data-aos-easing="ease-in-out" class="married-birth text-center font-60 regular">&</h1>
 
         <div data-aos="fade-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="w-307 mlr-auto">
           <img data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear" class="img-mempelai" src="{{$brideImage[0]->images ?? ''}}" alt="" />
@@ -201,29 +201,67 @@
     <div class="color-white display-center flex-column align-center">
       <img data-aos="fade-up" class="mlr-auto py-40" src="{{ asset('/concept1/svg/ornament.svg') }}" alt="" />
       <h1 data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out" class="font-18 large text-center">Rangkaian Acara</h1>
-      <div data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out" class="img-ellipse-1">
-        <img src="{{ asset('/concept1/svg/handshake.svg') }}" alt="" />
+      <div class="py-48 scope-24">
+        <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" class="mt-20 maps mlr-auto">
+          <img class="img-maps" src="{{ asset('/concept1i/png/mapsku.png') }}" alt="" />
+          <div class="relative">
+            <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center pinbox">
+              <div class="boxtempat">
+                <p class="font-14 regular m-0">Lokasi Akad</p>
+                <p class="font-16 large m-0">{{ $undangan->alamatAkad }}</p>
+              </div>
+              <div class="relative">
+                <div class="box-triangle">
+                </div>
+              </div>
+              <div class="pin mt-18">
+                <div class="box-pinloc mlr-auto">
+                  <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <img class="position-absolute start-0" src="{{ asset('/concept1/png/ornamentkiri1.png') }}" alt="">
       <div class="w-327 mt-24 text-center mlr-auto">
         <h1 data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out" class="font-18 large">Akad Nikah</h1>
         <div class="font-14 regular mt-16 flex flex-column gap-6">
           <p data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out">{{$akadDay}}, {{$akadDate}} {{ date('H:i', strtotime($undangan->akad_time)) }} </p>
-          <p data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out" class="">
+          <p data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out" class="mb-0">
             {{$undangan->alamatAkad}} <br>
             {{ $undangan->alamatAkadLengkap }}
           </p>
         </div>
         <a data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out" class="btn-submit text-decoration-none font-14 medium mlr-auto" role="button">Open on Maps</a>
       </div>
-      <div data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out" class="img-ellipse-1">
-        <img src="{{ asset('/concept1/svg/resepsi.svg') }}" alt="" />
+      <div class="py-48 scope-24">
+        <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" class="mt-20 maps mlr-auto">
+          <img class="img-maps" src="{{ asset('/concept1i/png/mapsku.png') }}" alt="" />
+          <div class="relative">
+            <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center pinbox">
+              <div class="boxtempat">
+                <p class="font-14 regular m-0">Lokasi Resepsi</p>
+                <p class="font-16 large m-0">{{ $undangan->alamatResepsi }}</p>
+              </div>
+              <div class="relative">
+                <div class="box-triangle">
+                </div>
+              </div>
+              <div class="pin mt-18">
+                <div class="box-pinloc mlr-auto">
+                  <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="w-327 text-center mlr-auto">
+      <div class="w-327 text-center mlr-auto mt-24">
         <h1 data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out" class="font-18 large">Resepsi Pernikahan</h1>
         <div class="font-14 regular mt-16 flex flex-column gap-6">
           <p data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out">{{ $receptionDay }}, {{$receptionDate}} {{ date('H:i', strtotime($undangan->resepsi_time)) }}</p>
-          <p data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out" class="">
+          <p data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out" class="mb-0">
             {{ $undangan->alamatResepsi }} <br />
             {{ $undangan->alamatResepsiLengkap }}
           </p>
@@ -251,105 +289,128 @@
       </div>
       <!-- Story end -->
 
-      <!-- gallery -->
-      <div data-aos="zoom-in" data-aos-duration="600" data-aos-easing="ease-in-out" class="wrapper mt-97">
-        <h1 class="font-18 large">Gallery</h1>
-        <!-- <div class="boxes mt-31">
-          <div class="slider">
-            @foreach($images as $key=>$image)
-            <input checked="checked" id="{{ $key+1 }}" name="ani" type="radio">
-            <label class="limage d-flex" for="{{ $key+1 }}"><img src="{{ $image->images ?? '' }}" width="70" height="70" style="object-fit: cover;"></label>
-            <img class="img-gallery" src="{{ $image->images ?? '' }}">
-            @endforeach
-          </div>
-        </div> -->
-
-
-        <div class="swiper swiper_main mt-31" style="width:375px;height:580px;">
-          <div class="swiper-wrapper">
-            @foreach($images as $key=>$image)
-            <div class="swiper-slide"><img src=" {{ $image->images ?? '' }}" alt=""></div>
-            @endforeach
-          </div>
-          <div class="swiper-button-prev" hidden></div>
-          <div class="swiper-button-next" hidden></div>
+    </div>
+    <!-- gallery -->
+    <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out">
+      <div class="swiper swiper_main mt-31" style="width:100%;height:580px;">
+        <div class="swiper-wrapper">
+          @foreach($images as $key=>$image)
+          <div class="swiper-slide"><img src=" {{ $image->images ?? '' }}" alt=""></div>
+          @endforeach
         </div>
-
-        <div class="swiper swiper_thumbnail mt-3" style="width:375px; height:100px;">
-          <div class="swiper-wrapper">
-            @foreach($images as $key=>$image)
-            <div class="swiper-slide"><img src="{{ $image->images ?? '' }}" alt=""></div>
-            @endforeach
-          </div>
-        </div>
-
+        <div class="swiper-button-prev" hidden></div>
+        <div class="swiper-button-next" hidden></div>
       </div>
 
-      <div class="message mt-120">
-        <div class="message-title color-white text-center">
-          <h1 data-aos="zoom-in" data-aos-duration="600" data-aos-easing="ease-in-out" class="font-18 medium">Kirim Ucapan</h1>
-          <p data-aos="zoom-in" data-aos-duration="600" data-aos-easing="ease-in-out" class="font-14 regular color-opacity">
-            Rangkaian kata kata untuk kami yang Sedang berbagahia
-          </p>
+      <div class="swiper swiper_thumbnail mt-3" style="width:100%; height:100px;">
+        <div class="swiper-wrapper jarak">
+          @foreach($images as $key=>$image)
+          <div class="swiper-slide"><img src="{{ $image->images ?? '' }}" alt=""></div>
+          @endforeach
         </div>
-        <div data-aos="zoom-in" data-aos-duration="600" data-aos-easing="ease-in-out" class="message-box mlr-auto" id="ucapan-box">
-          @foreach($ucapans as $ucapan)
+      </div>
+    </div>
+    <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="py-40 display-center flex-column">
+      <div class="text-center scope-24">
+        <h1 class="font-18 large color-white">Amplop Digital</h1>
+        <p class="font-14 regular color-white color-opacity mt-6">Doa restu anda merupakan karunia yang sangat berarti bagi kami. dan jika memberi adalah ungkapan terimakasih anda, Anda dapat memberi kado secara cashless</p>
+      </div>
+      <div class="mt-40 card-amplop mlr-auto">
+        @if($amplops[0]->nama_bank == 'bca')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/bca.svg') }}" alt="">
+        @elseif($amplops[0]->nama_bank == 'mandiri')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/mandiri.svg') }}" alt="">
+        @elseif($amplops[0]->nama_bank == 'bni')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/bni.svg') }}" alt="">
+        @elseif($amplops[0]->nama_bank == 'bri')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/bri.svg') }}" alt="">
+        @elseif($amplops[0]->nama_bank == 'bsi')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/bsi.svg') }}" alt="">
+        @elseif($amplops[0]->nama_bank == 'jenius')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/jenius.svg') }}" alt="">
+        @endif
+        <div class="display-center gap-4-1 flex-column text-center">
+          <p class="font-18 large text-uppercase">{{ $amplops[0]->nama_bank }} - {{ $amplops[0]->norek }}</p>
+          <p>A.n. {{$amplops[0]->pemilik_rekening}}</p>
+          <input type="text" value="{{ $amplops[0]->norek }}" id="copyText" hidden>
+          <a class="btn-amplop display-center cursor-pointer" id="copyBtn" onclick="copy()">
+            <img src="{{ asset('/concept6/svg/copy-linear.svg') }}" alt="">
+            <p class="color-orange font-14 medium">Salin</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="message mt-120">
+      <div class="scope-24 color-white text-center">
+        <h1 data-aos="zoom-in" data-aos-duration="600" data-aos-easing="ease-in-out" class="font-18 medium">Sedikit Ucapan</h1>
+        <p data-aos="zoom-in" data-aos-duration="600" data-aos-easing="ease-in-out" class="font-14 regular color-opacity">
+          Rangkaian kata kata untuk kami yang Sedang berbagahia
+        </p>
+      </div>
+      <div data-aos="zoom-in" data-aos-duration="600" data-aos-easing="ease-in-out" class="message-box mlr-auto" id="ucapan-box">
+        @foreach($ucapans as $ucapan)
+        <div class="box-message-looping">
           <div class="bubble">
             <h1 class="bubble-title">{{ $ucapan->guest_name }}</h1>
             <hr width="100%" style="background: #aaa; margin: 0px;" />
             <p class="bubble-isi">{{ $ucapan->ucapan }}</p>
           </div>
-          @endforeach
         </div>
-
-        <button data-aos="zoom-in" data-aos-duration="600" data-aos-easing="ease-in-out" class="btn-ucapan mlr-auto" data-bs-toggle="modal" data-bs-target="#myModal">
-          <img height="24px" src="{{ asset('concept1/svg/comment.svg') }}" alt="" />
-          <h1 class="font-18 medium color-white m-0">Tuliskan Ucapanmu</h1>
-        </button>
-
-      </div>
-      <div data-aos="zoom-in" data-aos-duration="600" data-aos-easing="ease-in-out" class="mt-120">
-        <div class="box-327 mlr-auto mt-16 text-center">
-
-
-          <p class="font-14 regular text-italic color-white">
-            “ Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan
-            pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung
-            dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa
-            kasih dan sayang."
-          </p>
-          <h4 class="font-16 medium color-white mt-20">QS Ar-rum 21</h4>
-          <p class="font-14 regular color-white mt-31">
-            Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
-            Bapak/ibu/ Saudara/i berkenan hadir untuk memberikan do’a restu
-            kepada kedua mempelai.
-          </p>
-          <h1 class="font-46 regular married-birth color-white mt-80">
-            {{ $undangan->groom_nickname}} & {{ $undangan->bride_nickname}}
-          </h1>
-          <p class="font-11 regular color-white mt-80">
-            Himbauan Protocol Kesehatan :
-          </p>
-          <div class="display-center mt-16">
-            <img class="img-ellipse-36-white" src="{{ asset('/concept1/svg/clean-hand.svg') }}" alt="" />
-            <img class="img-ellipse-36-white" src="{{ asset('/concept1/svg/face-mask.svg') }}" alt="" />
-            <img class="img-ellipse-36-white" src="{{ asset('/concept1/svg/distance.svg') }}" alt="" />
-          </div>
-        </div>
-        <div class="mt-31 mb-38 display-center flex-column color-white text-center">
-          <p class="font-14">Website invitation by</p>
-          <div class="">
-            <img src="{{ asset('/concept1/svg/Brandmark.svg') }}" alt="" />
-            <img class="" src="{{ asset('/concept1/svg/Logo.svg') }}" alt="" />
-          </div>
-        </div>
+        @endforeach
       </div>
 
-      <div class="relative w-100">
-        <img src="{{ asset('/concept1/svg/or-footer.svg') }}" alt="">
-        <img class="or-footerr" src="{{ asset('/concept1/svg/or-footerr.svg') }}" alt="">
+      <button data-aos="zoom-in" data-aos-duration="600" data-aos-easing="ease-in-out" class="btn-ucapan mlr-auto" data-bs-toggle="modal" data-bs-target="#myModal">
+        <img height="24px" src="{{ asset('concept1/svg/comment.svg') }}" alt="" />
+        <h1 class="font-18 medium color-white m-0">Tuliskan Ucapanmu</h1>
+      </button>
+
+    </div>
+
+    <div class="display-center">
+      <img data-aos="fade-up" class="mlr-auto mt-50" src="{{ asset('/concept1/svg/ornament.svg') }}" alt="" />
+    </div>
+    <div data-aos="zoom-in" data-aos-duration="600" data-aos-easing="ease-in-out" class="mt-50">
+      <div class="box-327 mlr-auto mt-16 text-center">
+
+        <p class="font-14 regular text-italic color-white">
+          “ Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan
+          pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung
+          dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa
+          kasih dan sayang."
+        </p>
+        <h4 class="font-16 medium color-white mt-20">QS Ar-rum 21</h4>
+        <p class="font-14 regular color-white mt-31">
+          Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
+          Bapak/ibu/ Saudara/i berkenan hadir untuk memberikan do’a restu
+          kepada kedua mempelai.
+        </p>
+        <h1 class="font-46 regular married-birth color-white mt-80">
+          {{ $undangan->groom_nickname}} & {{ $undangan->bride_nickname}}
+        </h1>
+        <p class="font-11 regular color-white mt-80">
+          Himbauan Protocol Kesehatan :
+        </p>
+        <div class="display-center mt-16 gap-10">
+          <img class="img-ellipse-36-white" src="{{ asset('/concept1/svg/clean-hand.svg') }}" alt="" />
+          <img class="img-ellipse-36-white" src="{{ asset('/concept1/svg/face-mask.svg') }}" alt="" />
+          <img class="img-ellipse-36-white" src="{{ asset('/concept1/svg/distance.svg') }}" alt="" />
+        </div>
+      </div>
+      <div class="mt-31 mb-38 display-center flex-column color-white text-center">
+        <p class="font-14">Website invitation by</p>
+        <div class="">
+          <img src="{{ asset('/concept1/svg/Brandmark.svg') }}" alt="" />
+          <img class="" src="{{ asset('/concept1/svg/Logo.svg') }}" alt="" />
+        </div>
       </div>
     </div>
+
+    <div class="relative w-100">
+      <img src="{{ asset('/concept1/svg/or-footer.svg') }}" alt="">
+      <img class="or-footerr" src="{{ asset('/concept1/svg/or-footerr.svg') }}" alt="">
+    </div>
+
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -407,6 +468,25 @@
     </script>
     <script>
       AOS.init();
+    </script>
+    <script>
+      function copy() {
+        const btn = document.getElementById('copyBtn');
+        const text = document.getElementById('copyText');
+        text.readOnly = true;
+
+        text.select();
+        text.setSelectionRange(0, 99999);
+        // Alert the copied text
+        try {
+          navigator.clipboard.writeText(text.value);
+          text.type = 'hidden';
+          $(`#copyBtn`).text("Copied");
+
+        } catch (err) {
+          console.error(err.name, err.message);
+        }
+      }
     </script>
     <script type="text/javascript">
       function hide() {
@@ -503,24 +583,32 @@
       // }
     </script>
     <script>
-      const swiper_thumbnail = new Swiper(".swiper_thumbnail", {
-        slidesPerView: 5,
-      })
-      const swiper = new Swiper('.swiper_main', {
+      var slider = new Swiper('.swiper_main', {
+        slidesPerView: 1,
+        centeredSlides: true,
         loop: true,
+        loopedSlides: 6,
         autoplay: {
           disableOnInteraction: false,
           pauseOnMouseEnter: true,
           delay: 2000,
         },
         navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
         },
-        thumbs: {
-          swiper: swiper_thumbnail,
-        },
-      })
+      });
+
+
+      var thumbs = new Swiper('.swiper_thumbnail', {
+        slidesPerView: 5,
+        spaceBetween: 10,
+        centeredSlides: true,
+        loop: true,
+        slideToClickedSlide: true,
+      });
+      slider.controller.control = thumbs;
+      thumbs.controller.control = slider;
     </script>
 
 

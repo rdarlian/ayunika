@@ -281,6 +281,34 @@
       document.getElementById("main").classList.remove("hidden");
     }
   </script>
+  <script>
+    var slider = new Swiper('.swiper_main', {
+      slidesPerView: 1,
+      centeredSlides: true,
+      loop: true,
+      loopedSlides: 6,
+      autoplay: {
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+        delay: 2000,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+
+
+    var thumbs = new Swiper('.swiper_thumbnail', {
+      slidesPerView: 5,
+      spaceBetween: 10,
+      centeredSlides: true,
+      loop: true,
+      slideToClickedSlide: true,
+    });
+    slider.controller.control = thumbs;
+    thumbs.controller.control = slider;
+  </script>
 </body>
 
 </html>
