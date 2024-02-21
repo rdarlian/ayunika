@@ -1,0 +1,212 @@
+.text-grey-10 {
+    color: #585661;
+}
+.mt-4 {
+    margin-top: 4px;
+}
+.or-endr {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.nav {
+    margin-top: 24px;
+    display: inline-flex;
+    padding: 10px 16px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 1000px;
+    background: #fff;
+    color: black;
+    text-decoration: none;
+    box-shadow: 0px 2px 8px 0px rgba(18, 7, 41, 0.1);
+}
+
+.second-cover {
+    padding-top: 208px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.ornament-border {
+    position: relative;
+    width: 278px;
+    height: 274.088px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.ornament-border-1 {
+    position: absolute;
+    right: 18px;
+    bottom: 44px;
+}
+.ornament-border-2 {
+    position: absolute;
+    right: -24px;
+    bottom: 30px;
+}
+.second-cover-flower {
+    position: absolute;
+    right: 0px;
+    bottom: -52px;
+    width: 143.353px;
+    height: 256.409px;
+    flex-shrink: 0;
+}
+.second-cover-bottom {
+    position: relative;
+}
+/* div.hexagon {
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+} */
+
+.outside-18 {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    background: #faf9f9;
+    border: 0px;
+    border-radius: 100%;
+}
+.ornament-glimpse {
+    position: relative;
+    margin-top: 70px;
+}
+.ornamentflower-left {
+    position: absolute;
+    left: 0px;
+}
+.ornamentflower-right {
+    position: absolute;
+    right: 0px;
+}
+
+.ucapan-carousel {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.pt-50 {
+    padding-top: 50px;
+}
+
+.bubble-carousel {
+    display: inline-flex;
+    padding: 46px 12px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: #fff;
+    margin-top: 22px;
+}
+.carousel-title {
+    width: 303px;
+    gap: 10px;
+}
+.card-carousel {
+    /* ... */
+    overflow-x: auto; /* Set overflow in horizontal scroll */
+    overflow-y: hidden; /* Hidden overflow in vertical scroll */
+    scroll-snap-type: x mandatory; /* Force the scroll to snap to the start of a scroll-snap area */
+    gap: 8px; /* Set gap between cards */
+}
+
+.penutup {
+    margin-top: 140px;
+}
+.relative {
+    position: relative;
+}
+.hexagon-flower {
+    position: absolute;
+    bottom: 514px;
+    left: -24px;
+    z-index: 1;
+}
+.hexagon-flower-right {
+    position: absolute;
+    right: 0px;
+}
+/* MAPS */
+.boxtempat {
+    border: 0px;
+    width: 220px;
+    display: flex;
+    padding: 16px 24px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 16px;
+    background: #050810;
+    color: white;
+    z-index: 1;
+}
+.pinbox {
+    position: absolute;
+    bottom: 80px;
+    right: 80px;
+}
+.box-triangle {
+    position: absolute;
+    bottom: -6px;
+    left: -20px;
+    width: 40px;
+    height: 40px;
+    background: #06332d;
+    border-radius: 4px;
+    transform: rotate(45deg);
+}
+.pin {
+    width: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 68px;
+    flex-shrink: 0;
+    border-radius: 1000px;
+    background: rgba(0, 0, 0, 0.13);
+    backdrop-filter: blur(2px);
+}
+.box-pinloc {
+    display: inline-flex;
+    padding: 10px;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 1000px;
+    background: #fff;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.06);
+}
+.maps {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-width: 310px;
+    max-width: 400px;
+    min-height: 327px;
+}
+.img-maps {
+    width: 100%;
+    height: 100%;
+    min-width: 310px;
+    min-height: 310px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+.btn-maps {
+    display: flex;
+    padding: 16px 32px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 8px;
+    background: #e1931e;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}

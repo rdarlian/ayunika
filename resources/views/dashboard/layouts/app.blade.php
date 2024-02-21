@@ -102,7 +102,8 @@
         height: 1px;
         border: 0;
         border-top: 1px solid #AAA;
-        margin: 1em 0;
+        margin-top: 24px;
+        margin-bottom: 24px;
         padding: 0;
     }
 
@@ -110,21 +111,39 @@
         border-radius: 8px;
         border: 1px dashed #EAECF0;
         background: #FFF;
+        cursor: pointer;
     }
 
     .dz-icon {
-        border-radius: 99990px;
-        border: 5.714px solid #FFECF5;
+        border-radius: 40px;
         background: #FFECF5;
-        padding: 10px;
-        width: 20px;
-        height: 20px;
-        display: inline-table
+        border: 5.714px solid #FFECF5;
+        display: flex;
+        width: 48px;
+        height: 48px;
+        padding: 14px;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
     }
 
     .dz-icon img {
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
+        object-fit: cover;
+    }
+
+    cursor-pointer {
+        cursor: pointer;
+    }
+
+    dz-icon img {
+        display: flex;
+        width: 48px;
+        height: 48px;
+        padding: 14px;
+        justify-content: center;
+        align-items: center;
     }
 
     .bolded {
@@ -186,11 +205,15 @@
     }
 
     .dropzone.dz-clickable .dz-message {
-        cursor: default;
+        cursor: pointer;
     }
 
     .dropzone.dz-clickable .dz-message * {
-        cursor: default;
+        cursor: pointer;
+    }
+
+    .dz-default {
+        cursor: pointer;
     }
 
     .dz-details {
@@ -249,7 +272,7 @@
         content: "";
         height: 20px;
         width: 20px;
-        left: 2px;
+        left: 1px;
         bottom: 2px;
         background-color: white;
         -webkit-transition: .4s;

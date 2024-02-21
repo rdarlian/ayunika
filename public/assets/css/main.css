@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Birthstone+Bounce&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&family=Rouge+Script&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
+
 @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
 
 @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500&display=swap");
@@ -54,6 +56,9 @@ body {
     display: flex;
     justify-content: right;
 }
+.justify-left {
+    justify-content: left;
+}
 .align-center {
     align-items: center;
 }
@@ -67,12 +72,18 @@ body {
 .flex-column {
     flex-direction: column;
 }
+.flex-wrap {
+    flex-wrap: wrap;
+}
 .flex-row {
     flex-direction: row;
 }
 
 .spacebetween {
     justify-content: space-between;
+}
+.spacearround {
+    justify-content: space-around;
 }
 
 .light-red {
@@ -173,6 +184,9 @@ body {
 .text-underline {
     text-decoration-line: underline;
 }
+.text-uppercase {
+    text-transform: uppercase;
+}
 
 .lineletter {
     line-height: 120%; /* 50.4px */
@@ -196,12 +210,15 @@ body {
     font-family: "Great Vibes", cursive;
 }
 .married-jakarta {
-    font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Plus Jakarta Sans";
     font-style: normal;
     line-height: normal;
 }
 .married-playfair {
     font-family: "Playfair Display", serif;
+}
+.married-rouge {
+    font-family: "Rouge Script", cursive;
 }
 
 /* Menentukan properti-properti khusus untuk tiap ukuran teks */
@@ -266,10 +283,14 @@ body {
 .font-60 {
     font-size: 60px;
 }
+
+.font-64 {
+    font-size: 64px;
+}
 .font-72 {
     font-size: 72px;
 }
-.font-86 {
+.font-80 {
     font-size: 80px;
 }
 .font-100 {
@@ -287,6 +308,12 @@ body {
 
 .gap-6 {
     gap: 6px;
+}
+.gap-10 {
+    gap: 10px;
+}
+.mt-4 {
+    margin-top: 4px;
 }
 .mt-10 {
     margin-top: 10px;
@@ -306,8 +333,14 @@ body {
 .mt-20 {
     margin-top: 20px;
 }
+.mt-30 {
+    margin-top: 30px;
+}
 .mt-31 {
     margin-top: 31px;
+}
+.mt-32 {
+    margin-top: 32px;
 }
 .mt-36 {
     margin-top: 36px;
@@ -318,6 +351,9 @@ body {
 .mt-42 {
     margin-top: 42px;
 }
+.mt-48 {
+    margin-top: 48px;
+}
 .mt-50 {
     margin-top: 50px;
 }
@@ -327,11 +363,23 @@ body {
 .mt-97 {
     margin-top: 97px;
 }
+.mb-12 {
+    margin-bottom: 12px;
+}
+.mb-16 {
+    margin-bottom: 16px;
+}
 .mt-120 {
     margin-top: 120px;
 }
 .mb-38 {
     margin-bottom: 38px;
+}
+.mb-40 {
+    margin-bottom: 40px;
+}
+.mb-80 {
+    margin-bottom: 80px;
 }
 
 .pt-30 {
@@ -387,6 +435,19 @@ body {
     padding: 16px;
 }
 
+.scope-18 {
+    padding-left: 18px;
+    padding-right: 18px;
+}
+.scope-24 {
+    padding-left: 24px;
+    padding-right: 24px;
+}
+.scope-30 {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
 .mlr-auto {
     margin-left: auto;
     margin-right: auto;
@@ -398,22 +459,6 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
-}
-
-/* ringkasan acara  */
-.ringkasan-acara {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.ringkasan-header-box {
-    text-align: center;
-    margin-bottom: 20px;
-    margin-top: 28px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
 }
 
 .img-radius {
@@ -440,20 +485,6 @@ body {
     object-fit: cover;
 }
 
-.akad-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    margin-top: 16px;
-    width: 327px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 32px;
-}
-
 /* Our Story Section */
 
 .ourstory-header-box {
@@ -466,10 +497,13 @@ body {
 .item-text {
     width: 279px;
 }
-
-/* Message */
-
+.box-message-looping {
+    display: flex;
+    margin-top: 20px;
+}
 .bubble {
+    min-width: 192px;
+    max-width: 225px;
     display: inline-flex;
     padding: 12px 16px;
     flex-direction: column;
@@ -477,21 +511,12 @@ body {
     gap: 4px;
     background: white;
     border-radius: 4px 16px 16px 16px;
-    margin-top: 20px;
+    -webkit-border-radius: 4px 16px 16px 16px;
+    -moz-border-radius: 4px 16px 16px 16px;
+    -ms-border-radius: 4px 16px 16px 16px;
+    -o-border-radius: 4px 16px 16px 16px;
 }
-.bubble-right {
-    position: relative;
-    right: -166px;
-    padding: 12px 16px;
-    align-items: flex-end;
-    text-align: end;
-    gap: 4px;
-    border-radius: 16px 4px 16px 16px;
-    background: #fff;
-    margin-top: 20px;
-    margin-right: 18px;
-    max-width: 194px;
-}
+
 .bubble-title {
     color: #10288a;
     font-family: Poppins;
@@ -500,6 +525,7 @@ body {
     font-weight: 600;
     line-height: 21px; /* 161.538% */
     letter-spacing: -0.3px;
+    margin-bottom: 0;
 }
 .bubble-isi {
     max-width: 275px;
@@ -510,6 +536,7 @@ body {
     font-weight: 400;
     line-height: 21px; /* 161.538% */
     letter-spacing: -0.3px;
+    margin-bottom: 0;
 }
 
 .ucapan {
@@ -528,7 +555,6 @@ body {
     font-style: normal;
     font-weight: 400;
     line-height: 160%; /* 22.4px */
-
     width: 100%;
     padding: 15px 16px;
     align-items: center;
@@ -541,6 +567,7 @@ body {
 
     outline: none;
 }
+
 .form-select {
     position: relative;
     color: #000;
@@ -583,6 +610,16 @@ select {
     right: 16px;
     position: absolute;
 }
+.select-grup-white {
+    position: relative;
+}
+.select-grup-white::after {
+    content: url("../../assets/svg/toggle-select-white.svg");
+    font-size: 1rem;
+    top: 38px;
+    right: 16px;
+    position: absolute;
+}
 .form-grup label {
     padding: 0px 12px;
 }
@@ -591,11 +628,10 @@ select {
     gap: 17px;
 }
 .box-form {
+    width: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
     gap: 12px;
 }
 
@@ -644,7 +680,7 @@ select {
 }
 .btn-submit {
     display: flex;
-    width: 339px;
+    width: 100%;
     padding: 18px 32px;
     justify-content: center;
     align-items: center;
@@ -658,8 +694,8 @@ select {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    margin-top: 32px;
-    margin-bottom: 34px;
+    margin-top: 24px;
+    margin-bottom: 24px;
 }
 
 .payment-header {
@@ -830,18 +866,10 @@ select {
     margin-top: 30px;
     text-align: center;
 }
-.close-last-left {
-    display: flex;
-    justify-content: start;
-    flex-direction: column;
-    margin-bottom: 30px;
-    margin-top: 30px;
-    text-align: left;
-    margin-left: 30px;
-}
+
 .img-last {
     display: flex;
-    gap: 4px;
+    gap: 6px;
     justify-content: center;
 }
 .img-last-left {
@@ -855,16 +883,6 @@ select {
     flex-shrink: 0;
     border-radius: 8px;
     object-fit: cover;
-}
-.name-item-mempelai {
-    width: 180px;
-    height: 124px;
-}
-.name-item-mempelai hr {
-    width: 100%;
-    margin-top: 12px;
-    margin-bottom: 12px;
-    opacity: 30%;
 }
 .img-glimpse {
     display: inline-flex;
@@ -962,17 +980,17 @@ select {
 .swiper img {
     width: 100%;
 }
-.jarak {
+/* .jarak {
     display: flex;
     gap: 8px;
-}
+} */
 
 .swiper_thumbnail .swiper-slide {
     cursor: pointer;
     opacity: 0.1;
     height: 100%;
 }
-.swiper_thumbnail .swiper-slide-thumb-active {
+.swiper_thumbnail .swiper-slide-active {
     opacity: 1;
 }
 .swiper_thumbnail img {
@@ -987,6 +1005,7 @@ select {
     bottom: 10px;
     right: 10px;
     position: fixed;
+    z-index: 99;
 }
 
 .wrapper {
@@ -999,9 +1018,41 @@ select {
     margin-top: 10px;
     width: 100%;
     max-width: 406px;
-    padding: 0px 24px;
 }
 .swiper-button-next,
 .swiper-button-prev {
     visibility: hidden;
+}
+
+/* Amplop */
+.card-amplop {
+    width: 282px;
+    display: inline-flex;
+    padding: 48px 16px 44px 16px;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    border-radius: 40px;
+    background: #fff;
+}
+.card-amplop p {
+    margin-bottom: 0;
+}
+.card-amplop a {
+    text-decoration: none;
+}
+.img-bank {
+    display: flex;
+    width: 160px;
+    height: 50px;
+    padding: 4.7px 10px 4.68px 10px;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+}
+.btn-amplop {
+    display: flex;
+    padding: 8px 16px;
+    align-items: center;
+    gap: 8px;
 }

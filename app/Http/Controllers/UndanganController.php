@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataAmplop;
 use DateTime;
 use Carbon\Carbon;
 use App\Models\Song;
@@ -153,15 +154,6 @@ class UndanganController extends Controller
                     'slug' =>  $details->slug = $slug,
                     'description_story' =>   $details->description_story,
                 ];
-
-                if (isset($image_story[$index])) {
-                    if ($oldImage[$index] != null) {
-                        Storage::disk('public')->delete($oldImage);
-                    }
-                    $validateData['image_story'] = $image_story[$index]->store('undangan-images', 'public');
-                } else {
-                    $validateData['image_story'] = $oldImage[$index];
-                }
                 // Update records directly without using a loop
                 Story::where('id', $data[$index]->id)->update($validateData);
             }
@@ -184,8 +176,6 @@ class UndanganController extends Controller
 
                 if (isset($request->file('image_story')[$index])) {
                     $validated['image_story'] = $request->file('image_story')[$index]->store('undangan-images', 'public');
-                } else {
-                    $validated['image_story'] = null;
                 }
                 $validated["user_id"] = $uid;
                 $validated["slug"] = $slug;
@@ -228,7 +218,7 @@ class UndanganController extends Controller
 
 
         if ($request->file('songs') != null && $request->file('songs') !== $request->oldSong) {
-            if ($request->oldSong) {
+            if ($request->oldSong != null) {
                 $isSongopt = Song::where('id', $request->oldSong)->first();
                 if (!isset($isSongopt)) {
                     $oldPath = UserSong::select('audio_path')->where('judul', $request->oldSong)
@@ -241,8 +231,9 @@ class UndanganController extends Controller
         }
 
         $audio["user_id"] = $uid;
+        $audio['slug'] = $slug;
 
-        if (UserSong::where('user_id', $uid)) {
+        if (UserSong::where('user_id', $uid)->first() != null) {
             UserSong::where('user_id', $uid)->update(
                 $audio
             );
@@ -251,6 +242,24 @@ class UndanganController extends Controller
                 $audio
             );
         }
+    }
+
+    public function createOrUpdateDataAmplop($request, $uid, $slug)
+    {
+        $dataAmplop = [
+            "nama_bank" => $request->nama_bank,
+            "norek" => $request->norek,
+            "pemilik_rekening" => $request->pemilik_rekening,
+            "slug" => $slug,
+        ];
+
+
+        $amplop = DataAmplop::updateOrCreate(
+            ["user_id" => Auth::id()],
+            $dataAmplop
+        );
+
+        return $amplop;
     }
 
     // fetcch latest record based on slug
@@ -325,6 +334,13 @@ class UndanganController extends Controller
         $stories = DB::table("stories")
             ->where("slug", $slug)
             ->get();
+        //Get Data Amplop with user_id
+        $amplop = DB::table("data_amplops")
+            ->where("slug", $slug)
+            ->get();
+        //Get latest stories with user_id
+        $endStory = DB::table("stories")
+            ->where("slug", $slug)->orderByDesc('created_at')->get();
 
         //Get tier with user_id
         $tier = DB::table("users")
@@ -348,6 +364,8 @@ class UndanganController extends Controller
             "slug" => $slug,
             "undangans" => $undangans,
             "stories" => $stories,
+            "amplop" => $amplop,
+            "endStory" => $endStory,
             "tier" => $tier,
             "cover_images" => $latestImagesCover,
             "bride_images" => $latestImagesBride,
@@ -387,6 +405,11 @@ class UndanganController extends Controller
 
         //UpdateStory FUnction
         $this->createOrUpdateStory(
+            $request,
+            $uid,
+            $slug,
+        );
+        $this->createOrUpdateDataAmplop(
             $request,
             $uid,
             $slug,
@@ -458,14 +481,14 @@ class UndanganController extends Controller
             $receptionDateRaw,
             "id_ID"
         );
+        $explodeReception = explode(" ", $receptionDate);
+        $explodeAkad = explode(" ", $akadDate);
 
         $ucapans = $this->fetchLatestRecord("ucapans", $slug, 5);
         $stories =  DB::table('stories')->where('slug', $slug)->get();
 
-
-
         $songs = DB::table('user_songs')->where("slug", $slug)->get();
-
+        $amplops = DB::table('data_amplops')->where("slug", $slug)->get();
         $images = $this->fetchAllRecords("images", $slug);
         $groomImage = $this->fetchAllRecords("groom_images", $slug);
         $brideImage = $this->fetchAllRecords("bride_images", $slug);
@@ -482,6 +505,7 @@ class UndanganController extends Controller
                 "undangan",
                 "ucapans",
                 "stories",
+                "amplops",
                 "images",
                 "coverImage",
                 "brideImage",
@@ -490,7 +514,9 @@ class UndanganController extends Controller
                 "akadDay",
                 "akadDate",
                 "receptionDay",
-                "receptionDate"
+                "receptionDate",
+                "explodeReception",
+                "explodeAkad",
             )
         );
     }

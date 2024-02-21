@@ -1,8 +1,12 @@
-<nav class="navbar navbar-expand-lg container">
+<nav class="navbar navbar-expand-lg custom-container">
   <div class="container-fluid">
     <a class="navbar-brand" href="/"><img src="/assets/svg/Company logo.svg" alt="" /></a>
-    <div class="collapse navbar-collapse justify-content-end pe-1 me-4" id="navbarNav">
-      <ul class="navbar-nav d-flex gap-4">
+    <button id="navbar-btn-icon" class="navbar-toggler text-toogle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="text-collapsed"><img src="assets/svg/Hamburger.svg" alt="" /></span>
+      <span class="text-expanded"><img src="assets/svg/x.svg" alt="" /></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end pe-1 me-4 font-16" id="navbarNav">
+      <ul class="navbar-nav d-flex gap-40">
         <li class="nav-item">
           <a class="nav-link {{ ($active === "beranda") ? 'active' : '' }}" aria-current="page" href="/#">Beranda</a>
         </li>
@@ -43,15 +47,12 @@
         @else
 
 
-        <a href="/login" class="btn-brown col-md-12 text-decoration-none">
+        <a href="/login" class="btn-brown btn-brown-login col-md-12 mt-sm-12 text-decoration-none">
           Login
         </a>
         @endauth
       </ul>
 
     </div>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
   </div>
 </nav>

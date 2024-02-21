@@ -18,7 +18,7 @@
 </div>
 <div class="container">
   <hr class="line">
-  <form action="{{ route('undangan.store') }}" method="POST" enctype="multipart/form-data">
+  <form id="formku" action="{{ route('undangan.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div>
       <div class="row justify-content-center align-items-start g-2">
@@ -30,34 +30,34 @@
           <div class="card bg-white p-4 card-dashboard">
             <div class="row py-lg-2">
               <div class=" py-3 py-lg-0 col-lg-6">
-                <label class="label-form" for="a">Nama Lengkap Mempelai Wanita</label>
+                <label class="label-form">Nama Lengkap Mempelai Wanita</label>
                 <input type="text" class="form-control" value="{{$undangans[0]->bride_name ?? '' }}" name="bride_name" placeholder="Nama Mempelai Wanita" aria-label="First name">
               </div>
               <div class=" py-3 py-lg-0 col-lg-6">
-                <label class="label-form" for="a">Nama Panggilan Mempelai Wanita</label>
+                <label class="label-form">Nama Panggilan Mempelai Wanita</label>
                 <input type="text" class="form-control" value="{{$undangans[0]->bride_nickname ?? '' }}" name="bride_nickname" placeholder="Nama Panggilan Mempelai Wanita" aria-label="Last name">
               </div>
             </div>
 
             <div class="row  py-lg-2">
               <div class=" py-3 py-lg-0 col-lg-6">
-                <label class="label-form" for="a">Nama Ayah Mempelai Wanita</label>
+                <label class="label-form">Nama Ayah Mempelai Wanita</label>
                 <input type="text" class="form-control" value="{{$undangans[0]->bride_father ?? '' }}" name="bride_fathername" placeholder="Nama Ayah Mempelai Wanita" aria-label="First name">
               </div>
               <div class=" py-3 py-lg-0 col-lg-6">
-                <label class="label-form" for="a">Nama Ibu Mempelai Wanita</label>
+                <label class="label-form">Nama Ibu Mempelai Wanita</label>
                 <input type="text" class="form-control" value="{{$undangans[0]->bride_mother ?? '' }}" name="bride_mothername" placeholder="Nama Ibu Mempelai Wanita" aria-label="Last name">
               </div>
             </div>
             <div class="row  py-lg-2">
               <div class=" py-3 py-lg-0">
-                <label class="label-form" for="a">Asal Mempelai Wanita</label>
+                <label class="label-form">Asal Mempelai Wanita</label>
                 <input type="text" class="form-control" value="{{$undangans[0]->bride_address ?? '' }}" name="bride_address" placeholder="Asal Mempelai Wanita" aria-label="First name">
               </div>
             </div>
             <div class="row  py-lg-2">
               <div class=" py-3 py-lg-0 col-lg-6">
-                <label class="label-form" for="a">Putri ke</label>
+                <label class="label-form">Putri ke</label>
                 <select class="form-select" name="bride_child_order" id="">
                   <option @if(old('bride_child_order', $undangans[0]->bride_child_order ?? "") == "Pertama") selected @endif value="Pertama">Pertama</option>
                   <option @if(old('bride_child_order', $undangans[0]->bride_child_order ?? "") == "Kedua") selected @endif value="Kedua">Kedua</option>
@@ -85,7 +85,7 @@
             <div class=" py-3 py-lg-0">
               <div class="card bg-white py-4 card-dashboard">
                 <div class="card-body">
-                  <h6 class="card-title fw-bold" for="#">Unggah foto Mempelai wanita</h6>
+                  <h6 class="card-title font-18 fw-bold" for="#">Unggah Foto Mempelai Wanita</h6>
 
                   <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
                     @forelse($bride_images as $item)
@@ -93,7 +93,7 @@
                       <img class="images-dashboard" src="{{ $item->images }}" alt="">
                       <div class="d-flex justify-content-center align-items-center gap-1 p-2">
                         <img src="{{ asset('/assets/svg/dashboard/hapus.svg') }}" alt="">
-                        <a class="text-danger mb-0" onclick="deleteDropzone('bride_images', 'images','{{ $item->images }}')">Hapus Foto</a>
+                        <a class="text-danger mb-0 inter" onclick="deleteDropzone('bride_images', 'images','{{ $item->images }}')">Hapus Foto</a>
                       </div>
                     </div>
                     @empty
@@ -118,34 +118,46 @@
           <div class="card bg-white p-4 card-dashboard">
             <div class="row py-lg-2">
               <div class="py-3 py-lg-0 col-lg-6">
-                <label class="label-form" for="a">Nama Lengkap Mempelai Pria</label>
+                <label class="label-form">Nama Lengkap Mempelai Pria</label>
                 <input type="text" class="form-control" value="{{$undangans[0]->groom_name ?? '' }}" name="groom_name" placeholder="Nama Mempelai Pria" aria-label="First name">
               </div>
               <div class=" py-3 py-lg-0 col-lg-6">
-                <label class="label-form" for="a">Nama Panggilan Mempelai Pria</label>
+                <label class="label-form">Nama Panggilan Mempelai Pria</label>
                 <input type="text" class="form-control" value="{{$undangans[0]->groom_nickname ?? '' }}" name="groom_nickname" placeholder="Nama Panggilan Mempelai Pria" aria-label="Last name">
               </div>
             </div>
             <div class="row py-lg-2">
               <div class=" py-3 py-lg-0 col-lg-6">
-                <label class="label-form" for="a">Nama Ayah Mempelai Pria</label>
+                <label class="label-form">Nama Ayah Mempelai Pria</label>
                 <input type="text" class="form-control" value="{{$undangans[0]->groom_father ?? '' }}" name="groom_fathername" placeholder="Nama Ayah Mempelai Pria" aria-label="First name">
               </div>
               <div class=" py-3 py-lg-0 col-lg-6">
-                <label class="label-form" for="a">Nama Ibu Mempelai Pria</label>
+                <label class="label-form">Nama Ibu Mempelai Pria</label>
                 <input type="text" class="form-control" value="{{$undangans[0]->groom_mother ?? '' }}" name="groom_mothername" placeholder="Nama Ibu Mempelai Pria" aria-label="Last name">
               </div>
             </div>
             <div class="row py-lg-2">
               <div class=" py-3 py-lg-0">
-                <label class="label-form" for="a">Asal Mempelai Pria</label>
+                <label class="label-form">Asal Mempelai Pria</label>
                 <input type="text" class="form-control" value="{{$undangans[0]->groom_address ?? '' }}" name="groom_address" placeholder="Asal Mempelai Pria" aria-label="First name">
               </div>
             </div>
             <div class="row  py-lg-2">
               <div class=" py-3 py-lg-0 col-lg-6">
-                <label class="label-form" for="a">Putra Ke</label>
-                <input type="text" class="form-control" value="{{$undangans[0]->groom_child_order ?? '' }}" name="groom_child_order" placeholder="Pertama" aria-label="First name">
+                <label class="label-form">Putra Ke</label>
+                <select class="form-select" name="groom_child_order" id="">
+                  <option @if(old('groom_child_order', $undangans[0]->groom_child_order ?? "") == "Pertama") selected @endif value="Pertama">Pertama</option>
+                  <option @if(old('groom_child_order', $undangans[0]->groom_child_order ?? "") == "Kedua") selected @endif value="Kedua">Kedua</option>
+                  <option @if(old('groom_child_order', $undangans[0]->groom_child_order ?? "") == "Ketiga") selected @endif value="Ketiga">Ketiga</option>
+                  <option @if(old('groom_child_order', $undangans[0]->groom_child_order ?? "") == "Keempat") selected @endif value="Keempat">Keempat</option>
+                  <option @if(old('groom_child_order', $undangans[0]->groom_child_order ?? "") == "Kelima") selected @endif value="Kelima">Kelima</option>
+                  <option @if(old('groom_child_order', $undangans[0]->groom_child_order ?? "") == "Keenam") selected @endif value="Keenam">Keenam</option>
+                  <option @if(old('groom_child_order', $undangans[0]->groom_child_order ?? "") == "Ketujuh") selected @endif value="Ketujuh">Ketujuh</option>
+                  <option @if(old('groom_child_order', $undangans[0]->groom_child_order ?? "") == "Kedelapan") selected @endif value="Kedelapan">Kedelapan</option>
+                  <option @if(old('groom_child_order', $undangans[0]->groom_child_order ?? "") == "Kesembilan") selected @endif value="Kesembilan">Kesembilan</option>
+                  <option @if(old('groom_child_order', $undangans[0]->groom_child_order ?? "") == "Kesepuluh") selected @endif value="Kesepuluh">Kesepuluh</option>
+                  <option @if(old('groom_child_order', $undangans[0]->groom_child_order ?? "") == "Kesebelas") selected @endif value="Kesebelas">Kesebelas</option>
+                </select>
               </div>
             </div>
           </div>
@@ -154,7 +166,7 @@
             <div class="py-3 py-lg-0">
               <div class="card bg-white py-4 card-dashboard">
                 <div class="card-body">
-                  <h6 class="card-title fw-bold" for="a">Unggah foto Mempelai Pria</h6>
+                  <h6 class="card-title font-18 fw-bold">Unggah foto Mempelai Pria</h6>
 
                   <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
                     @forelse($groom_images as $item)
@@ -162,7 +174,7 @@
                       <img class="images-dashboard" src="{{ $item->images }}" alt="">
                       <div class="d-flex justify-content-center align-items-center gap-1 p-2">
                         <img src="{{ asset('/assets/svg/dashboard/hapus.svg') }}" alt="">
-                        <a class="text-danger mb-0" onclick="deleteDropzone('groom_images', 'images','{{ $item->images }}')">Hapus Foto</a>
+                        <a class="text-danger mb-0 inter" onclick="deleteDropzone('groom_images', 'images','{{ $item->images }}')">Hapus Foto</a>
                       </div>
                     </div>
                     @empty
@@ -189,11 +201,11 @@
           <div class="card bg-white p-4 card-dashboard">
             <div class="row  py-lg-2">
               <div class=" py-3 py-lg-0 col-12">
-                <label class="label-form" for="a">Quote</label>
+                <label class="label-form">Quote</label>
                 <textarea class="form-control" name="quote" id="" cols="30" rows="5">{{$undangans[0]->quote ?? '' }}</textarea>
               </div>
               <div class=" py-3 py-lg-0 col-12">
-                <label class="label-form" for="a">Sumber Quote</label>
+                <label class="label-form">Sumber Quote</label>
                 <input type="text" class="form-control" value="{{$undangans[0]->quote_source ?? '' }}" name="quote_source">
               </div>
             </div>
@@ -214,47 +226,99 @@
             <div class="card p-4 bg-white card-dashboard">
               <h5 class="fw-bold">Kisah Cinta {{ $loop->index+1 }}</h5>
               <div class="form-group row pt-4">
-                <div class="col-12 mt-2">
-                  <label class="label-form" for="a">Judul Kisah Cinta</label>
+                <div class="col-12 col-md-6 mt-2">
+                  <label class="label-form">Judul Kisah Cinta</label>
                   <input type="text" class="form-control @error('title_story') is-invalid @enderror" id="title_story" name="title_stories[]" autocomplete="off" value="{{ $story->title_story }}">
                 </div>
-                <div class="col-12 mt-2">
-                  <label class="label-form" for="a">Tanggal Story</label>
+                <div class="col-12 col-md-6 mt-2">
+                  <label class="label-form">Tanggal Kisah Cinta</label>
                   <input type="date" class="form-control @error('tgl_story') is-invalid @enderror" id="tgl_story" name="tgl_stories[]" autocomplete="off" value="{{ $story->tgl_story }}">
                 </div>
                 <div class="col-12 mt-2">
-                  <label class="label-form mt-2" for="a">{{"Deskripsi Kisah Cinta " }}</label>
+                  <label class="label-form mt-2">{{"Deskripsi Kisah Cinta " }}</label>
                   <textarea name="description_stories[]" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $story->description_story }}</textarea>
                 </div>
-                <label class="label-form mt-2" for="a">Unggah Foto</label>
+                <label class="label-form mt-2">Unggah Foto</label>
                 <div class="col-12">
-                  <input type="hidden" name="oldImage[]" value="{{ $story->image_story }}">
-                  @if ($story->image_story)
+                  <!-- @if ($story->image_story)
                   <img src="{{ url('storage/' . $story->image_story) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
                   @else
                   <img class="img-preview img-fluid mb-3 col-sm-5">
-                  @endif
+                  @endif -->
 
+                  <div class="card bg-white py-4 card-dashboard">
+                    <div class="card-body">
+                      @if ($story->image_story)
+                      <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
+                        <div class="">
+                          <img class="images-dashboard" src="{{ url('storage/' . $story->image_story) }}" alt="">
+                          <div class="d-flex justify-content-center align-items-center gap-1 p-2">
+                            <img src="{{ asset('/assets/svg/dashboard/hapus.svg') }}" alt="">
+                            <a class="text-danger mb-0 inter" onclick="deleteStoryImage('{{ $story->id }}', '{{ $story->image_story }}')">Hapus Foto</a>
+                          </div>
+                        </div>
+                      </div>
+                      @endif
+                    </div>
+                    <form method="post" action="{{ route('dropzoneStoryUpload') }}" enctype="multipart/form-data" class="dropzone m-3" id="dzStoryImage">
+                      @csrf
+                      <input type="hidden" name="oldImage[]" value="{{ $story->image_story }}">
+                      <input type="hidden" name="id" value="{{ $story->id}}">
+                    </form>
+                  </div>
+                  <!-- 
                   <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="images[]" value="$story->image_story" onchange="previewImage()">
                   @error('image')
                   <div class="invalid-feedback">
                     {{ $message }}
                   </div>
-                  @enderror
+                  @enderror -->
                 </div>
               </div>
             </div>
-
-
             @endforeach
             @endif
           </div>
-          <div class="text-center d-flex align-items-center justify-content-center justify-content-md-end pt-4 pb-5" id="add_story">
-            @if (!$stories->isEmpty())
-            <button type="button" class="btn-white mx-2" id="del" onclick="maFunctionDel('{{ $story->id }}')">Hapus
+          <div class="text-center d-flex align-items-center justify-content-center justify-content-md-end pt-4" id="add_story">
+            @if(isset($endStory[0]->id))
+            <button type="button" class="btn-white mx-2" id="del" onclick="maFunctionDel('{{ $endStory[0]->id }}')">Hapus
               Cerita</button>
             @endif
             <button type="button" class="btn-black mx-2" onclick="maFunction()">Tambah Cerita</button>
+          </div>
+        </div>
+      </div>
+      <hr class="line">
+      <div class="row justify-content-center align-items-start g-2">
+        <div class="col-lg-5">
+          <p class="title">Amplop Digital</p>
+          <p class="subtitle">Gunakan Jika Dibutuhkan</p>
+        </div>
+        <div class="col-lg-7 column">
+          <div class="card bg-white p-4 card-dashboard">
+            <div class="row  py-lg-2 gy-lg-3">
+              <div class=" py-3 py-lg-0 col-12">
+                <label class="label-form">Nama Bank</label>
+                <select id="namaBank" name="nama_bank" class="form-select">
+                  <option value="">Pilih Bank</option>
+                  <option @if(old('nama_bank', $amplop[0]->nama_bank ?? "") == "bca") selected @endif value="bca">BCA</option>
+                  <option @if(old('nama_bank', $amplop[0]->nama_bank ?? "") == "bri") selected @endif value="bri">BRI</option>
+                  <option @if(old('nama_bank', $amplop[0]->nama_bank ?? "") == "bni") selected @endif value="bni">BNI</option>
+                  <option @if(old('nama_bank', $amplop[0]->nama_bank ?? "") == "bsi") selected @endif value="bsi">BSI Syariah</option>
+                  <option @if(old('nama_bank', $amplop[0]->nama_bank ?? "") == "jenius") selected @endif value="jenius">Jenius</option>
+                  <option @if(old('nama_bank', $amplop[0]->nama_bank ?? "") == "mandiri") selected @endif value="mandiri">MANDIRI</option>
+                  <option @if(old('nama_bank', $amplop[0]->nama_bank ?? "") == "lain") selected @endif value="lain">Lainnya ...</option>
+                </select>
+              </div>
+              <div class=" py-3 py-lg-0 col-12">
+                <label class="label-form">Nomor Rekening</label>
+                <input type="text" class="form-control" value="{{$amplop[0]->norek ?? '' }}" name="norek">
+              </div>
+              <div class=" py-3 py-lg-0 col-12">
+                <label class="label-form">Pemilik Rekening</label>
+                <input type="text" class="form-control" value="{{$amplop[0]->pemilik_rekening ?? '' }}" name="pemilik_rekening">
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -266,21 +330,18 @@
         </div>
         <div class="col-lg-7 column">
           <div class="card bg-white p-4 card-dashboard">
-            <div class="row py-lg-2 mt-4">
-              <div class=" py-3 py-lg-0 col-lg-2 align-self-center">
-                <h5 class="fw-bold">Tanggal</h5>
-              </div>
-              <div class="col-lg-11">
-                <hr>
+            <div class="row py-lg-2">
+              <div class="py-lg-0 col-lg-2 align-self-center">
+                <h5 class="fw-bold">Akad Nikah</h5>
               </div>
             </div>
             <div class="row py-lg-2">
-              <div class=" py-3 py-lg-0 col-lg-6">
-                <label class="label-form" for="a">Tanggal Akad</label>
+              <div class=" py-lg-3 py-2 py-lg-0 col-lg-6">
+                <label class="label-form">Tanggal Akad</label>
                 <input type="date" class="form-control" value="{{$undangans[0]->akad_date ?? '' }}" name="akad_date" id="akad_date">
               </div>
-              <div class=" py-3 py-lg-0 col-lg-6">
-                <label class="label-form" for="a">Waktu Akad</label>
+              <div class=" py-lg-3 py-2 py-lg-0 col-lg-6">
+                <label class="label-form">Waktu Akad</label>
                 <input type="time" class="form-control" value="{{$undangans[0]->akad_time ?? '' }}" name="akad_time">
               </div>
             </div>
@@ -295,12 +356,43 @@
               </div>
             </div>
             <div class="row py-lg-2">
+              <div class="col">
+                <label class="form-label" for="alamatAkad">Alamat Akad</label>
+                <input class="form-control" type="text" placeholder="Nama Tempat" aria-label="default input example" name="alamatAkad" id="alamatAkad" value="{{$undangans[0]->alamatAkad ?? '' }}">
+                <textarea class="form-control mt-2" id="alamatlengkapA" rows="3" name="alamatAkadLengkap" id="alamatLengkapA" placeholder="Alamat Lengkap"><?php echo htmlspecialchars($undangans[0]->alamatAkadLengkap ?? '') ?></textarea>
+              </div>
+            </div>
+            <div class="row py-lg-2">
+              <div class="col d-flex mt-2">
+                <label class="switch">
+                  <input id="validAlamat" type="checkbox" name="isSameAddress" value="1" {{ isset($undangans[0]->isSameAddress) && $undangans[0]->isSameAddress == 1 ? 'checked' : '' }}>
+
+                  <span class="slider round"></span>
+                </label>
+                <p class="text-secondary ms-2" for="invalidCheck">
+                  Gunakan sebagai alamat resepsi
+                </p>
+              </div>
+            </div>
+            <div class="row py-lg-2 my-2">
+              <div class="col-lg-12">
+                <hr>
+              </div>
+            </div>
+            <div class="row py-lg-2">
+              <div class="col-lg-4">
+                <h5 class="fw-bold">Resepsi Pernikahan</h5>
+              </div>
+            </div>
+
+
+            <div class="row py-lg-2">
               <div class=" py-3 py-lg-0 col-lg-6">
-                <label class="label-form" for="a">Tanggal Resepsi</label>
+                <label class="label-form">Tanggal Resepsi</label>
                 <input type="date" class="form-control" value="{{$undangans[0]->resepsi_date ?? '' }}" name="resepsi_date" id="resepsi_date">
               </div>
               <div class="py-3 py-lg-0 col-lg-6">
-                <label class="label-form" for="a">Waktu Respepsi</label>
+                <label class="label-form">Waktu Respepsi</label>
                 <input type="time" class="form-control" value="{{$undangans[0]->resepsi_time ?? '' }}" name="resepsi_time">
               </div>
             </div>
@@ -314,36 +406,11 @@
                 <p class="text-secondary ms-2">Gunakan sebagai tanggal di cover</p>
               </div>
             </div>
-
-            <div class="row py-lg-2 mt-5">
-              <div class="col-lg-2">
-                <h5 class="fw-bold">Alamat</h5>
-              </div>
-              <div class="col-lg-12">
-                <hr>
-              </div>
-            </div>
-            <div class="row py-lg-2">
-              <div class="col">
-                <label class="form-label" for="alamatAkad">Alamat Akad</label>
-                <input class="form-control" type="text" placeholder="Judul alamat" aria-label="default input example" name="alamatAkad" id="alamatAkad" value="{{$undangans[0]->alamatAkad ?? '' }}">
-                <textarea class="form-control mt-2" id="alamatlengkapA" rows="3" name="alamatAkadLengkap" id="alamatLengkapA"><?php echo htmlspecialchars($undangans[0]->alamatAkadLengkap ?? '') ?></textarea>
-              </div>
-            </div>
-            <div class="row py-lg-2">
-              <div class="col">
-                <input class="form-check-input" id="validAlamat" type="checkbox" value="1" name="isSameAddress">
-                <label class="form-check-label text-secondary" for="invalidCheck">
-                  Gunakan sebagai alamat resepsi juga
-                </label>
-
-              </div>
-            </div>
             <div class="row py-lg-2">
               <div class="col">
                 <label class="form-label" for="alamatResepsi">Alamat Resepsi</label>
-                <input class="form-control" type="text" id="alamatResepsi" placeholder="Judul alamat" aria-label="default input example" name="alamatResepsi" disabled value="{{$undangans[0]->alamatResepsi ?? '' }}">
-                <textarea class="form-control mt-2" id="alamatLengkapR" rows="3" name="alamatResepsiLengkap" disabled><?php echo htmlspecialchars($undangans[0]->alamatResepsiLengkap ?? '') ?></textarea>
+                <input class="form-control" type="text" id="alamatResepsi" placeholder="Nama Tempat" aria-label="default input example" name="alamatResepsi" value="{{$undangans[0]->alamatResepsi ?? '' }}">
+                <textarea class="form-control mt-2" id="alamatLengkapR" rows="3" name="alamatResepsiLengkap" placeholder="Alamat Lengkap"><?php echo htmlspecialchars($undangans[0]->alamatResepsiLengkap ?? '') ?></textarea>
               </div>
             </div>
           </div>
@@ -369,12 +436,12 @@
                 <p class="fs-6 text-black-50">Gunakan Alamat Jika Lokasi Sudah Terdaftar Pada Maps</p>
                 <div class="d-flex gap-2 flex-sm-column flex-md-row mt-4">
                   <div class="col-lg-6">
-                    <label class="label-form" for="a">Koordinat maps</label>
-                    <input type="text" class="form-control p-2" name="akad_loc" placeholder="Masukkan Koordinat" value="{{$undangans[0]->akad_loc ?? ''}}" id="alamat" aria-label="First name">
+                    <label class="label-form">Nama Tempat</label>
+                    <input type="text" class="form-control p-2" name="akad_loc" placeholder="Masukkan titik koordinat" value="{{$undangans[0]->akad_loc ?? ''}}" id="alamat" aria-label="First name">
                   </div>
                   <div class="d-flex align-items-end mt-2">
-                    <button type="button" id="geocode" onclick="getGeocode()" class="btn btn-black">Cek Koordinat</button>
-                    <button type="button" id="geoaddress" onclick="geoCodeName()" class="btn btn-black" hidden>Cek Alamat</button>
+                    <button type="button" id="geocode" onclick="getGeocode()" class="btn btn-dark">Cek Koordinat</button>
+                    <button type="button" id="geoaddress" onclick="geoCodeName()" class="btn btn-dark" hidden>Cek Alamat</button>
                   </div>
 
                 </div>
@@ -403,7 +470,7 @@
             <div class=" py-3 py-lg-0">
               <div class="card bg-white py-4 card-dashboard">
                 <div class="card-body">
-                  <h6 class="card-title fw-bold">
+                  <h6 class="card-title font-18 fw-bold">
                     Foto Cover
                   </h6>
                   <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
@@ -412,7 +479,7 @@
                       <img src="{{ $item->images }}" alt="" class="images-dashboard">
                       <div class="d-flex justify-content-center align-items-center gap-1 p-2">
                         <img src="{{ asset('/assets/svg/dashboard/hapus.svg') }}" alt="">
-                        <a class="text-danger mb-0" onclick="deleteDropzone('cover_images', 'images', '{{ $item->images }}')">Hapus Foto</a>
+                        <a class="text-danger mb-0 inter" onclick="deleteDropzone('cover_images', 'images', '{{ $item->images }}')">Hapus Foto</a>
                       </div>
                     </div>
                     @empty
@@ -429,14 +496,14 @@
             <div class="py-3 py-lg-0">
               <div class=" card bg-white py-4 card-dashboard">
                 <div class="card-body">
-                  <h6 class="card-title fw-bold" for="#">Foto Gallery</h6>
+                  <h6 class="card-title font-18 fw-bold" for="#">Foto Gallery</h6>
                   <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
                     @forelse($images as $item)
                     <div class="">
                       <img class="images-dashboard" src="{{ $item->images }}" alt="">
                       <div class="d-flex justify-content-center align-items-center gap-1 p-2">
                         <img src="{{ asset('/assets/svg/dashboard/hapus.svg') }}" alt="">
-                        <a class="text-danger mb-0" onclick="deleteDropzone('images', 'images','{{ $item->images }}')">Hapus Foto</a>
+                        <a class="text-danger mb-0 inter" onclick="deleteDropzone('images', 'images','{{ $item->images }}')">Hapus Foto</a>
                       </div>
                     </div>
                     @empty
@@ -468,8 +535,8 @@
           <div class="row  py-lg-2">
             <div class=" py-3 py-lg-0">
               <div class="card bg-white p-4 card-dashboard">
-                <label class="fw-bold mb-2" for="a">Lagu Background</label>
-                <div class="d-flex gap-2">
+                <label class="fw-bold font-18 mb-2">Lagu Background</label>
+                <div class="d-flex gap-2 mb-2">
                   <input id="r1" onclick="document.getElementById('songs').disabled = false; document.getElementById('songayunika').disabled = true;" type="radio" name="isUserSong" value="0" @if(old('isUserSong', $undangans[0]->isUserSong ?? "") == 0) checked @endif>
                   <h6 class="mb-0">Upload Manual</h6>
                 </div>
@@ -477,7 +544,8 @@
                 <input type="hidden" name="oldSong" value="{{ $songs[0]->judul ?? "" }}">
                 <!-- <audio id="ausongs" controls src=""></audio> -->
                 <input class="form-control col-6 @error('songs') is-invalid @enderror" type="file" id="songs" name="songs" accept="audio/*"">
-                <div class=" d-flex gap-2 align-items-center mt-3">
+                
+                <div class=" d-flex gap-2 align-items-center mt-3 mb-2">
                 <input id="r2" onclick="document.getElementById('songs').disabled = true; document.getElementById('songayunika').disabled = false;" type="radio" name="isUserSong" value="1" @if(old('isUserSong', $undangans[0]->isUserSong ?? "") == 1) checked @endif>
                 <h6 class="mb-0">Pilih Lagu Bawaan</h6>
               </div>
@@ -495,7 +563,7 @@
                 @endif
               </audio>
 
-              <h6 class="fw-bold mt-4" for="a">Link Youtube</h6>
+              <h6 class="fw-bold font-18 mt-4">Video (Link Youtube)</h6>
               <input type="text" class="form-control" value="{{$undangans[0]->link ?? "" }}" name="link">
               {{-- ? "https://www.youtube.com/watch?v=" . $undangans[0]->link : ""  --}}
             </div>
@@ -535,6 +603,7 @@
   let datas_arr = Object.values(datas_obj);
   let datas_length = datas_arr.length;
 </script>
+<!-- Switch Toggle -->
 <script>
   // function previewFile() {
   //   var preview = document.getElementById('ausongs');
@@ -559,42 +628,32 @@
 
   document.addEventListener('DOMContentLoaded', function() {
 
-    if (r1.checked == true) {
+    if (r1.checked) {
       radiosong2.disabled = true;
       radiosong1.disabled = false;
     }
-    if (r2.checked == true) {
+    if (r2.checked) {
       radiosong2.disabled = false;
       radiosong1.disabled = true;
     }
-
-
-    let checkbox = document.getElementById('tglSwitch');
-    let checkbox2 = document.getElementById('tglSwitch2');
-
+    const checkbox = document.getElementById('tglSwitch');
+    const checkbox2 = document.getElementById('tglSwitch2');
 
     checkbox.addEventListener('change', function() {
-      if (checkbox.checked && checkbox.value == 0) {
-        // do this
-        checkbox.value = 0;
-        checkbox2.checked = false;
-      } else {
-        // do that
-        checkbox2.checked = true;
-      }
+      checkbox2.checked = !checkbox.checked;
+      checkbox.value = checkbox.checked ? 0 : 1;
+      checkbox2.value = checkbox.checked ? 0 : 1;
     });
     checkbox2.addEventListener('change', function() {
-      if (checkbox2.checked && checkbox2.value == 1) {
-        // do this
-        checkbox.value = 1;
-        checkbox.checked = false;
-      } else {
-        // do that
-        checkbox.checked = true;
-      }
+      checkbox.checked = !checkbox2.checked;
+      checkbox.value = checkbox2.checked ? 1 : 0;
+      checkbox2.value = checkbox2.checked ? 1 : 0;
+
     });
   });
 </script>
+
+<!-- Checkbox alamat -->
 <script type="module">
   $(function() {
     changeAlamat();
@@ -603,11 +662,25 @@
 
   function changeAlamat() {
     if ($('#validAlamat').prop('checked')) {
-      $("#alamatResepsi").attr("disabled", true);
-      $("#alamatLengkapR").attr("disabled", true);
+      document.getElementById('alamatResepsi').value = document.getElementById('alamatAkad').value;
+      document.getElementById('alamatLengkapR').value = document.getElementById('alamatlengkapA').value
+
+      console.log(document.getElementById('alamatResepsi').value);
+      $("#alamatLengkapR,#alamatResepsi").css({
+        "pointer-events": "none",
+        "background": "#f4f6f6",
+        "color": "#a3a3a3",
+        "display": "block"
+      });
+
     } else {
-      $("#alamatResepsi").removeAttr("disabled");
-      $("#alamatLengkapR").removeAttr("disabled");
+
+      $("#alamatLengkapR,#alamatResepsi").css({
+        "pointer-events": "fill",
+        "background": "#FFF",
+        "display": "block",
+        "color": "#111"
+      });
     }
   }
   // $(function() {
@@ -632,9 +705,12 @@
     if (mapSelect == 'geocode') {
       $("#geocode").attr('hidden', false);
       $("#geoaddress").attr('hidden', true);
+      $("#alamat").attr("placeholder", "Masukkan Titik Koordinat");
     } else {
       $("#geocode").attr('hidden', true);
       $("#geoaddress").attr('hidden', false);
+      $("#alamat").attr("placeholder", "Masukkan Alamat");
+
     }
   })
 
@@ -650,7 +726,7 @@
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 15,
       center: new google.maps.LatLng(lat, lng),
-      draggable: false, //disable drag
+      draggable: true, //disable drag
       dragPan: false, //disable drag panning
       dragRotate: false, //disable drag rotation
       dragPitch: false, //disable drag pitch
@@ -793,6 +869,7 @@
     return Date.now().toString(36);
   }
 
+
   function initializeDropzone(dropzoneId, message, imageLimit, extension, fieldName, isMultiple) {
     var dropzoneOptions = {
       dictDefaultMessage: message,
@@ -813,7 +890,9 @@
       init: function() {
 
         var dropzoneInstance = this;
-
+        this.on('queuecomplete', function() {
+          location.reload();
+        })
         switch (fieldName) {
           case 'images':
             latestDataJson = @json($images);
@@ -902,7 +981,7 @@
             console.log(e);
           }
         });
-        var fileRef;
+        let fileRef;
         return (fileRef = file.previewElement) != null ?
           fileRef.parentNode.removeChild(file.previewElement) : void 0;
       },
@@ -970,10 +1049,13 @@
           croppie.result({
             type: 'blob',
             size: {
-              width: 256,
-              height: 256
-            }
+              width: 512,
+              height: 512,
+            },
+            quality: 1,
+
           }).then(function(blob) {
+
             // Create a new Dropzone file thumbnail
             myDropZone.createThumbnail(
               blob,
@@ -1022,7 +1104,7 @@
         // Create confirm button at the top left of the viewport
         var buttonConfirm = document.createElement('button');
         buttonConfirm.style.position = 'absolute';
-        buttonConfirm.style.left = '10px';
+        buttonConfirm.style.right = '10px';
         buttonConfirm.style.top = '10px';
         buttonConfirm.style.zIndex = 9999;
         buttonConfirm.textContent = 'Confirm';
@@ -1032,11 +1114,15 @@
         buttonConfirm.addEventListener('click', function() {
           // Get the output file data from Croppie
           croppie.result({
-            enableResize: false,
+            enableResize: true,
             type: 'blob',
-            size: 'original',
+            size: {
+              width: 1133,
+              height: 1752,
+            },
             quality: 1,
           }).then(function(blob) {
+            console.log(blob);
             // Create a new Dropzone file thumbnail
             myDropZone.createThumbnail(
               blob,
@@ -1055,12 +1141,13 @@
           editor.parentNode.removeChild(editor);
         });
         var croppie = new Croppie(editor, {
-          enableResize: false,
+          enableResize: true,
           viewport: {
             width: 375,
             height: 580,
             type: 'square'
           },
+          enforceBoundary: true,
           quality: 1,
         });
         croppie.bind({
@@ -1076,27 +1163,27 @@
   let max = tier == 3 ? "Max 20 Foto" : "Max 10 Foto";
   // Initialize Dropzone for the first div
   initializeDropzone('dzCoverImage',
-    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p><span class='bolded'>Klik untuk Upload</span><span class='normalized'> atau drag dan drop</span></p> <p class='second-text'>PNG, JPEG atau JPG (Max 1 Foto)</p>",
+    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p class='dz-image-p'><span class='bolded married-pop'>Klik atau seret untuk unggah atau ganti foto</span></p> <p class='second-text'>PNG atau JPG (Max 1 Foto)</p>",
     1, ".jpeg,.jpg,.png,.gif", "cover_images", false);
 
   // Initialize Dropzone for the second div
   initializeDropzone('dzGroomImage',
-    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p><span class='bolded'>Klik untuk Upload</span><span class='normalized'> atau drag dan drop</span></p> <p class='second-text'>PNG, JPEG atau JPG (Max 1 Foto)</p>",
+    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p class='dz-image-p'><span class='bolded'>Klik atau seret untuk unggah atau ganti foto</span></p> <p class='second-text'>PNG atau JPG (Max 15 Foto)</p>",
     1, ".jpeg,.jpg,.png,.gif", "groom_images", false);
 
   // Initialize Dropzone for the third div
   initializeDropzone('dzBrideImage',
-    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p><span class='bolded'>Klik untuk Upload</span><span class='normalized'> atau drag dan drop</span></p> <p class='second-text'>PNG, JPEG atau JPG (Max 1 Foto)</p>",
+    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p class='dz-image-p'><span class='bolded'>Klik atau seret untuk unggah atau ganti foto</span></p> <p class='second-text'>PNG atau JPG (Max 1 Foto)</p>",
     1, ".jpeg,.jpg,.png,.gif", "bride_images", false);
 
   //reserved line
   initializeDropzone('dzImages',
-    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p><span class='bolded'>Klik untuk Upload</span><span class='normalized'> atau drag dan drop</span></p> <p class='second-text'>PNG, JPEG atau JPG " +
+    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p class='dz-image-p'><span class='bolded'>Klik atau seret untuk unggah foto</span></p> <p class='second-text'>PNG atau JPG " +
     max + "</p>",
     10, ".jpeg,.jpg,.png,.gif", "images", true);
 
   initializeDropzone('dzSong',
-    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p><span class='bolded'>Klik untuk Upload</span><span class='normalized'> atau drag dan drop</span></p> <p class='second-text'>MP3 atau format audio lainnya (Max 3 Lagu)</p>",
+    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p class='dz-image-p'><span class='bolded'>Klik atau seret untuk unggah atau ganti foto</span><span class='normalized'> atau drag dan drop</span></p> <p class='second-text'>MP3 atau format audio lainnya (Max 3 Lagu)</p>",
     10, ".mp4,.mp3,.wav,.flac", "songs", false);
 
   function deleteDropzone($fieldName, $filename, $name) {
@@ -1132,32 +1219,202 @@
 </script>
 
 <script>
-  var count_class = (count_class = 0) ? 1 : datas_length;
+  // Initialize Dropzone for the third div (for stories) using a new dropzoneOptions
+  function initializeDropzone(dropzoneId, message, imageLimit, extension, fieldName, isMultiple) {
+    var dropzoneOptionsForStories = {
+      dictDefaultMessage: message,
+      paramName: fieldName,
+      maxFilesize: 50,
+      maxFiles: imageLimit,
+      parallelUploads: 10000,
+      uploadMultiple: isMultiple,
+      acceptedFiles: extension,
+      addRemoveLinks: true,
+      timeout: 50000,
 
+      init: function() {
+        this.on('queuecomplete', function() {
+          location.reload();
+        })
+        latestDataJson = @json($stories);
+        var dropzoneInstance = this;
+
+        for (const image of latestDataJson) {
+          const para = $(
+            `<div class="form-check"> <input class="form-check-input input-delete" type="checkbox" value="${image.images}" id="flexCheckDefault"> </div>`,
+          )
+          $('.dz-preview').append(para)
+          let mockFile = {
+            name: image.images,
+            // size: image.filesize
+          };
+        }
+      },
+      removedfile: function(file, response) {
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+          },
+          type: 'POST',
+          url: '{{ route("dropzoneStoryDelete") }}',
+          data: {
+            file
+          },
+          success: function(data, result) {
+            console.log("File has been successfully removed!!");
+            console.log(`Data: ${data}`)
+            console.log(`Res: ${result}`)
+          },
+          error: function(e) {
+            console.log(e);
+          }
+        });
+        let fileRef;
+        return (fileRef = file.previewElement) != null ?
+          fileRef.parentNode.removeChild(file.previewElement) : void 0;
+      },
+      success: function(file, response) {
+        console.log("response :" + response);
+        // console.log(file);
+        // const inputValue = response.result;
+        // console.log(inputValue);
+        // const hiddenInput = $('<input type="hidden" id="' + fieldName + '" name="' + fieldName +
+        //   '" value="' + inputValue + '">');
+
+        // const para = $(`<div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> </div>`);
+
+        // $('.dz-preview').append(para)
+        // $('#hiddenVal').append(hiddenInput);
+      },
+      error: function(file, response) {
+        return false;
+      }
+    }
+    Dropzone.options['dzStoryImage'] = dropzoneOptionsForStories; // Use the new dropzoneOptionsForStories
+    dropzoneOptionsForStories.transformFile = function(file, done) {
+      // Create the image editor overlay
+      myDropZone = this;
+      var editor = document.createElement('div');
+      editor.style.position = 'fixed';
+      editor.style.left = 0;
+      editor.style.right = 0;
+      editor.style.top = 0;
+      editor.style.bottom = 0;
+      editor.style.zIndex = 9999;
+      editor.style.backgroundColor = '#000';
+      document.body.appendChild(editor);
+
+      // Create confirm button at the top left of the viewport
+      var buttonConfirm = document.createElement('button');
+      buttonConfirm.style.position = 'absolute';
+      buttonConfirm.style.right = '10px';
+      buttonConfirm.style.top = '10px';
+      buttonConfirm.style.zIndex = 9999;
+      buttonConfirm.textContent = 'Confirm';
+      buttonConfirm.classList.add('btn-white');
+      editor.appendChild(buttonConfirm);
+
+      buttonConfirm.addEventListener('click', function() {
+        // Get the output file data from Croppie
+        croppie.result({
+          enableResize: true,
+          type: 'blob',
+          size: {
+            width: 1133,
+            height: 1752,
+          },
+          quality: 1,
+        }).then(function(blob) {
+          console.log(blob);
+          // Create a new Dropzone file thumbnail
+          myDropZone.createThumbnail(
+            blob,
+            myDropZone.options.thumbnailWidth,
+            myDropZone.options.thumbnailHeight,
+            myDropZone.options.thumbnailMethod,
+            false,
+            function(dataURL) {
+              // Update the Dropzone file thumbnail
+              myDropZone.emit('thumbnail', file, dataURL);
+              // Tell Dropzone of the new file
+              done(blob);
+            });
+        });
+        // Remove the editor from view
+        editor.parentNode.removeChild(editor);
+      });
+      var croppie = new Croppie(editor, {
+        enableResize: true,
+        viewport: {
+          width: 375,
+          height: 580,
+          type: 'square'
+        },
+        enforceBoundary: true,
+        quality: 1,
+      });
+      croppie.bind({
+        url: URL.createObjectURL(file)
+      });
+
+    };
+  }
+
+  initializeDropzone('dzStoryImage',
+    "<span class=\"dz-icon\"><img src='https://res.cloudinary.com/dtseetkdc/image/upload/v1689905073/svg/CloudArrowUp_jycet9.svg' alt='Icon'></span> <p class='dz-image-p'><span class='bolded'>Klik atau seret untuk unggah atau ganti foto</span></p> <p class='second-text'>PNG atau JPG (Max 1 Foto)</p>",
+    1, ".jpeg,.jpg,.png,.gif", "stories", false);
+
+  function deleteStoryImage($story, $image) {
+    console.log($story);
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+      },
+      type: 'POST',
+      url: '{{ route("dropzoneStoryDelete") }}',
+      data: {
+        id: $story,
+        image: $image,
+      },
+      success: function(data, result) {
+        window.location.reload();
+        console.log("File has been successfully removed!!");
+        console.log(`Data: ${data}`);
+        console.log(`Res: ${result}`);
+      },
+      error: function(e) {
+        console.log(e);
+      }
+    });
+  }
+
+  // ...
+
+  var count_class = (count_class = 0) ? 1 : datas_length;
 
   function maFunction() {
     count_class++
     // document.getElementById('count_val').value = count
-    if (count_class <= 10) {
+    if (count_class <= 4) {
       let div = document.createElement('div');
-      div.classList.add('mb-3', `love_story${count_class}`, 'form-group', 'row');
+      div.classList.add('mb-3', `love_story${count_class}`, 'form-group', 'row', 'bg-white', 'card-dashboard', 'card', 'py-4');
       div.innerHTML =
-        `<label class="label-form" for="a">Judul Story ${count_class}</label> <div class="col-12">
-        <input type="text" class="form-control @error('title_story') is-invalid @enderror" id="title_story" name="title_story[]" required autofocus autocomplete="off" value="{{ old('title_story') }}">
+        `<label class="label-form">Judul Kisah Cinta ${count_class}</label> <div class="col-6">
+        <input type="text" class="form-control @error('title_story') is-invalid @enderror" id="title_story" name="title_story[]" autocomplete="off" value="{{ old('title_story') }}">
         </div>
-        <label class="label-form mt-2" for="a">Tanggal Story ${count_class}</label><div class="col-6">
-        <input type="date" class="form-control @error('tgl_story') is-invalid @enderror" id="tgl_story" name="tgl_story[]" required autofocus autocomplete="off" value="{{ old('tgl_story') }}">
+        <label class="label-form mt-2" for="tgl_story">Tanggal Kisah Cinta ${count_class}</label><div class="col-6">
+        <input type="date" class="form-control @error('tgl_story') is-invalid @enderror" id="tgl_story" name="tgl_story[]" autocomplete="off" value="{{ old('tgl_story') }}">
         </div>
-        <label class="label-form  mt-2" for="a">Kisah Cinta ${count_class}</label> <div class="col-12"><textarea name="description_story[]" class="form-control love_story${count_class}" id="exampleFormControlTextarea1" rows="3"></textarea></div>
-        <label class="label-form mt-2" for="a">Story ${count_class}</label> <div class="col-12">
+        <label class="label-form  mt-2">Deskripsi Kisah Cinta ${count_class}</label> <div class="col-12"><textarea name="description_story[]" class="form-control love_story${count_class}" id="exampleFormControlTextarea1" rows="3"></textarea></div>
+        <label class="label-form mt-2">Foto Kisah Cinta ${count_class}</label> <div class="col-12">
         <img class="img-preview img-fluid mb-3 col-sm-5">
         <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image_story[]" onchange="previewImage()">
         </div>
         `;
       document.getElementById('loveStoryClass').appendChild(div);
-
+      document.forms["formku"].submit();
     } else {
-      alert("Cant Have more than 10")
+      alert("Hanya 4 Kisah Cinta")
     }
 
   }
@@ -1166,10 +1423,15 @@
     let text = "Do you want to delete";
     let token = $("meta[name='csrf-token']").attr("content");
 
+    console.log(count_class);
     if (confirm(text) == true) {
-      if (count_class > 1 && count_class != datas_length) {
+      console.log("text" + text);
+      console.log("count" + count_class);
+      console.log("count" + datas_length);
+      if (count_class >= 1 && count_class != datas_length) {
         $(`.love_story${count_class}`).remove();
-        count_class--
+        count_class--;
+        console.log(count_class);
       } else if (count_class == datas_length) {
         $.ajax({
           headers: {
