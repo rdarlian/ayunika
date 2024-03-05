@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-5">
-  <h1 class="fw-bold fs-5 text-secondary">Song/<span class="fs-6 fw-normal">Create</span></h1>
+  <h1 class="fw-bold fs-5 text-secondary">Song/<span class="fs-6 fw-normal">Add</span></h1>
 </div>
 
 <div class="col-lg-8 pt-3">
@@ -21,12 +21,12 @@
 
     <div class="mb-3">
       <label for="song_id" class="form-label">Song</label><br>
-      <input id="song_id" name="link" type="file" onchange="previewFile()" accept="audio/*"><br>
+      <input id="song_id" class="form-control" name="link" type="file" onchange="previewFile()" accept="audio/*"><br>
       <audio controls src=""></audio>
       <div id="result"></div>
 
     </div>
-    <button type="submit" class="btn btn-primary">Create Song</button>
+    <button type="submit" class="btn btn-primary py-2 px-4">Add Song</button>
   </form>
 </div>
 

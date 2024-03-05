@@ -65,13 +65,14 @@
           {{ $guest->nohp }}
         </td>
         <td>
+          @if(isset($greet))
           <?php
           $share = $link . "/" . $slug . "?r=" . $guest->name;
           $replaced = str_replace(['#TAMU#', '#LINK#', '#WANITA#', '#PRIA#'], [$guest->name, $share, $both["bride_nickname"], $both["groom_nickname"]], $greet);
 
           $apa = str_replace(["\r\n", "\n", ' '], ['%0A', '%0A', '%20'], $replaced);
           ?>
-          <input type="text" value="{{ $greet }}" id="copyText" hidden>
+          <input type="text" value="{{ $greet ?? '' }}" id="copyText" hidden>
           <button class="btn bg-info" onclick="copy('copyku{{$loop->index}}')" id="copyku{{$loop->index}}"><i class="fa-regular fa-copy"></i></button>
           <a href="https://wa.me/{{$guest->nohp}}/?text={!! $apa !!}" data-action="share/whatsapp/share" class="btn bg-success" target="_blank"><i class="fa-brands text-white fa-whatsapp"></i></a>
 
@@ -83,6 +84,9 @@
             @csrf
             <button class="btn bg-danger border-0" onclick="return confirm('Hapus data sekarang ?')"><i class="fa-solid fa-trash-can"></i></button>
           </form>
+          @else
+          <p>Pilih Template Ucapan Dulu</p>
+          @endif
         </td>
       </tr>
       @endforeach

@@ -57,7 +57,6 @@
       </li>
 
 
-      @endif
       <li class="sidebar-header">
         User
       </li>
@@ -73,7 +72,24 @@
           Daftar Tamu Undangan
         </a>
       </li>
-
+      @endif
+      @if(auth()->user()->is_admin == 0)
+      <li class="sidebar-header">
+        Undangan
+      </li>
+      <li class="sidebar-item">
+        <a href="/dashboard/user/undangan" class="sidebar-link {{ Request::is('dashboard/undangan*') ? 'active' : '' }}">
+          <i class="fa-solid fa-envelope pe-2"></i>
+          Detail Undangan
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="/dashboard/guests" class="sidebar-link {{ Request::is('dashboard/guests*') ? 'active' : '' }}">
+          <i class="fa-solid fa-users-viewfinder pe-2"></i>
+          Daftar Tamu Undangan
+        </a>
+      </li>
+      @endif
     </ul>
   </div>
 </aside>
