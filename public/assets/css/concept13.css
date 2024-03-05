@@ -1,6 +1,41 @@
 .mt-8 {
     margin-top: 8px;
 }
+.mt-72 {
+    margin-top: 72px;
+}
+.mt-136 {
+    margin-top: 136px;
+}
+.hr-cover {
+    width: 220px;
+    height: 1px;
+    opacity: 0.3;
+    background: #fff;
+}
+.border-countdown {
+    display: flex;
+    width: 64px;
+    height: 75px;
+    padding: 16px 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border: 1px solid #e5e5e5;
+}
+.btn-inv {
+    display: inline-flex;
+    padding: 14px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0px 10px 16px 0px rgba(14, 21, 89, 0.16);
+    cursor: pointer;
+    border: 0;
+}
 .pt-90 {
     padding-top: 90px;
 }
@@ -130,6 +165,26 @@
     object-fit: cover;
 }
 
+.hidden {
+    overflow: hidden;
+}
+.cover-container {
+    width: 100%;
+    min-width: 360px;
+    height: 100%;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    overflow-y: scroll; /* Add vertical scrollbar */
+    z-index: 99;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(15px);
+}
 /* MAPS */
 .boxtempat {
     border: 0px;
@@ -152,8 +207,8 @@
 }
 .box-triangle {
     position: absolute;
-    bottom: 81px;
-    left: 89px;
+    bottom: -4px;
+    left: -20px;
     width: 40px;
     height: 40px;
     background: #06332d;
@@ -196,6 +251,10 @@
     min-height: 310px;
     border-radius: 4px;
     object-fit: cover;
+    background: url(../../concept1i/png/mapsku.png);
+}
+.relative {
+    position: relative;
 }
 .btn-maps {
     display: flex;
@@ -209,4 +268,18 @@
     box-shadow: 0px 10px 16px 0px rgba(14, 21, 89, 0.16);
     text-decoration: none;
     color: white;
+}
+.card-amplop {
+    box-shadow: 0px 0px 20px 0px rgba(14, 21, 89, 0.16);
+}
+.box-img-footer {
+    width: 100%;
+    max-width: 430px;
+    min-width: 360px;
+}
+.img-footer {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    min-height: 550px;
 }

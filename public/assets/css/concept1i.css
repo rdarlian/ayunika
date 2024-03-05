@@ -59,6 +59,9 @@
     padding: 48px 0px;
 }
 
+.gap-5 {
+    gap: 5px;
+}
 .gap-16 {
     display: flex;
     gap: 16px;
@@ -171,6 +174,7 @@
     min-height: 327px;
     border-radius: 4px;
     object-fit: cover;
+    background: url(../../concept1i/png/mapsku.png);
 }
 
 /* Story */

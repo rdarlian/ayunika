@@ -15,7 +15,7 @@
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-  <title>concept1</title>
+  <title>Ayunika | {{$undangan->groom_nickname}} & {{$undangan->bride_nickname}}</title>
   <style>
     .modal-custom {
       position: absolute;
@@ -203,21 +203,18 @@
       <h1 data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out" class="font-18 large text-center">Rangkaian Acara</h1>
       <div class="py-48 scope-24">
         <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" class="mt-20 maps mlr-auto">
-          <img class="img-maps" src="{{ asset('/concept1i/png/mapsku.png') }}" alt="" />
-          <div class="relative">
-            <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center pinbox">
-              <div class="boxtempat">
-                <p class="font-14 regular m-0">Lokasi Akad</p>
-                <p class="font-16 large m-0">{{ $undangan->alamatAkad }}</p>
+          <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center img-maps text-center">
+            <div class="boxtempat">
+              <p class="font-14 regular m-0">Lokasi Akad</p>
+              <p class="font-16 large m-0">{{ $undangan->alamatAkad }}</p>
+            </div>
+            <div class="relative">
+              <div class="box-triangle">
               </div>
-              <div class="relative">
-                <div class="box-triangle">
-                </div>
-              </div>
-              <div class="pin mt-18">
-                <div class="box-pinloc mlr-auto">
-                  <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
-                </div>
+            </div>
+            <div class="pin mt-18">
+              <div class="box-pinloc mlr-auto">
+                <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
               </div>
             </div>
           </div>
@@ -237,21 +234,18 @@
       </div>
       <div class="py-48 scope-24">
         <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" class="mt-20 maps mlr-auto">
-          <img class="img-maps" src="{{ asset('/concept1i/png/mapsku.png') }}" alt="" />
-          <div class="relative">
-            <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center pinbox">
-              <div class="boxtempat">
-                <p class="font-14 regular m-0">Lokasi Resepsi</p>
-                <p class="font-16 large m-0">{{ $undangan->alamatResepsi }}</p>
+          <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center img-maps">
+            <div class="boxtempat">
+              <p class="font-14 regular m-0">Lokasi Resepsi</p>
+              <p class="font-16 large m-0 text-center">{{ $undangan->alamatResepsi }}</p>
+            </div>
+            <div class="relative">
+              <div class="box-triangle">
               </div>
-              <div class="relative">
-                <div class="box-triangle">
-                </div>
-              </div>
-              <div class="pin mt-18">
-                <div class="box-pinloc mlr-auto">
-                  <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
-                </div>
+            </div>
+            <div class="pin mt-18">
+              <div class="box-pinloc mlr-auto">
+                <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
               </div>
             </div>
           </div>
@@ -270,7 +264,7 @@
       </div>
       <!-- Story -->
       <div class="pt-105 display-center flex-column ">
-        <div data-aos="zoom-in" data-aos-duration="600" data-aos-easing="ease-in-out" class="display-center align-center flex-column mb-24">
+        <div data-aos="zoom-in" data-aos-duration="600" data-aos-easing="ease-in-out" class="display-center relative align-center flex-column mb-24">
           <img class="position-absolute orleft-2" src="{{ asset('concept1/svg/orleft-2.svg') }}" alt="">
           <img src="{{ asset('concept1/svg/storyheader.svg') }}" alt="">
           <p class="font-18 large mb-0 mt-24">Our Story Begin</p>
@@ -337,6 +331,7 @@
             <img src="{{ asset('/concept6/svg/copy-linear.svg') }}" alt="">
             <p class="color-orange font-14 medium">Salin</p>
           </a>
+          <a id="konfirmasi" href="https://wa.me/{{$amplops[0]->nowa}}?text=Hallo Saya Mau Konfirmasi Sudah Kirim Sumbangan pada rekening yang tertera di undangan, berikut juga buktinya " target="_blank" class="color-orange font-16 medium" data-action="share/whatsapp/share" hidden>Konfirmasi</a>
         </div>
       </div>
     </div>
@@ -474,15 +469,17 @@
         const btn = document.getElementById('copyBtn');
         const text = document.getElementById('copyText');
         text.readOnly = true;
-
         text.select();
         text.setSelectionRange(0, 99999);
         // Alert the copied text
         try {
           navigator.clipboard.writeText(text.value);
           text.type = 'hidden';
-          $(`#copyBtn`).text("Copied");
-
+          $(`#copyBtn`).text("Tersalin");
+          $(`#copyBtn`).addClass("color-grey");
+          setTimeout(function() {
+            $(`#konfirmasi`).attr("hidden", false);
+          }, 3000);
         } catch (err) {
           console.error(err.name, err.message);
         }

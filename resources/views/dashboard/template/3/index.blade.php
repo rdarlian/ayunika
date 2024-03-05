@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ $undangan->bride_nickname}} & {{ $undangan->groom_nickname}}</title>
+  <title>Ayunika | {{ $undangan->bride_nickname}} & {{ $undangan->groom_nickname}}</title>
   <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
   <link rel="stylesheet" href="{{ asset('assets/css/concept6.css') }}" />
   <link rel="stylesheet" href="{{ asset('assets/css/animasi.css') }}" />
@@ -108,18 +108,18 @@
           <img class="or-img-mempelai spin" src="{{ asset('/concept6/svg/or-img-mempelai.svg') }}" alt="">
           <img src="{{ $groomImage[0]->images ?? '' }}" alt="" class="img-ellipse bg-img-linear mlr-auto" />
         </div>
-        <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="w-327 mt-53 display-center align-item-center flex-column text-center gap-6">
-          <h1 class="married-birth font-26 medium color-h1">
-            {{$undangan->groom_name}}
-          </h1>
+        <h1 class="married-birth font-26 medium color-h1 text-center mt-53">
+          {{$undangan->groom_name}}
+        </h1>
+        <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="w-327 display-center align-item-center flex-column text-center gap-6">
           <p class="font-12 regular mt-16 color-linear">
             Putra {{ $undangan->groom_child_order }} dari
           </p>
           <p class="font-16 regular color-linear">{{$undangan->groom_father}} & </p>
           <p class="font-16 regular color-linear">{{$undangan->groom_mother}}</p>
-          <p class="font-14 regular lineletter-160 color-linear">
+          <!-- <p class="font-14 regular lineletter-160 color-linear">
             {{$undangan->groom_address}}
-          </p>
+          </p> -->
         </div>
       </div>
 
@@ -128,19 +128,19 @@
           <img class="or-img-mempelai spin" src="{{ asset('/concept6/svg/or-img-mempelai.svg') }}" alt="">
           <img class="img-ellipse bg-img-linear mlr-auto" src="{{ $brideImage[0]->images ?? ''}}" alt="" />
         </div>
-        <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="w-327 mt-53 display-center gap-6 align-item-center flex-column text-center color-linear">
-          <h1 class="married-birth font-26 medium color-h1">
-            {{$undangan->bride_name}}
-          </h1>
+        <h1 class="married-birth font-26 medium color-h1 mt-53 text-center">
+          {{$undangan->bride_name}}
+        </h1>
+        <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="w-327 display-center gap-6 align-item-center flex-column color-linear text-center">
           <p class="font-12 regular mt-16">
             Putri {{ $undangan->bride_child_order }} dari
           </p>
           <p class="font-16 regular ">{{$undangan->bride_father}} & </p>
           <p class="font-16 regular "> {{$undangan->bride_mother}}
           </p>
-          <p class="font-14 regular lineletter-160">
+          <!-- <p class="font-14 regular lineletter-160">
             {{$undangan->bride_address}}
-          </p>
+          </p> -->
         </div>
       </div>
     </div>
@@ -149,7 +149,7 @@
     <div id="ringkasan-acara" class="display-center flex-column pt-40">
       <div class="display-center flex-column align-center">
         <h1 data-aos="zoom-in-up" data-aos-duration="800" data-aos-once="true" data-aos-easing="ease-in-out" class="married-birth font-52 color-linear">Save The Date</h1>
-        <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="mt-24 flex gap-24" id="countdown">
+        <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="mt-24 flex gap-24 color-linear" id="countdown">
         </div>
       </div>
       <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-once="true" data-aos-easing="ease-in-out" class="text-center mt-40">
@@ -160,21 +160,18 @@
       </div>
 
       <div data-aos="zoom-in" data-aos-duration="800" data-aos-once="true" data-aos-easing="ease-in-out" class="mt-20 maps mlr-auto">
-        <img class="img-maps" src="{{ asset('/concept1i/png/mapsku.png') }}" alt="" />
-        <div class="relative">
-          <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="display-center flex-column align-center pinbox">
-            <div class="boxtempat">
-              <p class="font-14 regular">Lokasi Akad</p>
-              <p class="font-16 large">{{ $undangan->alamatAkad }}</p>
+        <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="display-center flex-column align-center img-maps text-center">
+          <div class="boxtempat">
+            <p class="font-14 regular">Lokasi Akad</p>
+            <p class="font-16 large">{{ $undangan->alamatAkad }}</p>
+          </div>
+          <div class="relative">
+            <div class="box-triangle">
             </div>
-            <div class="relative">
-              <div class="box-triangle">
-              </div>
-            </div>
-            <div class="pin mt-18">
-              <div class="box-pinloc mlr-auto">
-                <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
-              </div>
+          </div>
+          <div class="pin mt-18">
+            <div class="box-pinloc mlr-auto">
+              <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
             </div>
           </div>
         </div>
@@ -196,25 +193,23 @@
       </a>
 
 
-      <div data-aos="zoom-in" data-aos-duration="800" data-aos-once="true" data-aos-easing="ease-in-out" class="mt-50 maps mlr-auto">
-        <img class="img-maps" src="{{ asset('/concept1i/png/mapsku.png') }}" alt="" />
-        <div class="relative">
-          <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="display-center flex-column align-center pinbox">
-            <div class="boxtempat">
-              <p class="font-14 regular">Lokasi Resepsi</p>
-              <p class="font-16 large">{{ $undangan->alamatResepsi }}</p>
+      <div data-aos="zoom-in" data-aos-duration="800" data-aos-once="true" data-aos-easing="ease-in-out" class="mt-32 maps mlr-auto">
+        <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="display-center flex-column align-center img-maps text-center">
+          <div class="boxtempat">
+            <p class="font-14 regular">Lokasi Resepsi</p>
+            <p class="font-16 large">{{ $undangan->alamatResepsi }}</p>
+          </div>
+          <div class="relative">
+            <div class="box-triangle">
             </div>
-            <div class="relative">
-              <div class="box-triangle">
-              </div>
-            </div>
-            <div class="pin mt-18">
-              <div class="box-pinloc mlr-auto">
-                <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
-              </div>
+          </div>
+          <div class="pin mt-18">
+            <div class="box-pinloc mlr-auto">
+              <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
             </div>
           </div>
         </div>
+
       </div>
       <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-once="true" data-aos-easing="ease-in-out" class="w-327 flex flex-column mlr-auto text-center color-linear6 mt-16">
         <h1 class="font-18 large">Resepsi Pernikahan</h1>
@@ -250,8 +245,8 @@
             <img class="{{ isset($story->image_story) ? 'img-story ' : 'icon-story' }}" src="{{ isset($story->image_story) ? url('storage/' . $story->image_story) : asset('/concept1i/svg/story'. $key+1 .'.svg')  }}" alt="">
           </div>
           <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="text-center">
-            <h1 class="font-16 large color-linear6 mt-12">{{$story->title_story }}</h1>
-            <h1 class="font-14 regular color-linear6">{{$story->tgl_story }}</h1>
+            <h1 class="font-16 large color-linear6">{{$story->title_story }}</h1>
+            <h1 class="font-14 regular color-linear6 mt-8">{{$story->tgl_story }}</h1>
             <p class="font-14 regular color-linear-v2 mt-12">
               {{ $story->description_story }}
             </p>
@@ -267,8 +262,8 @@
           Our Memories
         </h1>
       </div>
-      <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-once="true" data-aos-easing="ease-in-out" class="tron-video mt-24">
-        <iframe width="343" height="220" src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=1">
+      <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-once="true" data-aos-easing="ease-in-out" class="mt-24 scope-24">
+        <iframe class="tron-video" src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=1">
         </iframe>
       </div>
       <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true">
@@ -315,10 +310,11 @@
           <p class="font-18 large text-uppercase">{{ $amplops[0]->nama_bank }} - {{ $amplops[0]->norek }}</p>
           <p>A.n. {{$amplops[0]->pemilik_rekening}}</p>
           <input type="text" value="{{ $amplops[0]->norek }}" id="copyText" hidden>
-          <a class="btn-amplop display-center cursor-pointer" onclick="copy('copyku')">
+          <a id="copyBtn" class="btn-amplop display-center cursor-pointer color-orange" onclick="copy('copyku')">
             <img src="{{ asset('/concept6/svg/copy-linear.svg') }}" alt="">
             <p class="color-orange font-14 medium">Salin</p>
           </a>
+          <a id="konfirmasi" href="https://wa.me/{{$amplops[0]->nowa}}?text=Hallo Saya Mau Konfirmasi Sudah Kirim Sumbangan pada rekening yang tertera di undangan, berikut juga buktinya " target="_blank" class="color-orange font-16 medium" data-action="share/whatsapp/share" hidden>Konfirmasi</a>
         </div>
       </div>
     </div>
@@ -433,7 +429,7 @@
 
       <div class="name-close">
         <hr class="hr-linear" />
-        <h3 class="married-birth font-46 color-linear">Adin & Lisa</h3>
+        <h3 class="married-birth font-46 color-linear">{{ $undangan->groom_nickname}} & {{ $undangan->bride_nickname}}</h3>
         <hr class="hr-linear" />
       </div>
       <p class="close-alert color-linear">Himbauan Protocol Kesehatan :</p>
@@ -486,17 +482,20 @@
   <script>
     function copy() {
       const btn = document.getElementById('copyBtn');
-      const text = document.getElementById('copyText');
-      text.readOnly = true;
+      const teksku = document.getElementById('copyText');
+      teksku.readOnly = true;
 
-      text.select();
-      text.setSelectionRange(0, 99999);
+      teksku.select();
+      teksku.setSelectionRange(0, 99999);
       // Alert the copied text
       try {
-        navigator.clipboard.writeText(text.value);
-        text.type = 'hidden';
-        $(`#copyBtn`).text("Copied");
-
+        navigator.clipboard.writeText(teksku.value);
+        teksku.type = 'hidden';
+        $(`#copyBtn`).text("Tersalin");
+        $(`#copyBtn`).addClass("color-grey");
+        setTimeout(function() {
+          $(`#konfirmasi`).attr("hidden", false);
+        }, 3000);
       } catch (err) {
         console.error(err.name, err.message);
       }
@@ -538,28 +537,28 @@
 
       document.getElementById('countdown').innerHTML = `
         <div class="border-countdown">
-        <p class="font-32 regular lineletter text-center color-green">
+        <p class="font-32 large lineletter text-center color-linear">
         ${days}
             </p>
-            <span class="font-14 regular color-green">Day</span>
+            <span class="font-16 regular color-linear">Day</span>
           </div>
           <div class="border-countdown">
-            <p class="font-32 regular lineletter text-center color-green">
+            <p class="font-32 large lineletter text-center color-linear">
             ${hours}
             </p>
-            <span class="font-14 regular color-green">Hour</span>
+            <span class="font-16 regular color-linear">Hour</span>
           </div>
           <div class="border-countdown">
-            <p class="font-32 regular lineletter text-center color-green">
+            <p class="font-32 large lineletter text-center color-linear">
             ${minutes}
             </p>
-            <span class="font-14 regular color-green">Min</span>
+            <span class="font-16 regular color-linear">Min</span>
           </div>
           <div class="border-countdown">
-            <p class="font-32 regular lineletter text-center color-green">
+            <p class="font-32 large lineletter text-center color-linear">
             ${seconds}
             </p>
-            <span class="font-14 regular color-green">Sec</span>
+            <span class="font-16 regular color-linear">Sec</span>
           </div>
     `;
 

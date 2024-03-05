@@ -14,10 +14,34 @@
 
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
-  <title>{{ $slug }}</title>
+  <title>Ayunika | {{ $undangan->bride_nickname}} & {{ $undangan->groom_nickname}}</title>
 </head>
 
-<body>
+<body class="hidden">
+  <div class="cover-container color-white scope-24" id="cover">
+    <div class="mt-136 w-100">
+      <h1 class="font-20 regular text-center">The Wedding of</h1>
+      <h1 class="font-80 regular married-birth text-left mt-8">{{ $undangan->groom_nickname}}</h1>
+      <div class="relative">
+        <h1 class="font-60 regular married-birth text-center dan">&</h1>
+      </div>
+      <h1 class="font-80 regular married-birth text-right">{{ $undangan->bride_nickname}}</h1>
+    </div>
+
+    <div class="text-center mlr-auto mt-32 display-center flex-column text-center align-center">
+      <div>
+        <p class="text-italic font-18 medium">Dear</p>
+        @if(request()->filled('r'))
+        <p class="font-20 large mt-4">{{ request()->r }}</p>
+        @endif
+      </div>
+      <hr class="hr-cover mt-8">
+      <p class="invite mt-16">You are cordially invited to our wedding</p>
+    </div>
+
+    <button class="btn-inv mt-40 font-18 medium" onclick="hide()">💌 Buka Undangan</button>
+  </div>
+
   <div id="main" class="main-container">
     <!-- <div class="">
       <a class="nav married-pop font-12 medium" href="">
@@ -65,7 +89,7 @@
         <h1 class="font-14 medium">
           Assalamu’allaikum Warrahmatullahi Wabarrakatuh
         </h1>
-        <p class="font-14 regular color-opacity">
+        <p class="font-14 regular color-opacity mt-8">
           Dengan memohon rahmat dan ridho Allah SWT, Mohon doa restu
           Bapak/Ibu/Saudara/I dalam rangka melangsungkan pernikahan
           Putra-Putri kami :
@@ -74,6 +98,15 @@
 
       <div class="text-center">
         <div class="mt-42">
+          <div class="hex">
+            <!-- <div class="hex-title">
+              Simple title
+            </div> -->
+            <div class="hex-hide"></div>
+            <div class="hex-img">
+              <img src="{{$brideImage[0]->images ?? ''}}">
+            </div>
+          </div>
           <img src="{{$brideImage[0]->images ?? ''}}" alt="" />
           <h1 class="mt-16 font-28 medium married-birth color-linear">
             {{$undangan->bride_name}}
@@ -283,25 +316,188 @@
     </div>
   </div>
 
+
   <script>
-    const swiper_thumbnail = new Swiper(".swiper_thumbnail", {
-      slidesPerView: 5,
-    })
-    const swiper = new Swiper('.swiper_main', {
+    AOS.init();
+  </script>
+
+  <script type="text/javascript">
+    window.onbeforeunload = function() {
+      $(this).scrollTop(0);
+    };
+
+    function hide() {
+      document.getElementById("cover").style.visibility = "hidden";
+      document.body.classList.remove('hidden');
+    }
+    $(document).ready(function() {
+      let form = '#add-user-form';
+      $(form).on('submit', function(event) {
+        event.preventDefault();
+        let url = $(this).attr('data-action');
+
+        $.ajax({
+          url: url,
+          method: 'POST',
+          data: new FormData(this),
+          dataType: 'JSON',
+          contentType: false,
+          cache: false,
+          processData: false,
+          success: function(response) {
+            $(form).trigger("reset");
+
+            // Trigger AOS animation once
+            setTimeout(function() {
+              $('#ucapan-box').load(' #ucapan-box', function() {
+                console.info("loading ...");
+              });;
+
+            }, 3000);
+            console.info("sudah");
+            $('#ucapan-bubble').addClass('aos-animate');
+            // Wait for the animation to finish before removing the class
+            setTimeout(function() {
+
+              $('#ucapan-bubble').removeClass('aos-animate');
+            }, 1000);
+          },
+          error: function(response) {}
+        });
+
+      });
+
+    });
+  </script>
+  <!-- CountDown -->
+  <script>
+    const endDate = '{{ $undangan->resepsi_date }} {{$undangan->resepsi_time}}';
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = new Date(endDate) - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('countdown').innerHTML = `
+        <div class="border-countdown">
+        <p class="font-32 large lineletter text-center color-opacity">
+        ${days}
+            </p>
+            <span class="font-16 regular color-opacity">Day</span>
+          </div>
+          <div class="border-countdown">
+            <p class="font-32 large lineletter text-center color-opacity">
+            ${hours}
+            </p>
+            <span class="font-16 regular color-opacity">Hour</span>
+          </div>
+          <div class="border-countdown">
+            <p class="font-32 large lineletter text-center color-opacity">
+            ${minutes}
+            </p>
+            <span class="font-16 regular color-opacity">Min</span>
+          </div>
+          <div class="border-countdown">
+            <p class="font-32 large lineletter text-center color-opacity">
+            ${seconds}
+            </p>
+            <span class="font-16 regular color-opacity">Sec</span>
+          </div>
+    `;
+
+      if (distance < 0) {
+        clearInterval(countdownInterval);
+        document.getElementById('countdown').innerHTML = `
+          <div class="border-countdown">
+            <p class="font-32 regular lineletter text-center color-opacity">
+             0
+            </p>
+            <span class="font-14 regular color-opacity">Day</span>
+          </div>
+          <div class="border-countdown">
+            <p class="font-32 regular lineletter text-center color-opacity">
+            0
+            </p>
+            <span class="font-14 regular color-opacity">Hour</span>
+          </div>
+          <div class="border-countdown">
+            <p class="font-32 regular lineletter text-center color-opacity">
+            0
+            </p>
+            <span class="font-14 regular color-opacity">Min</span>
+          </div>
+          <div class="border-countdown">
+            <p class="font-32 regular lineletter text-center color-opacity">
+            0
+            </p>
+            <span class="font-14 regular color-opacity">Sec</span>
+          </div>`;
+      }
+    }
+
+    // Update the countdown every second
+    const countdownInterval = setInterval(updateCountdown, 1000);
+
+    // Initial update
+    updateCountdown();
+  </script>
+  <!-- End CountDown -->
+
+  <!-- copy to clipboard -->
+  <script>
+    function copy() {
+      const btn = document.getElementById('copyBtn');
+      const teksku = document.getElementById('copyText');
+      teksku.readOnly = true;
+
+      teksku.select();
+      teksku.setSelectionRange(0, 99999);
+      // Alert the copied text
+      try {
+        navigator.clipboard.writeText(teksku.value);
+        teksku.type = 'hidden';
+        $(`#copyBtn`).text("Tersalin");
+        $(`#copyBtn`).addClass("color-grey");
+        setTimeout(function() {
+          $(`#konfirmasi`).attr("hidden", false);
+        }, 3000);
+      } catch (err) {
+        console.error(err.name, err.message);
+      }
+    }
+  </script>
+
+  <script>
+    var slider = new Swiper('.swiper_main', {
+      slidesPerView: 1,
+      centeredSlides: true,
       loop: true,
+      loopedSlides: 6,
       autoplay: {
         disableOnInteraction: false,
         pauseOnMouseEnter: true,
         delay: 2000,
       },
       navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
       },
-      thumbs: {
-        swiper: swiper_thumbnail,
-      },
-    })
+    });
+
+
+    var thumbs = new Swiper('.swiper_thumbnail', {
+      slidesPerView: 5,
+      spaceBetween: 10,
+      centeredSlides: true,
+      loop: true,
+      slideToClickedSlide: true,
+    });
+    slider.controller.control = thumbs;
+    thumbs.controller.control = slider;
   </script>
 </body>
 

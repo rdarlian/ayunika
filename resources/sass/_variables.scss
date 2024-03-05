@@ -20,6 +20,12 @@ $container-max-widths: (
     @include make-container(150px);
 }
 
+@media (max-width: 1380px) {
+    .custom-container {
+        @include make-container(16px);
+    }
+}
+// Typography
 @media (max-width: 576px) {
     .custom-container {
         @include make-container(16px);

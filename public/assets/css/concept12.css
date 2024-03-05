@@ -163,30 +163,34 @@
     visibility: hidden;
 }
 .message-box {
-    width: 100%;
-    max-width: 330px;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
+    padding-left: 0px;
+    padding-right: 0px;
 }
-.bubble:nth-child(2n) {
-    position: relative;
-    left: 120px;
+.box-message-looping:nth-child(2n) {
+    justify-content: end;
+    margin-top: 20px;
+}
+
+.box-message-looping:nth-child(2n) .bubble {
+    width: 100%;
     display: flex;
     justify-content: flex-end;
     padding: 12px 16px;
     align-items: flex-end;
     text-align: end;
     gap: 4px;
-    border-radius: 16px 4px 16px 16px;
     background: #fff;
-    margin-top: 20px;
-    max-width: 200px;
-    width: 100%;
+    max-width: 245px;
+    min-width: 100px;
+    border-radius: 16px 4px 16px 16px;
     -webkit-border-radius: 16px 4px 16px 16px;
     -moz-border-radius: 16px 4px 16px 16px;
     -ms-border-radius: 16px 4px 16px 16px;
     -o-border-radius: 16px 4px 16px 16px;
+}
+.bubble-title,
+.bubble-isi {
+    color: black;
 }
 .select-grup::after {
     content: url("../../assets/svg/toggle-select-white.svg");
@@ -218,6 +222,7 @@
 }
 
 /* MAPS */
+
 .boxtempat {
     border: 0px;
     width: 220px;
@@ -239,8 +244,8 @@
 }
 .box-triangle {
     position: absolute;
-    bottom: 81px;
-    left: 89px;
+    bottom: -4px;
+    left: -20px;
     width: 40px;
     height: 40px;
     background: #06332d;
@@ -272,9 +277,8 @@
     display: flex;
     width: 100%;
     height: 100%;
-    min-width: 310px;
-    max-width: 400px;
-    min-height: 310px;
+    min-width: 220px;
+    min-height: 327px;
 }
 .img-maps {
     width: 100%;
@@ -283,4 +287,8 @@
     min-height: 310px;
     border-radius: 4px;
     object-fit: cover;
+    background: url(../../concept1i/png/mapsku.png);
+}
+.relative {
+    position: relative;
 }

@@ -4,7 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Concept 9</title>
+  <title>Ayunika | {{ $undangan->bride_nickname}} & {{ $undangan->groom_nickname}}</title>
+  <link rel="icon" href="{{ asset('/assets/png/ayunika.ico') }}" type="image/icon type">
+
   <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
   <link rel="stylesheet" href="{{ asset('assets/css/concept9.css') }}" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
@@ -17,7 +19,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
-  <title>{{$slug}}</title>
 </head>
 
 <body class="hidden">
@@ -38,13 +39,22 @@
         <p class="font-20 large mt-4">{{ request()->r }}</p>
         @endif
       </div>
-      <hr class="hr-cover">
+      <hr class="hr-cover mt-8">
       <p class="invite mt-16">You are cordially invited to our wedding</p>
     </div>
 
-    <button class="btn-inv mt-40" onclick="hide()">💌 Buka Undangan</button>
+    <button class="btn-inv mt-40 font-18 medium" onclick="hide()">💌 Buka Undangan</button>
   </div>
   <div class="main-container married-pop" id="main">
+    <div class="sound">
+      <!-- <iframe src="{{ asset('/concept1i/silence.mp3') }}" allow="autoplay" id="audio"></iframe> -->
+      <audio id="player" autoplay loop>
+        <source src="{{isset($songs[0]->audio_path) ? url('storage/' . $songs[0]->audio_path) : '' }}">
+      </audio>
+      <span class="suara" onclick="togglePlay()">
+        <img id="suara-i" src="{{ asset('/concept1i/svg/suara.svg') }}" alt="">
+      </span>
+    </div>
     <div class="display-center flex-column relative pb-32">
       <img class="img-cover-9-1" src="{{$coverImage[0]->images ?? ''}}" alt="" />
       <img class="img-cover-9-2" src="{{ asset('/concept9/png/ornament-9-1.png') }}" alt="" />
@@ -72,14 +82,14 @@
           <p class="font-16 large">
             {{$receptionDay}}, {{$receptionDate}}
           </p>
-          <p class="font-12 regular color-opacity">
+          <p class="font-12 regular color-opacity mt-8">
             {{$undangan->alamatResepsi}}
           </p>
           @else
           <p class="font-16 large">
             {{$akadDay}}, {{$akadDate}}
           </p>
-          <p class="font-12 regular color-opacity">
+          <p class="font-12 regular color-opacity mt-8">
             {{$undangan->alamatAkad}}
           </p>
           @endif
@@ -115,10 +125,12 @@
       </div>
       <div class="display-center flex-column mlr-auto align-center mt-40">
         <img data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="img-border-9" src="{{$brideImage[0]->images ?? ''}}" alt="" />
-        <div data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="w-140 text-center">
-          <h1 class="font-20 large mt-20">{{$undangan->bride_name}}</h1>
-          <hr class="mt-12">
-          <p class="font-12 regular mt-10">
+        <div data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="scope-24 text-center">
+          <div class="underline">
+            <h1 class="font-20 large mt-20 mb-12">{{$undangan->bride_name}}</h1>
+          </div>
+
+          <p class="font-12 regular mt-12">
             Putra {{ $undangan->bride_child_order }} dari </p>
           <h4 class="font-14 medium mt-6">{{$undangan->bride_father}} & <br>{{$undangan->bride_mother}}</h4>
         </div>
@@ -126,18 +138,24 @@
         <h1 data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="married-birth font-60 regular">&</h1>
 
         <img data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="img-border-9" src="{{$groomImage[0]->images ?? ''}}" alt="" />
-        <div data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="w-140 text-center">
-          <h1 class="font-20 large mt-20">{{$undangan->groom_name}}</h1>
-          <hr class="mt-12">
-          <p class="font-12 regular mt-10">
+        <div data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="scope-24 text-center">
+          <div class="underline">
+            <h1 class="font-20 large mt-20 mb-12">{{$undangan->groom_name}}</h1>
+          </div>
+
+          <p class="font-12 regular mt-12">
             Putra {{ $undangan->groom_child_order }} dari </p>
           <h4 class="font-14 medium mt-6">{{$undangan->groom_father}} & <br>{{$undangan->groom_mother}}</h4>
         </div>
       </div>
     </div>
-
     <div class="mt-80 scope-24">
-      <div class="text-center">
+      <div class="display-center flex-column align-center">
+        <h1 data-aos="zoom-in-up" data-aos-duration="800" data-aos-once="true" data-aos-easing="ease-in-out" class="married-birth font-46 color-opacity">Save The Date</h1>
+        <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="mt-24 display-center gap-24" id="countdown">
+        </div>
+      </div>
+      <div class="text-center mt-32">
         <h1 data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="font-18 medium">Ringkasan Acara</h1>
         <p data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="font-14 regular color-opacity">
           Serangkaian acara kami nantinya
@@ -145,48 +163,10 @@
       </div>
       <div class="mt-16 display-center flex-column">
         <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" class="maps mlr-auto">
-          <img class="img-maps" src="{{ asset('/concept1i/png/mapsku.png') }}" alt="" />
-          <div class="relative">
-            <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center pinbox">
-              <div class="boxtempat">
-                <p class="font-14 regular">Lokasi Akad</p>
-                <p class="font-16 large">{{ $undangan->alamatAkad }}</p>
-              </div>
-              <div class="relative">
-                <div class="box-triangle">
-                </div>
-              </div>
-              <div class="pin mt-18">
-                <div class="box-pinloc mlr-auto">
-                  <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="akad-box-12 mt-24 text-center display-center align-center flex-column mlr-auto">
-          <h1 class="font-18 large">Akad Nikah</h1>
-          <p class="font-14 regular color-opacity">
-            {{$akadDay}}, {{$akadDate}} {{ date('H:i', strtotime($undangan->akad_time)) }}
-          </p>
-          <p class="font-14 color-opacity">
-            {{$undangan->alamatAkad}} <br />
-            {{ $undangan->alamatAkadLengkap }}
-          </p>
-        </div>
-        <button data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="btn-submit">
-          <img src="assets/svg/concept12/calendar.svg" alt="" /><span class="font-18 medium">Open on Gmaps</span>
-        </button>
-      </div>
-
-      <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" class="mt-24 maps mlr-auto">
-        <img class="img-maps" src="{{ asset('/concept1i/png/mapsku.png') }}" alt="" />
-        <div class="relative">
-          <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center pinbox">
+          <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center img-maps text-center">
             <div class="boxtempat">
-              <p class="font-14 regular">Lokasi Resepsi</p>
-              <p class="font-16 large">{{ $undangan->alamatResepsi }}</p>
+              <p class="font-14 regular">Lokasi Akad</p>
+              <p class="font-16 large">{{ $undangan->alamatAkad }}</p>
             </div>
             <div class="relative">
               <div class="box-triangle">
@@ -199,14 +179,46 @@
             </div>
           </div>
         </div>
+
+        <div data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="akad-box-12 mt-24 text-center display-center align-center flex-column mlr-auto">
+          <h1 class="font-18 large">Akad Nikah</h1>
+          <p class="font-14 regular color-opacity mt-10">
+            {{$akadDay}}, {{$akadDate}} {{ date('H:i', strtotime($undangan->akad_time)) }}
+          </p>
+          <p class="font-14 color-opacity mt-12">
+            {{$undangan->alamatAkad}} <br />
+            {{ $undangan->alamatAkadLengkap }}
+          </p>
+        </div>
+        <button data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="btn-submit">
+          <img src="assets/svg/concept12/calendar.svg" alt="" /><span class="font-18 medium">Open on Gmaps</span>
+        </button>
+      </div>
+
+      <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" class="mt-24 maps mlr-auto">
+        <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center img-maps text-center">
+          <div class="boxtempat">
+            <p class="font-14 regular">Lokasi Resepsi</p>
+            <p class="font-16 large">{{ $undangan->alamatResepsi }}</p>
+          </div>
+          <div class="relative">
+            <div class="box-triangle">
+            </div>
+          </div>
+          <div class="pin mt-18">
+            <div class="box-pinloc mlr-auto">
+              <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
+            </div>
+          </div>
+        </div>
       </div>
 
       <div data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="akad-box-12 mt-24 text-center display-center align-center flex-column mlr-auto">
         <h1 class="font-18 large">Resepsi Pernikahan</h1>
-        <p class="font-14 regular color-opacity">
+        <p class="font-14 regular color-opacity mt-10">
           {{ $receptionDay }}, {{$receptionDate}} {{ date('H:i', strtotime($undangan->resepsi_time)) }}
         </p>
-        <p class="font-14 color-opacity">
+        <p class="font-14 color-opacity mt-12">
           {{ $undangan->alamatResepsi }} <br />
           {{ $undangan->alamatResepsiLengkap }}
         </p>
@@ -243,6 +255,38 @@
       </div>
     </div>
 
+    <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="py-40 display-center flex-column">
+      <div class="text-center scope-24">
+        <h1 class="font-18 large">Amplop Digital</h1>
+        <p class="font-14 regular color-opacity mt-6">Doa restu anda merupakan karunia yang sangat berarti bagi kami. dan jika memberi adalah ungkapan terimakasih anda, Anda dapat memberi kado secara cashless</p>
+      </div>
+      <div class="mt-40 card-amplop mlr-auto">
+        @if($amplops[0]->nama_bank == 'bca')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/bca.svg') }}" alt="">
+        @elseif($amplops[0]->nama_bank == 'mandiri')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/mandiri.svg') }}" alt="">
+        @elseif($amplops[0]->nama_bank == 'bni')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/bni.svg') }}" alt="">
+        @elseif($amplops[0]->nama_bank == 'bri')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/bri.svg') }}" alt="">
+        @elseif($amplops[0]->nama_bank == 'bsi')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/bsi.svg') }}" alt="">
+        @elseif($amplops[0]->nama_bank == 'jenius')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/jenius.svg') }}" alt="">
+        @endif
+        <div class="display-center gap-4 flex-column text-center">
+          <p class="font-18 large text-uppercase">{{ $amplops[0]->nama_bank }} - {{ $amplops[0]->norek }}</p>
+          <p>A.n. {{$amplops[0]->pemilik_rekening}}</p>
+          <input type="text" value="{{ $amplops[0]->norek }}" id="copyText" hidden>
+          <a id="copyBtn" class="btn-amplop display-center cursor-pointer color-orange" onclick="copy('copyku')">
+            <img src="{{ asset('/concept6/svg/copy-linear.svg') }}" alt="">
+            <p class="color-orange font-14 medium">Salin</p>
+          </a>
+          <a id="konfirmasi" href="https://wa.me/{{$amplops[0]->nowa}}?text=Hallo Saya Mau Konfirmasi Sudah Kirim Sumbangan pada rekening yang tertera di undangan, berikut juga buktinya " target="_blank" class="color-orange font-16 medium" data-action="share/whatsapp/share" hidden>Konfirmasi</a>
+        </div>
+      </div>
+    </div>
+
     <div class="display-center flex-column mt-24 scope-24">
       <div data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="text-center">
         <h1 class="font-18 large">Apa Kata Mereka</h1>
@@ -262,7 +306,7 @@
         @endforeach
       </div>
 
-      <div data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="display-flex flex-column text-center mt-31">
+      <div data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="display-flex flex-column text-center mt-31 mb-30">
         <h1 class="font-18">Tulis Ucapanmu</h1>
         <form data-action="{{ route('ucapan.store') }}" method="POST" enctype="multipart/form-data" id="add-user-form">
           @csrf
@@ -283,16 +327,16 @@
               <label for="ucapan" class="font-14">Ucapan</label>
               <textarea class="form-linear" name="ucapan"></textarea>
             </div>
-
-            <button type="submit" class="btn-submit font-18 medium">
-              Submit Ucapan
-            </button>
           </div>
+
+          <button type="submit" class="btn-submit font-18 medium">
+            Submit Ucapan
+          </button>
         </form>
       </div>
     </div>
 
-    <div class="display-center flex-column">
+    <div class="display-center flex-column pt-40">
       <div data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="box-327 mlr-auto">
         <p class="font-14 regular text-center">
           Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
@@ -304,13 +348,13 @@
         <h3 class="married-birth font-46 regular">{{ $undangan->groom_nickname }} & {{ $undangan->bride_nickname }}</h3>
       </div>
 
-      <div data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="diagonal-black pt-30 pb-60">
+      <div data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-in-out" data-aos-once="true" class="diagonal-black mt-32 pt-80 pb-60">
         <p class="close-alert">Himbauan Protocol Kesehatan :</p>
 
         <div class="close-item">
-          <img class="img-ellipse-36-normal" src="{{ asset('/concept9/svg/clean-hand.svg') }}" alt="" />
-          <img class="img-ellipse-36-normal" src="{{ asset('/concept9/svg/face-mask.svg') }}" alt="" />
-          <img class="img-ellipse-36-normal" src="{{ asset('/concept9/svg/social-distance.svg') }}" alt="" />
+          <img class="img-ellipse-36-white" src="{{ asset('/concept9/svg/clean-hand.svg') }}" alt="" />
+          <img class="img-ellipse-36-white" src="{{ asset('/concept9/svg/face-mask.svg') }}" alt="" />
+          <img class="img-ellipse-36-white" src="{{ asset('/concept9/svg/social-distance.svg') }}" alt="" />
         </div>
         <div class="close-last">
           <p class="font-14 color-white">Website invitation by</p>
@@ -327,12 +371,32 @@
     AOS.init();
   </script>
 
+  <script>
+    let a = 0;
+
+    function togglePlay() {
+      if (a == 0) {
+        console.log('musiiic')
+        document.getElementsByTagName("audio")[0].play();
+        a++;
+        $("#suara-i").attr('src', "{{ asset('/concept1i/svg/suara.svg') }}");
+      } else {
+        document.querySelector("audio").pause();
+
+        $("#suara-i").attr('src', "{{ asset('/concept1i/svg/suaraoff.svg') }}");
+        a--;
+
+      }
+    };
+  </script>
+  </script>
   <script type="text/javascript">
     window.onbeforeunload = function() {
       $(this).scrollTop(0);
     };
 
     function hide() {
+      togglePlay();
       document.getElementById("cover").style.visibility = "hidden";
       document.body.classList.remove('hidden');
     }
@@ -374,6 +438,107 @@
       });
 
     });
+  </script>
+  <!-- CountDown -->
+  <script>
+    const endDate = '{{ $undangan->resepsi_date }} {{$undangan->resepsi_time}}';
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = new Date(endDate) - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('countdown').innerHTML = `
+        <div class="border-countdown">
+        <p class="font-32 large lineletter text-center color-opacity">
+        ${days}
+            </p>
+            <span class="font-16 regular color-opacity">Day</span>
+          </div>
+          <div class="border-countdown">
+            <p class="font-32 large lineletter text-center color-opacity">
+            ${hours}
+            </p>
+            <span class="font-16 regular color-opacity">Hour</span>
+          </div>
+          <div class="border-countdown">
+            <p class="font-32 large lineletter text-center color-opacity">
+            ${minutes}
+            </p>
+            <span class="font-16 regular color-opacity">Min</span>
+          </div>
+          <div class="border-countdown">
+            <p class="font-32 large lineletter text-center color-opacity">
+            ${seconds}
+            </p>
+            <span class="font-16 regular color-opacity">Sec</span>
+          </div>
+    `;
+
+      if (distance < 0) {
+        clearInterval(countdownInterval);
+        document.getElementById('countdown').innerHTML = `
+          <div class="border-countdown">
+            <p class="font-32 regular lineletter text-center color-opacity">
+             0
+            </p>
+            <span class="font-14 regular color-opacity">Day</span>
+          </div>
+          <div class="border-countdown">
+            <p class="font-32 regular lineletter text-center color-opacity">
+            0
+            </p>
+            <span class="font-14 regular color-opacity">Hour</span>
+          </div>
+          <div class="border-countdown">
+            <p class="font-32 regular lineletter text-center color-opacity">
+            0
+            </p>
+            <span class="font-14 regular color-opacity">Min</span>
+          </div>
+          <div class="border-countdown">
+            <p class="font-32 regular lineletter text-center color-opacity">
+            0
+            </p>
+            <span class="font-14 regular color-opacity">Sec</span>
+          </div>`;
+      }
+    }
+
+    // Update the countdown every second
+    const countdownInterval = setInterval(updateCountdown, 1000);
+
+    // Initial update
+    updateCountdown();
+  </script>
+  <!-- End CountDown -->
+
+  <!-- copy to clipboard -->
+  <script>
+    function copy() {
+      const btn = document.getElementById('copyBtn');
+      const teksku = document.getElementById('copyText');
+      teksku.readOnly = true;
+
+      teksku.select();
+      teksku.setSelectionRange(0, 99999);
+      // Alert the copied text
+      try {
+        navigator.clipboard.writeText(teksku.value);
+        teksku.type = 'hidden';
+        $(`#copyBtn`).text("Tersalin");
+        $(`#copyBtn`).addClass("color-grey");
+        setTimeout(function() {
+          $(`#konfirmasi`).attr("hidden", false);
+        }, 3000);
+      } catch (err) {
+        console.error(err.name, err.message);
+      }
+    }
   </script>
 
   <script>

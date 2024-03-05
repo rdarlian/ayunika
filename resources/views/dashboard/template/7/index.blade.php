@@ -19,7 +19,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
-  <title>Ayunika | Concept1</title>
+  <title>Ayunika | {{ $undangan->bride_nickname}} & {{ $undangan->groom_nickname}}</title>
+  <link rel="icon" href="{{ asset('/assets/png/ayunika.ico') }}" type="image/icon type">
+
 </head>
 
 <body class="hidden">
@@ -58,6 +60,15 @@
   </div>
 
   <div id="main" class="main-container married-pop color-white">
+    <div class="sound">
+      <!-- <iframe src="{{ asset('/concept1i/silence.mp3') }}" allow="autoplay" id="audio"></iframe> -->
+      <audio id="player" autoplay loop>
+        <source src="{{isset($songs[0]->audio_path) ? url('storage/' . $songs[0]->audio_path) : '' }}">
+      </audio>
+      <span class="suara" onclick="togglePlay()">
+        <img id="suara-i" src="{{ asset('/concept1i/svg/suara.svg') }}" alt="">
+      </span>
+    </div>
     <div id="pembuka" class="relative py-24">
       <img class="or-coverl" src="{{ asset('/concept2i/svg/or-coverl.svg') }}" alt="ornament">
 
@@ -101,7 +112,7 @@
 
     <div class="scope-24 mt-60 mb-40">
       <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="border12 text-center">
-        <p class="font-12">
+        <p class="font-14">
           "{{ $undangan->quote }}"
         </p>
         <h1 class="font-30 regular married-great color2i">{{ $undangan->quote_source }}</h1>
@@ -138,6 +149,13 @@
       </div>
       <img class="or-coverr" src="{{ asset('/concept2i/svg/or-coverr.svg') }}" alt="">
     </div>
+    <div class="scope-24 py-48 text-center display-center flex-column ">
+      <p data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="font-32 regular color2i married-great">
+        Save The Date
+      </p>
+      <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="mt-24 flex spacearround" id="countdown">
+      </div>
+    </div>
 
     <div class="py-48 scope-24 text-center">
       <h1 data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="font-32 married-great regular color2i">
@@ -158,7 +176,7 @@
       @endforeach
     </div>
 
-    <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="py-48">
+    <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="py-48">
       <div class="text-center scope-24">
         <p class="font-20 regular">A Glimpse of</p>
         <h1 class="font-40 regular married-great color2i">Our Memories</h1>
@@ -168,8 +186,8 @@
         <iframe class="box-yt scope-24" src="https://www.youtube.com/embed/{{ $undangan->link }}?autoplay=1&mute=1">
         </iframe>
 
-        <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out">
-          <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="swiper swiper_main mt-31" style="width:100%;height:580px;">
+        <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true">
+          <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="swiper swiper_main mt-31" style="width:100%;height:580px;">
             <div class="swiper-wrapper">
               @foreach($images as $key=>$image)
               <div class="swiper-slide"><img src=" {{ $image->images ?? '' }}" alt=""></div>
@@ -190,38 +208,27 @@
       </div>
     </div>
 
-    <div class="scope-24 py-48 text-center display-center flex-column ">
-      <p data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="font-32 regular color2i married-great">
-        Save The Date
-      </p>
-      <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="mt-24 flex spacearround" id="countdown">
-      </div>
-    </div>
-
     <div class="display-center flex-column py-48 scope-24 text-center">
-      <p data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="font-16 regular lineletter">Prosesi</p>
-      <h1 data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="font-40 regular lineletter married-great mt-8">Akad Nikah</h1>
-      <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" class="mt-20 maps mlr-auto">
-        <img class="img-maps" src="{{ asset('/concept1i/png/mapsku.png') }}" alt="" />
-        <div class="relative">
-          <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center pinbox">
-            <div class="boxtempat">
-              <p class="font-14 regular">Lokasi Akad</p>
-              <p class="font-16 large">{{ $undangan->alamatAkad }}</p>
+      <p data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="font-16 regular lineletter">Prosesi</p>
+      <h1 data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="font-40 regular lineletter married-great mt-8 color2i">Akad Nikah</h1>
+      <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="mt-20 maps mlr-auto">
+        <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="display-center flex-column align-center img-maps text-center">
+          <div class="boxtempat">
+            <p class="font-14 regular">Lokasi Akad</p>
+            <p class="font-16 large">{{ $undangan->alamatAkad }}</p>
+          </div>
+          <div class="relative">
+            <div class="box-triangle">
             </div>
-            <div class="relative">
-              <div class="box-triangle">
-              </div>
-            </div>
-            <div class="pin mt-18">
-              <div class="box-pinloc mlr-auto">
-                <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
-              </div>
+          </div>
+          <div class="pin mt-18">
+            <div class="box-pinloc mlr-auto">
+              <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
             </div>
           </div>
         </div>
       </div>
-      <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="mt-24 w-327 mlr-auto text-center">
+      <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="mt-24 w-327 mlr-auto text-center">
         <p class="font-18 large">Akad Nikah</p>
         <p class="font-14 regular mt-10">
           {{$akadDay}}, {{$akadDate}} {{ date('H:i', strtotime($undangan->akad_time)) }}
@@ -234,29 +241,26 @@
       </div>
 
       <p class="font-16 regular lineletter mt-48">Prosesi</p>
-      <h1 class="font-40 regular lineletter married-great mt-8">Akad Nikah</h1>
+      <h1 class="font-40 regular lineletter married-great mt-8 color2i">Resepsi Pernikahan</h1>
 
-      <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" class="mt-20 maps mlr-auto display-center">
-        <img class="img-maps" src="{{ asset('/concept1i/png/mapsku.png') }}" alt="" />
-        <div class="relative">
-          <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center pinbox">
-            <div class="boxtempat">
-              <p class="font-14 regular">Lokasi Resepsi</p>
-              <p class="font-16 large">{{ $undangan->alamatResepsi }}</p>
+      <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="mt-20 maps mlr-auto display-center">
+        <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="display-center flex-column align-center img-maps text-center">
+          <div class="boxtempat">
+            <p class="font-14 regular">Lokasi Resepsi</p>
+            <p class="font-16 large">{{ $undangan->alamatResepsi }}</p>
+          </div>
+          <div class="relative">
+            <div class="box-triangle">
             </div>
-            <div class="relative">
-              <div class="box-triangle">
-              </div>
-            </div>
-            <div class="pin mt-18">
-              <div class="box-pinloc mlr-auto">
-                <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
-              </div>
+          </div>
+          <div class="pin mt-18">
+            <div class="box-pinloc mlr-auto">
+              <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
             </div>
           </div>
         </div>
       </div>
-      <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="mt-24 w-327 mlr-auto text-center">
+      <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="mt-24 w-327 mlr-auto text-center">
         <p class="font-18 large">Resepsi Pernikahan</p>
         <p class="font-14 regular mt-10">
           {{ $receptionDay }}, {{$receptionDate}} {{ date('H:i', strtotime($undangan->resepsi_time)) }}
@@ -265,7 +269,39 @@
           {{ $undangan->alamatResepsi }} <br />
           {{ $undangan->alamatResepsiLengkap }}
         </p>
-        <a data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="btn-maps font-16 large mt-24 mlr-auto" href="https://www.google.com/maps/search/?api=1&query={{ $undangan->akad_loc }}" target="_blank">Open on Gmaps</a>
+        <a data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="btn-maps font-16 large mt-24 mlr-auto" href="https://www.google.com/maps/search/?api=1&query={{ $undangan->akad_loc }}" target="_blank">Open on Gmaps</a>
+      </div>
+    </div>
+
+    <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="py-40 display-center flex-column">
+      <div class="text-center scope-24">
+        <h1 class="font-32 regular color2i married-great">Amplop Digital</h1>
+        <p class="font-14 regular color-white color-opacity mt-10">Doa restu anda merupakan karunia yang sangat berarti bagi kami. dan jika memberi adalah ungkapan terimakasih anda, Anda dapat memberi kado secara cashless</p>
+      </div>
+      <div class="mt-40 card-amplop mlr-auto">
+        @if($amplops[0]->nama_bank == 'bca')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/bca.svg') }}" alt="">
+        @elseif($amplops[0]->nama_bank == 'mandiri')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/mandiri.svg') }}" alt="">
+        @elseif($amplops[0]->nama_bank == 'bni')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/bni.svg') }}" alt="">
+        @elseif($amplops[0]->nama_bank == 'bri')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/bri.svg') }}" alt="">
+        @elseif($amplops[0]->nama_bank == 'bsi')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/bsi.svg') }}" alt="">
+        @elseif($amplops[0]->nama_bank == 'jenius')
+        <img class="img-bank" src="{{ asset('/assets/svg/bank/jenius.svg') }}" alt="">
+        @endif
+        <div class="display-center gap-4 flex-column text-center color-black">
+          <p class="font-18 large text-uppercase">{{ $amplops[0]->nama_bank }} - {{ $amplops[0]->norek }}</p>
+          <p>A.n. {{$amplops[0]->pemilik_rekening}}</p>
+          <input type="text" value="{{ $amplops[0]->norek }}" id="copyText" hidden>
+          <a id="copyBtn" class="btn-amplop display-center cursor-pointer color-orange" onclick="copy('copyku')">
+            <img src="{{ asset('/concept6/svg/copy-linear.svg') }}" alt="">
+            <p class="color-orange font-14 medium">Salin</p>
+          </a>
+          <a id="konfirmasi" href="https://wa.me/{{$amplops[0]->nowa}}?text=Hallo Saya Mau Konfirmasi Sudah Kirim Sumbangan pada rekening yang tertera di undangan, berikut juga buktinya " target="_blank" class="color-orange font-16 medium" data-action="share/whatsapp/share" hidden>Konfirmasi</a>
+        </div>
       </div>
     </div>
 
@@ -362,30 +398,51 @@
 
   <script>
     function hide() {
-      // togglePlay();
+      togglePlay();
       document.getElementById("cover").style.visibility = "hidden";
       document.body.classList.remove('hidden');
     }
   </script>
   <script>
-    const swiper_thumbnail = new Swiper(".swiper_thumbnail", {
-      slidesPerView: 5,
-    })
-    const swiper = new Swiper('.swiper_main', {
-      loop: true,
-      autoplay: {
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-        delay: 2000,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      thumbs: {
-        swiper: swiper_thumbnail,
-      },
-    })
+    let a = 0;
+
+    function togglePlay() {
+      if (a == 0) {
+        console.log('musiiic')
+        document.getElementsByTagName("audio")[0].play();
+        a++;
+        $("#suara-i").attr('src', "{{ asset('/concept1i/svg/suara.svg') }}");
+      } else {
+        document.querySelector("audio").pause();
+
+        $("#suara-i").attr('src', "{{ asset('/concept1i/svg/suaraoff.svg') }}");
+        a--;
+
+      }
+    };
+  </script>
+  <!-- copy to clipboard -->
+  <script>
+    function copy() {
+      const btn = document.getElementById('copyBtn');
+      const teksku = document.getElementById('copyText');
+      teksku.readOnly = true;
+
+      teksku.select();
+      teksku.setSelectionRange(0, 99999);
+      // Alert the copied text
+      try {
+        navigator.clipboard.writeText(teksku.value);
+        teksku.type = 'hidden';
+        $(`#copyBtn`).text("Tersalin");
+        $(`#copyBtn`).addClass("color-grey");
+        setTimeout(function() {
+          $(`#konfirmasi`).attr("hidden", false);
+        }, 3000);
+      } catch (err) {
+        console.error(err.name, err.message);
+      }
+    }
   </script>
 
   <script type="text/javascript">
@@ -511,6 +568,34 @@
     updateCountdown();
   </script>
   <!-- End CountDown -->
+  <script>
+    var slider = new Swiper('.swiper_main', {
+      slidesPerView: 1,
+      centeredSlides: true,
+      loop: true,
+      loopedSlides: 6,
+      autoplay: {
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+        delay: 2000,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+
+
+    var thumbs = new Swiper('.swiper_thumbnail', {
+      slidesPerView: 5,
+      spaceBetween: 10,
+      centeredSlides: true,
+      loop: true,
+      slideToClickedSlide: true,
+    });
+    slider.controller.control = thumbs;
+    thumbs.controller.control = slider;
+  </script>
 </body>
 
 </html>

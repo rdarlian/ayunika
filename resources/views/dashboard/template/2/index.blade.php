@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
-  <title>Ayunika | Concept1</title>
+  <title>Ayunika | {{$undangan->groom_nickname}} & {{$undangan->bride_nickname}}</title>
 </head>
 
 <body class="hidden">
@@ -193,21 +193,20 @@
           <p class="font-40 lineletter married-great text-green">Akad Nikah</p>
         </div>
         <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" class="mt-20 maps mlr-auto">
-          <img class="img-maps" src="{{ asset('/concept1i/png/mapsku.png') }}" alt="" />
-          <div class="relative">
-            <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center pinbox">
-              <div class="boxtempat">
-                <p class="font-14 regular">Lokasi Akad</p>
-                <p class="font-16 large">{{ $undangan->alamatAkad }}</p>
+
+
+          <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center img-maps text-center">
+            <div class="boxtempat">
+              <p class="font-14 regular">Lokasi Akad</p>
+              <p class="font-16 large">{{ $undangan->alamatAkad }}</p>
+            </div>
+            <div class="relative">
+              <div class="box-triangle">
               </div>
-              <div class="relative">
-                <div class="box-triangle">
-                </div>
-              </div>
-              <div class="pin mt-18">
-                <div class="box-pinloc mlr-auto">
-                  <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
-                </div>
+            </div>
+            <div class="pin mt-18">
+              <div class="box-pinloc mlr-auto">
+                <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
               </div>
             </div>
           </div>
@@ -229,21 +228,19 @@
         </div>
 
         <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" class="mt-20 maps mlr-auto display-center">
-          <img class="img-maps" src="{{ asset('/concept1i/png/mapsku.png') }}" alt="" />
-          <div class="relative">
-            <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center pinbox">
-              <div class="boxtempat">
-                <p class="font-14 regular">Lokasi Resepsi</p>
-                <p class="font-16 large">{{ $undangan->alamatResepsi }}</p>
+
+          <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="img-maps display-center flex-column align-center">
+            <div class="boxtempat">
+              <p class="font-14 regular">Lokasi Resepsi</p>
+              <p class="font-16 large">{{ $undangan->alamatResepsi }}</p>
+            </div>
+            <div class="relative">
+              <div class="box-triangle">
               </div>
-              <div class="relative">
-                <div class="box-triangle">
-                </div>
-              </div>
-              <div class="pin mt-18">
-                <div class="box-pinloc mlr-auto">
-                  <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
-                </div>
+            </div>
+            <div class="pin mt-18">
+              <div class="box-pinloc mlr-auto">
+                <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
               </div>
             </div>
           </div>
@@ -325,10 +322,11 @@
             <p class="font-18 large text-uppercase">{{ $amplops[0]->nama_bank }} - {{ $amplops[0]->norek }}</p>
             <p>A.n. {{$amplops[0]->pemilik_rekening}}</p>
             <input type="text" value="{{ $amplops[0]->norek }}" id="copyText" hidden>
-            <a class="btn-amplop display-center cursor-pointer" id="copyBtn" onclick="copy()">
+            <a class="btn-amplop display-center" id="copyBtn" onclick="copy()">
               <img src="{{ asset('/concept1i/svg/copy-green.svg') }}" alt="">
               <p class="color-green font-14 medium">Salin</p>
             </a>
+            <a id="konfirmasi" href="https://wa.me/{{$amplops[0]->nowa}}/?text=Hallo Selamat yaa, saya mau konfirmasi ..." class="color-green font-16 medium" target="_blank" hidden>Konfirmasi</a>
           </div>
         </div>
       </div>
@@ -396,9 +394,9 @@
         <p class="mt-16 font-32 regular married-great">{{ $undangan->groom_nickname }} & {{ $undangan->bride_nickname }}</p>
         <p class="font-16 regular married-playfair">{{$receptionDate}}</p>
 
-        <div class="mt-40 display-center">
+        <div class="mt-40 display-center gap-5">
           <p class="font-12 regular lineletter-160">made with love by </p>
-          <img src="{{ asset('/concept1i/svg/logo.svg') }}" alt="" />
+          <a href="https://www.ayunika.com/"><img src="{{ asset('/concept1i/svg/logo.svg') }}" alt="" /></a>
         </div>
       </div>
     </div>
@@ -541,7 +539,29 @@
     updateCountdown();
   </script>
   <!-- End CountDown -->
+  <!-- copy to clipboard -->
+  <script>
+    function copy() {
+      const btn = document.getElementById('copyBtn');
+      const teksku = document.getElementById('copyText');
+      teksku.readOnly = true;
 
+      teksku.select();
+      teksku.setSelectionRange(0, 99999);
+      // Alert the copied text
+      try {
+        navigator.clipboard.writeText(teksku.value);
+        teksku.type = 'hidden';
+        $(`#copyBtn`).text("Tersalin");
+        $(`#copyBtn`).addClass("color-grey");
+        setTimeout(function() {
+          $(`#konfirmasi`).attr("hidden", false);
+        }, 3000);
+      } catch (err) {
+        console.error(err.name, err.message);
+      }
+    }
+  </script>
   <script>
     let a = 0;
 

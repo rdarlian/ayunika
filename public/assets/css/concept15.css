@@ -1,0 +1,96 @@
+.ml-14 {
+    margin-left: 14px;
+}
+.ml-26 {
+    margin-left: 26px;
+}
+.mt-72 {
+    margin-top: 72px;
+}
+.mt-176 {
+    margin-top: 176px;
+}
+.img-cover-15 {
+    width: 234px;
+    height: 688px;
+    flex-shrink: 0;
+    background: url(<path-to-image>),
+        lightgray -385.49px 0px / 448.077% 100.143% no-repeat, #d9d9d9;
+    object-fit: cover;
+}
+
+.vertical {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+}
+.reverse-vertical {
+    transform: rotate(90deg);
+}
+
+.hr-15 {
+    position: absolute;
+    left: 80px;
+    top: 120px;
+    width: 30px;
+    height: 120px;
+    background: #49a2f3;
+}
+.hr-15-2 {
+    width: 16px;
+    height: 120px;
+    border: none;
+    background: #49a2f3;
+}
+.relative {
+    position: relative;
+}
+.img-732 {
+    width: 315px;
+    height: 732px;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+.img-360 {
+    width: 315px;
+    height: 360px;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+.img-812 {
+    width: 375px;
+    height: 812px;
+    object-fit: cover;
+}
+.img-140 {
+    width: 315px;
+    height: 140px;
+    object-fit: cover;
+}
+.img-400 {
+    width: 315px;
+    height: 400px;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+.img-145 {
+    width: 145px;
+    height: 157px;
+    object-fit: cover;
+}
+
+.border-bottom15 {
+    border-bottom: 1px solid gray;
+}
+
+.form-linear {
+    color: black;
+    border: 1px solid #d4d4d4; /*2*/
+    background: transparent;
+}
+
+.form-linear:focus {
+    color: black;
+    border: 1px solid black;
+    outline: none;
+}

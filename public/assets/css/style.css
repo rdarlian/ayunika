@@ -473,7 +473,21 @@
 #beranda {
     padding: 0px 150px;
 }
-
+.flying-button {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    display: flex;
+    width: 60px;
+    height: 60px;
+    padding: 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    border-radius: 100px;
+    background: #25d366;
+}
 @media (min-width: 1441px) {
     .card-iphone {
         border-radius: 14px;
@@ -487,6 +501,11 @@
     }
 }
 @media (max-width: 576px) {
+    .flying-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+    }
     .img-bg {
         object-position: 30% 10%;
     }

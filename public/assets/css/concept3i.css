@@ -1,6 +1,12 @@
 .mt-8 {
     margin-top: 8px;
 }
+.ml-2 {
+    margin-left: 2px;
+}
+.mb-32 {
+    margin-bottom: 32px;
+}
 .mb-40 {
     margin-bottom: 40px;
 }
@@ -22,6 +28,9 @@
 }
 .bg-3i {
     background: #faf2ec;
+}
+.bg-3i-footer {
+    background: #af7245;
 }
 .text-brown {
     color: #af7245;
@@ -328,9 +337,11 @@
     min-height: 310px;
     border-radius: 4px;
     object-fit: cover;
+    background: url(../../concept3i/png/maps.png);
 }
 .btn-maps {
     display: flex;
+    min-height: 48px;
     padding: 12px 10px;
     justify-content: center;
     align-items: center;
@@ -341,4 +352,8 @@
     border: 0;
     text-decoration: none;
     color: white;
+}
+
+.card-amplop {
+    background: #faf2ec;
 }

@@ -267,11 +267,11 @@
 }
 .border12 {
     display: flex;
-    padding: 16px;
+    padding: 24px 16px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 16px;
     border: 2px solid;
     border-image: linear-gradient(
             281deg,
@@ -357,8 +357,8 @@
 }
 .box-triangle {
     position: absolute;
-    bottom: -7px;
-    left: -21px;
+    bottom: -4px;
+    left: -20px;
     width: 40px;
     height: 40px;
     background: #06332d;
@@ -400,6 +400,7 @@
     min-height: 310px;
     border-radius: 4px;
     object-fit: cover;
+    background: url(../../concept1i/png/mapsku.png);
 }
 .btn-maps {
     color: black;

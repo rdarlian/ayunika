@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
-  <title>{{ $slug }}</title>
+  <title>Ayunika | {{ $undangan->bride_nickname}} & {{ $undangan->groom_nickname}}</title>
 </head>
 
 <body>
@@ -66,8 +66,8 @@
             <div class="flex spacebetween">
               @if($undangan->timetitle == 1)
               <button class="font-20 img-subheader color-white">
-                {{ $explodeReception[1] }}
-                <p class="small font-12">{{ $explodeReception[2] }}</p>
+                {{ $explodeReception[0] }}
+                <p class="small font-12">{{ $explodeReception[1] }}</p>
               </button>
               @elseif($undangan->timetitle == 0)
               <button class="font-20 img-subheader color-white">
@@ -153,23 +153,19 @@
         <p class="font-32 small">Ringkasan</p>
         <h1 class="font-42 large">Acara kami</h1>
       </div>
-
       <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" class="mt-24 maps mlr-auto">
-        <img class="img-maps" src="{{ asset('/concept1i/png/mapsku.png') }}" alt="" />
-        <div class="relative">
-          <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center pinbox">
-            <div class="boxtempat">
-              <p class="font-14 regular">Lokasi Akad</p>
-              <p class="font-16 large">{{ $undangan->alamatAkad }}</p>
+        <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center img-maps text-center">
+          <div class="boxtempat">
+            <p class="font-14 regular">Lokasi Akad</p>
+            <p class="font-16 large">{{ $undangan->alamatAkad }}</p>
+          </div>
+          <div class="relative">
+            <div class="box-triangle">
             </div>
-            <div class="relative">
-              <div class="box-triangle">
-              </div>
-            </div>
-            <div class="pin mt-18">
-              <div class="box-pinloc mlr-auto">
-                <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
-              </div>
+          </div>
+          <div class="pin mt-18">
+            <div class="box-pinloc mlr-auto">
+              <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
             </div>
           </div>
         </div>
@@ -190,21 +186,18 @@
       </button>
 
       <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" class="mt-24 maps mlr-auto">
-        <img class="img-maps" src="{{ asset('/concept1i/png/mapsku.png') }}" alt="" />
-        <div class="relative">
-          <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center pinbox">
-            <div class="boxtempat">
-              <p class="font-14 regular">Lokasi Resepsi</p>
-              <p class="font-16 large">{{ $undangan->alamatResepsi }}</p>
+        <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" class="display-center flex-column align-center img-maps text-center">
+          <div class="boxtempat ">
+            <p class="font-14 regular">Lokasi Resepsi</p>
+            <p class="font-16 large">{{ $undangan->alamatResepsi }}</p>
+          </div>
+          <div class="relative">
+            <div class="box-triangle">
             </div>
-            <div class="relative">
-              <div class="box-triangle">
-              </div>
-            </div>
-            <div class="pin mt-18">
-              <div class="box-pinloc mlr-auto">
-                <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
-              </div>
+          </div>
+          <div class="pin mt-18">
+            <div class="box-pinloc mlr-auto">
+              <img src="{{ asset('/concept1i/svg/pinloc.svg') }}" alt="">
             </div>
           </div>
         </div>
@@ -292,6 +285,7 @@
               <img src="{{ asset('/concept6/svg/copy-linear.svg') }}" alt="">
               <p class="color-orange font-14 medium">Salin</p>
             </a>
+            <a id="konfirmasi" href="https://wa.me/{{$amplops[0]->nowa}}?text=Hallo Saya Mau Konfirmasi Sudah Kirim Sumbangan pada rekening yang tertera di undangan, berikut juga buktinya " target="_blank" class="color-orange font-16 medium" data-action="share/whatsapp/share" hidden>Konfirmasi</a>
           </div>
         </div>
       </div>
@@ -300,15 +294,17 @@
         <p class="font-42 medium">From you</p>
       </div>
 
-      <div class="display-center mt-32">
-        <div class="message-box mlr-auto">
+      <div class="display-center flex-column mt-32">
+        <div class="message-box">
           @foreach($ucapans as $ucapan)
-          <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="bubble">
-            <h1 class="bubble-title">{{ $ucapan->guest_name }}</h1>
-            <hr width="100%" />
-            <p class="bubble-isi">
-              {{ $ucapan->ucapan }}
-            </p>
+          <div class="box-message-looping">
+            <div data-aos="zoom-in" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="bubble">
+              <h1 class="bubble-title">{{ $ucapan->guest_name }}</h1>
+              <hr width="100%" />
+              <p class="bubble-isi">
+                {{ $ucapan->ucapan }}
+              </p>
+            </div>
           </div>
           @endforeach
         </div>
@@ -365,10 +361,10 @@
 
       <div class="mt-32 pb-60">
         <p class="font-14">Website invitation by</p>
-        <div class="img-last-left">
+        <a href="http://www.ayunika.com" target="_blank" class="img-last-left">
           <img src="{{ asset('/concept12/svg/logo.svg') }}" alt="" />
           <img class="" src="{{ asset('/concept12/svg/name.svg') }}" alt="" />
-        </div>
+        </a>
       </div>
     </div>
 
@@ -383,6 +379,31 @@
         document.getElementById("main").classList.remove("hidden");
       }
     </script>
+
+    <!-- Copy for Donate -->
+    <script>
+      function copy() {
+        const btn = document.getElementById('copyBtn');
+        const text = document.getElementById('copyText');
+        text.readOnly = true;
+        text.select();
+        text.setSelectionRange(0, 99999);
+        // Alert the copied text
+        try {
+          navigator.clipboard.writeText(text.value);
+          text.type = 'hidden';
+          $(`#copyBtn`).text("Tersalin");
+          $(`#copyBtn`).addClass("color-grey");
+          setTimeout(function() {
+            $(`#konfirmasi`).attr("hidden", false);
+          }, 3000);
+        } catch (err) {
+          console.error(err.name, err.message);
+        }
+      }
+    </script>
+    <!-- End Copy -->
+
     <script type="text/javascript">
       $(document).ready(function() {
         let form = '#add-user-form';
