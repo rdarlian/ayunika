@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Theme;
+use App\Models\Undangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -18,7 +19,8 @@ class DashboardThemeController extends Controller
 
     public function create()
     {
-        return view('dashboard.theme.create');
+        $data_states = Undangan::select('data_states')->where('slug', 'preview')->get();
+        return view('dashboard.theme.create', ['data_states' => $data_states]);
     }
 
     public function store(Request $request)
@@ -28,6 +30,7 @@ class DashboardThemeController extends Controller
             'slug' => 'required',
             'image' => 'image|file|max:5048',
             'theme_id' => 'required',
+            'data_states' => 'required',
 
         ]);
         if ($request->file('image')) {
@@ -57,8 +60,10 @@ class DashboardThemeController extends Controller
      */
     public function edit(Theme $theme)
     {
+        $data_states = Undangan::select('data_states')->where('slug', 'preview')->get();
         return view('dashboard.theme.edit', [
             'theme' => $theme,
+            'data_states' => $data_states,
         ]);
     }
 
@@ -74,6 +79,7 @@ class DashboardThemeController extends Controller
         $rules = [
             'name' => 'required|max:255',
             'theme_id' => 'required',
+            'data_states' => 'required',
             'image' => 'image|file|max:2048',
         ];
 

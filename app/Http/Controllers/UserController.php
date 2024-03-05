@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Guest;
 use App\Models\Story;
 use App\Models\Images;
+use App\Models\Ucapan;
 use App\Models\Greeting;
 use App\Models\Undangan;
+use App\Models\UserSong;
 use App\Models\BrideImage;
 use App\Models\CoverImage;
+use App\Models\DataAmplop;
 use App\Models\GroomImage;
-use App\Models\Guest;
-use App\Models\Ucapan;
-use App\Models\UserSong;
+use App\Models\UserUndangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
@@ -97,8 +99,9 @@ class UserController extends Controller
                 ]);
             }
         } else {
+
             // If it's not an admin request, create the undangan
-            Undangan::create([
+            UserUndangan::create([
                 "slug" => $request->input("slug"),
                 // Add other undangan fields as needed
                 "user_id" => $user->id, // Assuming user_id is the foreign key in Undangan
@@ -187,6 +190,7 @@ class UserController extends Controller
             $story = Story::Where('slug', $user->slug)->get();
             $bride_images = BrideImage::Where('slug', $user->slug)->first();
             $cover_images = CoverImage::where('slug', $user->slug)->first();
+            $data_amplop = DataAmplop::where('slug', $user->slug)->first();
             $groom_images = GroomImage::where('slug', $user->slug)->first();
             $gallery = Images::where('slug', $user->slug)->get();
             $greeting = Greeting::where('id', $user->id)->first();
@@ -194,6 +198,7 @@ class UserController extends Controller
             $ucapan = Ucapan::where('slug', $user->slug)->first();
             $song = UserSong::where('slug', $user->slug)->first();
             $undangan = Undangan::where('slug', $user->slug)->first();
+            $userundangan = UserUndangan::where('slug', $user->slug)->first();
 
             //Handle Delete Cloudinary
             $imageTypes = [$bride_images, $cover_images, $groom_images];
@@ -261,6 +266,9 @@ class UserController extends Controller
             if ($ucapan != null) {
                 Ucapan::where('slug', $user->slug)->delete();
             }
+            if ($data_amplop != null) {
+                DataAmplop::where('slug', $user->slug)->delete();
+            }
 
             if ($song != null) {
                 if ($song->audio_path) {
@@ -269,8 +277,18 @@ class UserController extends Controller
                 $song->delete();
             }
 
+
+
+            if ($undangan != null) {
+                $undangan = Undangan::find($undangan->id);
+                $undangan->delete();
+            }
+            if ($userundangan != null) {
+                $userundangan = UserUndangan::find($userundangan->id);
+                $userundangan->delete();
+            }
+
             $user->delete();
-            $undangan->delete();
 
             $users = User::all();
             return redirect()

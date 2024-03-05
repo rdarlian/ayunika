@@ -4,7 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> {{ config('app.name') }}</title>
+  <title>Ayunika | Undangan Digital</title>
+  <link rel="icon" href="{{ asset('/assets/png/ayunika.ico') }}" type="image/icon type">
+
   <link rel="stylesheet" href="assets/css/style.css" />
   @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -75,6 +77,9 @@
     <div class="position-relative end-0" style="top: -50px;">
       <img class="ornament-kanan" src="assets/png/footer-2.png" alt="" />
     </div>
+    <a href="https://wa.me/62859106667985/?text=Halo Ayunika, Saya mau memesan Undangan Digital" class="flying-button" target="_blank">
+      <img src="assets/svg/whatsapp.svg" alt="">
+    </a>
   </div>
   <script type="module">
     window.addEventListener('hashchange', function() {

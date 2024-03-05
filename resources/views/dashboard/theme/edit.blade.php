@@ -37,6 +37,15 @@
       </div>
       @enderror
     </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Pilih Data</label>
+      <select id="dataStates" class="form-select form-select" name="data_states">
+        <option value="">Select Data</option>
+        @foreach($data_states as $item)
+        <option value="{{ $item->data_states }}">{{ $item->data_states }}</option>
+        @endforeach
+      </select>
+    </div>
 
     <div class="mb-3">
       <label for="image" class="form-label">Theme Image</label>

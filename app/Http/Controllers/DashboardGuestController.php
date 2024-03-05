@@ -36,18 +36,20 @@ class DashboardGuestController extends Controller
             ->where('slug', $slug)
             ->first();
 
-        if ($record) {
+        if ($record != null) {
             $both = [
                 'groom_nickname' => $record->groom_nickname,
                 'bride_nickname' => $record->bride_nickname,
             ];
-        }
+        } else
+            $both = null;
+
 
         $link = url('');
-        $guest = Guest::select('name')->get();
+        $guest = Guest::latest()->where('user_id', $id)->paginate(10);
 
         return view('dashboard.guest.index', [
-            'guests' => Guest::latest()->where('user_id', $id)->paginate(10),
+            'guests' => $guest,
             'greet' => $greeting,
             'link' => $link,
             'both' => $both,

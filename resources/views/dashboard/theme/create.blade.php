@@ -28,6 +28,24 @@
       @enderror
     </div>
     <div class="mb-3">
+      <label for="" class="form-label">Pilih Data</label>
+      <select id="dataStates" class="form-select form-select" name="data_states">
+        <option value="">Select Data</option>
+        @foreach($data_states as $item)
+        <option value="{{ $item->data_states }}">{{ $item->data_states }}</option>
+        @endforeach
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Pilih Tier</label>
+      <select id="selectTier" class="form-select form-select" name="tier">
+        <option value="">Select tier</option>
+        <option value="1">Basic</option>
+        <option value="2">Advance</option>
+        <option value="3">Premium</option>
+      </select>
+    </div>
+    <div class="mb-3">
       <label for="theme_id" class="form-label">Theme</label>
       <input type="text" class="form-control @error('theme_id') is-invalid @enderror" id="theme_id" name="theme_id" value="{{ old('theme_id') }}">
       @error('theme_id')

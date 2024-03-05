@@ -22,6 +22,8 @@
         <th scope="col">#</th>
         <th scope="col">Title</th>
         <th scope="col">Slug</th>
+        <th scope="col">Theme_id</th>
+        <th scope="col">Data</th>
         <th scope="col">Image</th>
         <th scope="col">Action</th>
       </tr>
@@ -32,6 +34,8 @@
         <td>{{ $loop->iteration }}</td>
         <td>{{ $theme->name }}</td>
         <td>{{ $theme->slug }}</td>
+        <td>{{ $theme->theme_id }}</td>
+        <td>{{ $theme->data_states }}</td>
 
         <td> <img width="100px" height="100px" src=" {{ asset('storage/'.$theme->image) }}" alt=""></td>
         <td>

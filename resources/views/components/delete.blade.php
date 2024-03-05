@@ -16,7 +16,7 @@
       confirmButtonText: 'YA, HAPUS!'
     }).then((result) => {
       if (result.value) {
-        form.submit();
+        $(this).closest("form").submit();
       }
     })
 

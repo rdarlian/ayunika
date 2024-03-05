@@ -90,6 +90,7 @@ class FileUploadController extends Controller
         // Define the list of allowed fields and their corresponding model classes
         $uid = Auth::id();
         $slug = DB::table('undangans')->where("user_id", Auth::id())->value("slug");
+        $data_states = $request->data_states;
         $allowedFields = [
             "bride_images" => BrideImage::class,
             "groom_images" => GroomImage::class,
@@ -144,6 +145,7 @@ class FileUploadController extends Controller
             return Song::updateOrCreate(
                 [
                     "user_id" => Auth::id(),
+                    "data_states" => $data_states,
                 ],
                 [
                     "judul" => $audioTitle,
@@ -167,10 +169,12 @@ class FileUploadController extends Controller
                         $file->getClientOriginalName()
                     );
                     $uid = Auth::id();
+
                     Images::create([
                         "user_id" => $uid,
                         "images" => $result,
                         "slug" => $slug,
+                        "data_states" => $data_states,
                     ]);
 
                     $latestImages = DB::table("images")
@@ -202,17 +206,17 @@ class FileUploadController extends Controller
 
 
                 $modelClass = $this->getModelClass($fieldName);
-
                 $modelClass::updateOrCreate(
                     [
                         "user_id" => $uid,
+                        "data_states" => $data_states,
                     ],
                     [
                         "images" => $result,
                         "user_id" => $uid,
                         $fieldName => $result,
                         "slug" => $slug,
-
+                        "data_states" => $data_states,
                     ]
                 );
 
