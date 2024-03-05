@@ -7,19 +7,21 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GeocodeSearch;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\UcapanController;
+use App\Http\Controllers\StoriesController;
 use App\Http\Controllers\GreetingController;
 use App\Http\Controllers\UndanganController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\ReverseGeocodeSearch;
 use App\Http\Controllers\ExcelImportController;
+use App\Http\Controllers\UserUndanganController;
 use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\DashboardSongController;
 use App\Http\Controllers\DashboardGuestController;
 use App\Http\Controllers\DashboardThemeController;
 use App\Http\Controllers\DashboardGreetingController;
-use App\Http\Controllers\ReverseGeocodeSearch;
-use App\Http\Controllers\StoriesController;
-use App\Http\Controllers\ThemeController;
+use App\Models\Undangan;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -71,7 +73,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('guests/greeting', [GreetingController::class, 'index']);
     Route::put('guests/greeting/{guest}', [DashboardGuestController::class, 'updategreeting'])->name('guest.updateucapan');
     Route::post('guests/greeting', [GreetingController::class, 'store']);
-    Route::post('{slug}/{tamu}', [DashboardGuestController::class, 'greeting'])->name('whatsapp');
+    // Route::post('{slug}/{tamu}', [DashboardGuestController::class, 'greeting'])->name('whatsapp');
     Route::resource('guests', DashboardGuestController::class);
 });
 Route::get('/coba', [PostController::class, 'lazyload']);
@@ -85,7 +87,17 @@ Route::middleware('auth')->group(function () {
     // Route::post('/dashboard/theme-select', 'ThemeController@themeSelected')->name('theme.post');
 
     // Undangan Resource Routes
-    Route::resource('dashboard/undangan', UndanganController::class);
+    Route::resource('dashboard/undangan', UndanganController::class)->middleware('admin')->except('index');
+    Route::get('dashboard/undangan', [UndanganController::class, 'home']);
+
+
+    Route::get('dashboard/undangan/{undangan}', [UndanganController::class, 'state_data']);
+    Route::get('dashboard/states', [UndanganController::class, 'createstates']);
+    Route::post('dashboard/states', [UndanganController::class, 'storestates'])->name('undangan.storestates');
+    Route::get('dashboard/states/{state}/edit', [UndanganController::class, 'edit'])->name('undangan.editstates');
+    Route::put('dashboard/states/{state}', [UndanganController::class, 'updateStates'])->name('undangan.updatestates');
+    Route::delete('dashboard/states/{id}', [UndanganController::class, 'deleteData'])->name('undangan.deletestate');
+    Route::resource('dashboard/user/undangan', UserUndanganController::class)->names('user');
 
     // Untuk Dropzone Upload File 
     Route::get('/dz/upload-ui', [FileUploadController::class, 'dropzoneUi'])->name('upload.dropzone');
@@ -100,5 +112,6 @@ Route::middleware('auth')->group(function () {
 Route::post('ucapan', [UcapanController::class, 'store'])->name('ucapan.store');
 
 // Undangan previewnya
-Route::get('/{undangan}', [UndanganController::class, 'show'])->name('undangan.show');
+// Route::get('/{undangan}', [UndanganController::class, 'show'])->name('undangan.show');
+Route::get('/{undangan}', [UserUndanganController::class, 'show'])->name('undangan.show');
 Route::get('/{slug}/{theme}', [UndanganController::class, 'show'])->name('undangan.show1');

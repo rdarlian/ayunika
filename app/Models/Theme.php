@@ -10,6 +10,10 @@ class Theme extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
+    public function undangan()
+    {
+        return $this->belongsTo(undangan::class);
+    }
     public function getRouteKeyName()
     {
         return 'id';
