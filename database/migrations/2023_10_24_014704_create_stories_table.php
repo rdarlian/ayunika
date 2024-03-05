@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->string('slug')->nullable();
+            $table->string('data_states')->nullable();
             $table->date('tgl_story')->nullable();
             $table->text('title_story')->nullable();
             $table->text('description_story')->nullable();

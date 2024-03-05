@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('nama_bank')->nullable();
             $table->string('norek')->nullable();
             $table->string('pemilik_rekening')->nullable();
+            $table->string('nowa')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
+            $table->string('data_states')->nullable();
             $table->string('slug')->nullable();
             $table->timestamps();
         });

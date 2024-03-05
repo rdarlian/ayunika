@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('undangans', function (Blueprint $table) {
+        Schema::create('user_undangans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
-            $table->string('data_states')->nullable();
             $table->string('groom_name')->nullable();
             $table->string('groom_nickname')->nullable();
             $table->string('groom_child_order')->nullable();
@@ -64,6 +63,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('undangans');
+        Schema::dropIfExists('user_undangans');
     }
 };
