@@ -7,7 +7,7 @@
   <title>Ayunika | Undangan Digital</title>
   <link rel="icon" href="{{ asset('/assets/png/ayunika.ico') }}" type="image/icon type">
 
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
   @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 

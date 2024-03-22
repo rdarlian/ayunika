@@ -118,6 +118,7 @@
                 <div class=" py-3 py-lg-0">
                   <form method="post" action="{{ route('dropzoneFileUpload') }}" enctype="multipart/form-data" class="dropzone" id="someHidden">
                     @csrf
+                    <input type="text" class="form-control" value="{{$undangans[0]->data_states ?? '' }}" name="data_states" placeholder="Nama Mempelai Wanita" aria-label="First name" hidden>
                   </form>
                 </div>
               </div>
@@ -1282,7 +1283,7 @@
 
       init: function() {
         this.on('queuecomplete', function() {
-          location.reload();
+          // location.reload();
         })
         latestDataJson = @json($stories);
         var dropzoneInstance = this;
@@ -1414,6 +1415,7 @@
 
   function deleteStoryImage($story, $image) {
     console.log($story);
+    console.log("terpencet")
     $.ajax({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')

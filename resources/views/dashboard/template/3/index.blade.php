@@ -240,7 +240,7 @@
       <div class="timeline">
         <!-- <img class="line" src="assets/svg/line.svg" alt="" /> -->
         @foreach($stories as $key=>$story)
-        <div class="card-story mt-24">
+        <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-in-out" data-aos-once="true" class="card-story mt-24">
           <div data-aos="zoom-in-up" data-aos-duration="800" data-aos-once="true" data-aos-easing="ease-in-out" class="display-center flex-column align-center">
             <img class="{{ isset($story->image_story) ? 'img-story ' : 'icon-story' }}" src="{{ isset($story->image_story) ? url('storage/' . $story->image_story) : asset('/concept1i/svg/story'. $key+1 .'.svg')  }}" alt="">
           </div>

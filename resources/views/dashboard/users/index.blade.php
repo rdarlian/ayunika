@@ -96,7 +96,6 @@
           @method('delete')
           <button type="submit" href="javascript:void(0)" id="btn-delete-post" data-id="{{ $item->id }}" data-username="{{$item->username}}" class="btn btn-danger "><i class="fa fa-trash"></i></button>
         </form>
-
       </td>
 
 
@@ -111,6 +110,17 @@
 </table>
 
 
+<script>
+  function showLoading() {
+    document.querySelector('#loading').classList.add('loading');
+    document.querySelector('#loading-content').classList.add('loading-content');
+  }
+
+  function hideLoading() {
+    document.querySelector('#loading').classList.remove('loading');
+    document.querySelector('#loading-content').classList.remove('loading-content');
+  }
+</script>
 <script type="module">
   function openModal() {
     $('#myModal').modal('show');

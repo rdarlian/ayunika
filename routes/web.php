@@ -21,6 +21,7 @@ use App\Http\Controllers\DashboardSongController;
 use App\Http\Controllers\DashboardGuestController;
 use App\Http\Controllers\DashboardThemeController;
 use App\Http\Controllers\DashboardGreetingController;
+use App\Http\Controllers\LawakController;
 use App\Models\Undangan;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -44,9 +45,9 @@ Route::get('/', function () {
         'posts' => Post::latest()->take(3)->get(),
     ]);
 });
-Route::get('/blogs', [PostController::class, 'index']);
 Route::get('/template', [ThemeController::class, 'index']);
-
+Route::get('/blogs', [PostController::class, 'index']);
+Route::get('/blogs/{post:slug}', [PostController::class, 'show']);
 
 Route::get('/dashboard/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -76,7 +77,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     // Route::post('{slug}/{tamu}', [DashboardGuestController::class, 'greeting'])->name('whatsapp');
     Route::resource('guests', DashboardGuestController::class);
 });
-Route::get('/coba', [PostController::class, 'lazyload']);
+// Route::get('/coba', [PostController::class, 'lazyload']);
+
 
 
 // Undangan routes
