@@ -46,6 +46,7 @@
             @csrf
             <button class="btn bg-danger border-0" onclick="return confirm('Hapus data sekarang ?')"><i class="fa-solid fa-trash-can"></i></button>
           </form>
+          <a target="_blank" href="/{{$user}}/{{ $theme->theme_id }}?r=Adin" class="btn bg-primary"><i class="fa-regular fa-eye"></i></a>
         </td>
       </tr>
       @endforeach

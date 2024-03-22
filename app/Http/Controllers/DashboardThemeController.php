@@ -13,7 +13,8 @@ class DashboardThemeController extends Controller
     public function index()
     {
         return view('dashboard.theme.index', [
-            'themes' => Theme::latest()->paginate(10)
+            'themes' => Theme::latest()->paginate(10),
+            'user' => auth()->user()->slug
         ]);
     }
 

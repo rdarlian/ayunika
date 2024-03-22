@@ -34,7 +34,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         return view('post', [
-            "active" => 'berita',
+            "active" => 'blogs',
             "title" => "Single Post",
             "post" => $post
         ]);
@@ -43,7 +43,7 @@ class PostController extends Controller
     {
         $posts = Post::latest()->paginate(20);
         if ($request->ajax()) {
-            $view = view('coba', compact('posts'))->render();
+            $view = view('post', compact('posts'))->render();
             return Response::json(['view' => $view, 'nextPageUrl' => $posts->nextPageUrl()]);
         }
         return view('coba', compact('posts'));

@@ -226,6 +226,7 @@ class UserController extends Controller
 
             foreach ($gallery ?? [] as $galeri) {
                 $images = $galeri;
+
                 if ($images != null) {
                     $cloudinaryURL = $images->images;
                     $regex = '~\/([^/.]+)(\.\w+)$~';
@@ -249,8 +250,8 @@ class UserController extends Controller
 
             if ($story != null) {
                 foreach ($story as $stori) {
-                    if ($stori->image) {
-                        Storage::delete($stori->image);
+                    if ($stori->image_story) {
+                        Storage::disk('public')->delete($stori->image_story);
                     }
                 }
                 $storyIds = $story->pluck('id');
@@ -276,9 +277,6 @@ class UserController extends Controller
                 }
                 $song->delete();
             }
-
-
-
             if ($undangan != null) {
                 $undangan = Undangan::find($undangan->id);
                 $undangan->delete();

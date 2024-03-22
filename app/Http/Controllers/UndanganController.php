@@ -143,7 +143,7 @@ class UndanganController extends Controller
         $image_story = $request->file('images');
         $oldImage = $request->oldImage;
 
-        $data = Story::where('slug', $slug)->get();
+        $data = Story::where('slug', $slug)->where('data_states', $data_states)->get();
 
         if ($title_story != null)
             foreach ($title_story as $index => $title) {
@@ -164,7 +164,7 @@ class UndanganController extends Controller
 
                 ];
                 // Update records directly without using a loop
-                Story::where('id', $data[$index]->id)->update($validateData);
+                Story::where('id', $data[$index]->id)->where('data_states', $data_states)->update($validateData);
             }
 
         if ($request->title_story != '') {
@@ -212,13 +212,13 @@ class UndanganController extends Controller
         if (isset($request->songopt) && $request->songopt !== $request->oldSong) {
             if ($request->oldSong) {
                 $isSongopt = Song::where('id', $request->oldSong)->first();
-
                 if (!isset($isSongopt)) {
                     $oldPath = UserSong::select('audio_path')->where('judul', $request->oldSong)
-                        ->where('slug', $slug)->first();
+                        ->where('slug', $slug)->where('data_states', $data_states)->first();
                     Storage::disk('public')->delete($oldPath->audio_path);
                 }
             }
+
             $path = Song::select('link')->where('id', $request->songopt)->first();
             $audio['audio_path'] = $path->link;
             $audio['judul'] = $request->songopt;
@@ -230,7 +230,7 @@ class UndanganController extends Controller
                 $isSongopt = Song::where('id', $request->oldSong)->first();
                 if (!isset($isSongopt)) {
                     $oldPath = UserSong::select('audio_path')->where('judul', $request->oldSong)
-                        ->where('slug', $slug)->first();
+                        ->where('slug', $slug)->where('data_states', $data_states)->first();
                     Storage::disk('public')->delete($oldPath->audio_path);
                 }
             }
@@ -242,8 +242,9 @@ class UndanganController extends Controller
         $audio['slug'] = $slug;
         $audio['data_states'] = $data_states;
 
-        if (UserSong::where('user_id', $uid)->first() != null) {
-            UserSong::where('user_id', $uid)->update(
+
+        if (UserSong::where('user_id', $uid)->where('data_states', $data_states)->first() != null) {
+            UserSong::where('data_states', $data_states)->update(
                 $audio
             );
         } else {
@@ -594,7 +595,6 @@ class UndanganController extends Controller
         $akadDateRaw = $undanganDate->akad_date ?? "2023-06-06";
 
         $receptionDateRaw = $undanganDate->resepsi_date ?? "2023-06-06";
-
         $akadDay = $this->formatDay($akadDateRaw, "id_ID");
         $akadDate = $this->formatDate($akadDateRaw, "id_ID");
 
@@ -736,6 +736,17 @@ class UndanganController extends Controller
     //             break;
     //     }
     // }
+
+    public function destroy($id)
+    {
+        $story = Story::find($id);
+
+        if ($story->image_story) {
+            Storage::disk('public')->delete($story->image_story);
+        }
+        $delete = story::destroy($story->id);
+        return $delete;
+    }
 
     public function deleteData($id)
     {

@@ -475,9 +475,7 @@
     <div class="col-11 col-lg-4 px-4">
       <img class="img-card" src="{{$item->image ? asset('storage/'.$item->image) : 'https://placehold.co/600x400' }}  " alt="" />
       <div class="">
-        <h1 class="font-20 fw-semibold mt-24 box-p">
-          {{ $item->title }}
-        </h1>
+        <h5 class="font-20 fw-semibold mt-24 box-p"><a href="/blogs/{{ $item->slug }}" class="text-decoration-none text-dark">{{ $item->title }}</a></h5>
         <p class="font-14 fw-light text-body-secondary mt-3">
           {{ $item->created_at }}
         </p>

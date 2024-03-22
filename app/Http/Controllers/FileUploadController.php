@@ -91,6 +91,10 @@ class FileUploadController extends Controller
         $uid = Auth::id();
         $slug = DB::table('undangans')->where("user_id", Auth::id())->value("slug");
         $data_states = $request->data_states;
+        if ($data_states == null) {
+            $slug = DB::table('user_undangans')->where("user_id", Auth::id())->value("slug");
+            $data_states = $slug;
+        }
         $allowedFields = [
             "bride_images" => BrideImage::class,
             "groom_images" => GroomImage::class,

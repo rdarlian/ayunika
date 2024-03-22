@@ -10,7 +10,7 @@
         @endif
       </div>
       <div class="mt-3">
-        <h5 class="">{{ $post->title }}</h5>
+        <h5 class="card-title"><a href="/blogs/{{ $post->slug }}" class="text-decoration-none text-dark">{{ $post->title }}</a></h5>
         <p>
           <small class="text-muted">
             By. <a href="/blogs?author={{ $post->author->username }}" class="text-decoration-none">{{ $post->author->name }}</a> {{ $post->created_at->diffForHumans() }}

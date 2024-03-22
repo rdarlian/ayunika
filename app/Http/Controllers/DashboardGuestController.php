@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\InvitationWord;
 use App\Models\Undangan;
+use App\Models\UserUndangan;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardGuestController extends Controller
@@ -32,10 +33,15 @@ class DashboardGuestController extends Controller
         // $tamu = Guest::where('id', $tamu);
         // $link = Undangan::where('id', $id)->select('slug')->get();
 
+
         $record = Undangan::select('groom_nickname', 'bride_nickname')
             ->where('slug', $slug)
             ->first();
-
+        if ($record == null) {
+            $record = UserUndangan::select('groom_nickname', 'bride_nickname')
+                ->where('slug', $slug)
+                ->first();
+        }
         if ($record != null) {
             $both = [
                 'groom_nickname' => $record->groom_nickname,
@@ -43,7 +49,6 @@ class DashboardGuestController extends Controller
             ];
         } else
             $both = null;
-
 
         $link = url('');
         $guest = Guest::latest()->where('user_id', $id)->paginate(10);
