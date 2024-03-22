@@ -1,8 +1,23 @@
+.py-16 {
+    padding-top: 16px;
+    padding-bottom: 40px;
+}
 .text-grey-10 {
     color: #585661;
 }
 .hidden {
     overflow: hidden;
+}
+.border-countdown {
+    display: flex;
+    width: 64px;
+    height: 75px;
+    padding: 16px 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border: 1px solid #e5e5e5;
 }
 .cover-container {
     width: 100%;
@@ -252,6 +267,11 @@
 .relative {
     position: relative;
 }
+.img-10 {
+    position: absolute;
+    top: -32px;
+    left: 74px;
+}
 .hexagon-flower {
     position: absolute;
     bottom: 514px;
@@ -328,6 +348,15 @@
     min-height: 310px;
     border-radius: 4px;
     object-fit: cover;
+}
+.img-mempelai-10 {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
 }
 .btn-maps {
     display: flex;

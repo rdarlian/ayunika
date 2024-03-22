@@ -349,7 +349,7 @@
 }
 .card-iphone {
     border-radius: 14px;
-    width: 100%;
+    width: 360px;
     height: 398px;
     object-fit: cover;
 }
@@ -490,8 +490,9 @@
 }
 @media (min-width: 1441px) {
     .card-iphone {
-        border-radius: 14px;
         width: 100%;
+        border-radius: 14px;
+        max-width: 410px;
         object-fit: cover;
     }
 }
