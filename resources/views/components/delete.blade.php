@@ -17,8 +17,9 @@
     }).then((result) => {
       if (result.value) {
         $(this).closest("form").submit();
+        showLoading()
       }
     })
-
+    hideLoading()
   });
 </script>

@@ -744,7 +744,7 @@
   const slug = "{{ strval($slug) }}"
   $(function() {
     const link = slug !== "" ? $("#preview, #preview2").attr("href",
-      "{{ route('undangan.show', $undangans[0]->slug ?? '')}}").attr("target", "_blank") : $(
+      "/{{ $undangans[0]->slug ?? ''}}/{{$theme}}").attr("target", "_blank") : $(
       "#preview").attr("href", "javascript:void(0)");
   })
 </script>
@@ -763,6 +763,7 @@
 
     }
   })
+
 
   let lat = '{{ floatval($undangans[0] -> akad_lat ?? -7.825953992187836) }}'
   let lng = '{{ floatval($undangans[0] -> akad_lng ?? 110.36282899647806) }}'
@@ -1283,7 +1284,7 @@
 
       init: function() {
         this.on('queuecomplete', function() {
-          // location.reload();
+          // document.forms["formku"].submit();
         })
         latestDataJson = @json($stories);
         var dropzoneInstance = this;
@@ -1415,7 +1416,6 @@
 
   function deleteStoryImage($story, $image) {
     console.log($story);
-    console.log("terpencet")
     $.ajax({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')

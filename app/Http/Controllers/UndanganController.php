@@ -30,29 +30,6 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class UndanganController extends Controller
 {
-    public function generateUniqueSlug($groomNickname, $brideNickname, $userId)
-    {
-        // if($userId == 1)
-        // {
-
-        // }
-        $slug = Str::slug($groomNickname . "-" . $brideNickname);
-
-        $count = 1;
-        $slugExists = Undangan::where("slug", $slug)
-            ->whereNotIn("user_id", [$userId])
-            ->exists();
-
-        while ($slugExists) {
-            $slug = Str::slug($slug) . "-" . $count;
-            $count++;
-
-            $slugExists = Undangan::where("slug", $slug)
-                ->whereNotIn("user_id", [$userId])
-                ->exists();
-        }
-        return $slug;
-    }
 
     public function extractYouTubeVideoId($url)
     {
@@ -140,8 +117,6 @@ class UndanganController extends Controller
         $title_story = $request->title_stories;
         $tgl_story = $request->tgl_stories;
         $description_story = $request->description_stories;
-        $image_story = $request->file('images');
-        $oldImage = $request->oldImage;
 
         $data = Story::where('slug', $slug)->where('data_states', $data_states)->get();
 
@@ -161,7 +136,6 @@ class UndanganController extends Controller
                     'slug' =>  $details->slug = $slug,
                     'description_story' =>   $details->description_story,
                     "data_states" => $data_states,
-
                 ];
                 // Update records directly without using a loop
                 Story::where('id', $data[$index]->id)->where('data_states', $data_states)->update($validateData);
@@ -189,15 +163,9 @@ class UndanganController extends Controller
                 $validated["data_states"] = $data_states;
 
                 // Use updateOrCreate for simplicity
-                $story = Story::Create($validated);
+                Story::Create($validated);
             }
         }
-
-
-
-        // if ($request->file('image_story')) {
-        //     $storyData['image_story'] = $request->file('image_story')->store('story-images', 'public');
-        // }
     }
 
     public function createOrUpdateSong($request, $uid, $slug, $data_states)
@@ -315,15 +283,6 @@ class UndanganController extends Controller
         // If no match is found, return null
         return $modelMap[$fieldName] ?? null;
     }
-    public function getLatestImages($table)
-    {
-        return DB::table($table)
-            // ->select($table, "filesize") // Add 'filesize' to the select statement
-            ->where("slug", Auth::user()->slug)
-            ->orderBy("created_at", "desc")
-            ->take(20)
-            ->get();
-    }
     public function getLatestImagesState($table, $data_states)
     {
         return DB::table($table)
@@ -334,15 +293,6 @@ class UndanganController extends Controller
             ->take(20)
             ->get();
     }
-    public function getSingleData($table)
-    {
-        return DB::table($table)
-            // ->select($table, "filesize") // Add 'filesize' to the select statement
-            ->where("slug", Auth::user()->slug)
-            ->orderBy("created_at", "desc")
-            ->take(1)
-            ->get();
-    }
     public function getSingleDataState($table, $data_states)
     {
         return DB::table($table)
@@ -351,73 +301,6 @@ class UndanganController extends Controller
             ->orderBy("created_at", "desc")
             ->take(1)
             ->get();
-    }
-    public function index(Undangan $undangans, Story $story)
-    {
-        $uid = Auth::id();
-        $slug = Auth::user()->slug;
-        //Get Data Undangan from user_id
-        $data_states = DB::table("undangans")->select('data_states', 'id')
-            ->where("slug", $slug)
-            ->get();
-        $states = DB::table("undangans")->select('data_states')
-            ->where("slug", $slug)
-            ->first();
-
-        $undangans = DB::table("undangans")
-            ->where("slug", $slug)
-            ->where("data_states", $states->data_states)
-            ->get()
-            ->toArray();
-
-
-        //Get stories with user_id
-        $stories = DB::table("stories")
-            ->where("slug", $slug)
-            ->get();
-        //Get Data Amplop with user_id
-        $amplop = DB::table("data_amplops")
-            ->where("slug", $slug)
-            ->get();
-        //Get latest stories with user_id
-        $endStory = DB::table("stories")
-            ->where("slug", $slug)->orderByDesc('created_at')->get();
-
-        //Get tier with user_id
-        $tier = DB::table("users")
-            ->where("id", $uid)
-            ->value("tier");
-
-        $where = [["user_id", $uid]];
-        $edit = false;
-        $user = DB::table("users")
-            ->where("id", Auth::id())
-            ->get();
-
-        $latestImagesCover = $this->getSingleData('cover_images');
-        $latestImagesGroom = $this->getSingleData('groom_images');
-        $latestImagesBride = $this->getSingleData('bride_images');
-        $latestImages = $this->getLatestImages('images');
-        $songs = $this->getLatestImages("user_songs");
-        $songopt = DB::table("songs")->get();
-
-        $data = [
-            "user" => $user,
-            "slug" => $slug,
-            "undangans" => $undangans,
-            "stories" => $stories,
-            "amplop" => $amplop,
-            "endStory" => $endStory,
-            "tier" => $tier,
-            "cover_images" => $latestImagesCover,
-            "bride_images" => $latestImagesBride,
-            "groom_images" => $latestImagesGroom,
-            "images" => $latestImages,
-            "songs" => $songs,
-            "songopt" => $songopt,
-            "states" => $data_states,
-        ];
-        return view("dashboard.undangan.index", $data);
     }
     public function home()
     {
@@ -478,7 +361,7 @@ class UndanganController extends Controller
         $latestImages = $this->getLatestImagesState('images', $data_states);
         $songs = $this->getLatestImagesState("user_songs", $data_states);
         $songopt = DB::table("songs")->get();
-
+        $theme_id =  Auth::user()->theme;
         $data = [
             "user" => $user,
             "slug" => $slug,
@@ -493,7 +376,8 @@ class UndanganController extends Controller
             "images" => $latestImages,
             "songs" => $songs,
             "songopt" => $songopt,
-            "states" => $states
+            "states" => $states,
+            "theme" => $theme_id,
         ];
         return view("dashboard.undangan.index", $data);
     }
@@ -510,16 +394,6 @@ class UndanganController extends Controller
         $slug = Auth::user()->slug;
         $data_states = $request->data_states;
         $user = DB::table('users')->select('is_admin')->where('id', $uid)->get();
-
-        // if ($user[0]->is_admin !== 1) {
-        //     $slug =  $this->generateUniqueSlug(
-        //         $request->groom_nickname,
-        //         $request->bride_nickname,
-        //         Auth::id()
-        //     );
-        // } else {
-        //     $slug = 'preview';
-        // }
 
         //call Youtube Function
         $link = $this->extractYouTubeVideoId($request->link);
@@ -556,10 +430,6 @@ class UndanganController extends Controller
             $lng,
         );
 
-        $theme_id = DB::table("users")
-            ->where("id", $uid)
-            ->value("theme");
-
         return redirect("dashboard/undangan/$data_states")
             ->with("success", "Data berhasil ditambahkan.");
     }
@@ -585,6 +455,7 @@ class UndanganController extends Controller
 
         if ($theme != 0) {
             $currentUrl = dirname($currentUrl);
+            $findTheme = Theme::where('theme_id', $theme)->firstOrFail();
             $undangan = Undangan::where('slug', $slug)->where('data_states', $data_states->data_states)->first();
         }
         $undanganDate = DB::table("undangans")
@@ -611,8 +482,7 @@ class UndanganController extends Controller
         $explodeAkad = explode(" ", $akadDate);
 
         $ucapans = $this->fetchLatestRecord("ucapans", $slug, 5);
-        $stories =  DB::table('stories')->where('slug', $slug)->get();
-
+        $stories =  DB::table('stories')->where('slug', $slug)->where('data_states', $data_states->data_states)->get();
         $songs = $this->fetchAllRecords("user_songs", $slug, $data_states->data_states);
         $amplops = $this->fetchAllRecords("data_amplops", $slug, $data_states->data_states);
         $images = $this->fetchAllRecords("images", $slug, $data_states->data_states);
@@ -701,42 +571,6 @@ class UndanganController extends Controller
         return redirect('/dashboard/undangan')->with('success', 'Data States has been added');
     }
 
-    // public function calendarEvents(Request $request)
-    // {
-
-    //     switch ($request->type) {
-    //         case 'create':
-    //             $event = CrudEvents::create([
-    //                 'event_name' => $request->event_name,
-    //                 'event_start' => $request->event_start,
-    //                 'event_end' => $request->event_end,
-    //             ]);
-
-    //             return response()->json($event);
-    //             break;
-
-    //         case 'edit':
-    //             $event = CrudEvents::find($request->id)->update([
-    //                 'event_name' => $request->event_name,
-    //                 'event_start' => $request->event_start,
-    //                 'event_end' => $request->event_end,
-    //             ]);
-
-    //             return response()->json($event);
-    //             break;
-
-    //         case 'delete':
-    //             $event = CrudEvents::find($request->id)->delete();
-
-    //             return response()->json($event);
-    //             break;
-
-    //         default:
-    //             # ...
-    //             break;
-    //     }
-    // }
-
     public function destroy($id)
     {
         $story = Story::find($id);
@@ -759,8 +593,6 @@ class UndanganController extends Controller
                     "error" => "Data pada Undangan ini masih digunakan",
                 ]);
         }
-
-        dd($theme);
 
         $story = Story::Where('data_states', $undangan->data_states)->get();
         $bride_images = BrideImage::Where('data_states', $undangan->data_states)->first();
@@ -840,7 +672,7 @@ class UndanganController extends Controller
 
 
         return redirect()
-            ->route("undangan.index")
+            ->route("home")
             ->with([
                 "success" => "User berhasil dihapus",
             ]);

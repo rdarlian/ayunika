@@ -302,6 +302,12 @@
         border-radius: 50%;
     }
 
+    .fixed-nav {
+        position: fixed;
+        top: 0;
+        z-index: 99;
+        width: 100%;
+    }
 
     /* .dz-remove{
             display: none!important;
@@ -312,7 +318,7 @@
     <div id="app" class="wrapper">
         @include('dashboard.layouts.sidebar')
         <div class="main">
-            <nav class="navbar navbar-light bg-white shadow-sm" id="navbar_top">
+            <nav class="navbar navbar-light fixed-nav bg-white shadow-sm" id="navbar_top">
                 <div class="container-fluid">
                     <button class="btn" type="button" id="toggler">
                         <span class="navbar-toggler-icon"></span>
@@ -364,7 +370,7 @@
 
             </div>
 
-            <main class="content" id="mainnih">
+            <main class="content mt-5" id="mainnih">
                 <div class="container-fluid overflow-scroll">
                     <div class="mb-3">
                         @yield('content')
@@ -439,11 +445,6 @@
         let mobile = false
         let sidebar_width = document.querySelector('#sidebar').offsetWidth;
         $("#toggler").on("click", function() {
-            this.addEventListener('touchend', function(e) {
-                mobile = true;
-                console.log("Mobile " + mobile)
-            }, false);
-
             if (burger == false) {
                 burger = true
                 console.log("true")
@@ -452,43 +453,28 @@
             } else {
                 burger = false
                 console.log("false")
-                if (window.scrollY != 0) {
-                    if (mobile == false) {
-                        document.getElementById('mainnih').style.paddingLeft = sidebar_width + 'px';
-                    }
-                    document.getElementById('toggler').style.paddingLeft = sidebar_width + 'px';
+                if (mobile == false) {
+                    document.getElementById('mainnih').style.paddingLeft = sidebar_width + 'px';
                 }
+                document.getElementById('toggler').style.paddingLeft = sidebar_width + 'px';
             }
         });
 
         document.addEventListener("DOMContentLoaded", function() {
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 0.5) {
-                    document.getElementById('navbar_top').classList.add('fixed-top');
-                    document.getElementById('sidebar').classList.add('fixed-top');
-
-                    if (burger == false) {
-                        if (mobile == false) {
-                            document.getElementById('mainnih').style.paddingLeft = sidebar_width + 'px';
-                        }
-
-                        document.getElementById('toggler').style.paddingLeft = sidebar_width + 'px';
-                    }
-
-                } else {
-                    document.getElementById('navbar_top').classList.remove('fixed-top');
-                    document.getElementById('sidebar').classList.remove('fixed-top');
-
-                    // remove padding top from body
-                    document.getElementById('mainnih').style.paddingLeft = 0;
-                    document.getElementById('toggler').style.paddingLeft = 0;
-                    // document.body.style.paddingTop = '0';
+            if (burger == false) {
+                if (mobile == false) {
+                    document.getElementById('mainnih').style.paddingLeft = sidebar_width + 'px';
                 }
-            });
+
+                document.getElementById('toggler').style.paddingLeft = sidebar_width + 'px';
+            } else {
+                // remove padding top from body
+                document.getElementById('mainnih').style.paddingLeft = 0;
+                document.getElementById('toggler').style.paddingLeft = 0;
+            }
+
         });
     </script>
-
-
 </body>
 
 </html>

@@ -10,7 +10,7 @@
     @csrf
     <div class="mb-3">
       <label for="name" class="form-label">Masukkan Daftar Tamu</label>
-      <textarea name="name" rows="10" cols="40" placeholder="Contoh: Ayunika@08898123411" class="form-control @error('name') is-invalid @enderror" required autofocus value="{{ old('name') }}" autocomplete="off"></textarea>
+      <textarea name="name" rows="10" cols="40" placeholder="Contoh: Ayunika@62898123411" class="form-control @error('name') is-invalid @enderror" required autofocus value="{{ old('name') }}" autocomplete="off"></textarea>
       @error('name')
       <div class="invalid-feedback">
         {{ $message }}
@@ -21,7 +21,7 @@
   </form>
 
   <div>
-    <p>Contoh: <br>Ayunika@01231231 <br>Samboo@08889183131</p>
+    <p>Contoh: Untuk data lebih dari satu juga bisa <br>Darlian@6283445101233 <br>Ihza@6288891833121</p>
   </div>
 </div>
 

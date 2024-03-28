@@ -1,4 +1,4 @@
-<aside id="sidebar">
+<aside class="fixed-top" id="sidebar">
   <div class="h-100" id="sidebar-content">
     <div class="sidebar-logo">
       <a class="text-decoration-none" href="#">
